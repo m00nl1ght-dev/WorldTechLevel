@@ -64,7 +64,7 @@ internal static class Patch_Page_CreateWorldParams
     {
         pos += 40f;
 
-        Widgets.Label(new Rect(0.0f, pos, 200f, 30f), "WorldTechLevel.Settings.TechLevel".Translate().CapitalizeFirst());
+        Widgets.Label(new Rect(0.0f, pos, 200f, 30f), "WorldTechLevel.TechLevel".Translate().CapitalizeFirst());
 
         var levelBefore = WorldTechLevel.Current;
         var sliderRect = new Rect(200f, pos, width, 30f);

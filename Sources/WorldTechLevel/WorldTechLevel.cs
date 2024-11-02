@@ -24,6 +24,8 @@ public class WorldTechLevel : Mod
         CompatPatchGroup.Subscribe();
 
         ModCompat.ApplyAll(LunarAPI, CompatPatchGroup);
+
+        EffectiveTechLevels.Initialize();
     }
 
     private static void Cleanup()
