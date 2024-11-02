@@ -14,6 +14,6 @@ internal static class Patch_FactionGenerator
     [HarmonyPatch(nameof(FactionGenerator.ConfigurableFactions), MethodType.Getter)]
     internal static void GetConfigurableFactions(ref IEnumerable<FactionDef> __result)
     {
-        __result = __result.Where(Patch_Page_CreateWorldParams.CanAddFaction);
+        __result = __result.Where(f => f.techLevel <= WorldTechLevel.Current);
     }
 }

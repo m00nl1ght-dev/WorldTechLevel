@@ -17,8 +17,13 @@ internal static class Patch_WorldFactionsUIUtility
         var pattern = TranspilerPattern.Build("DoWindowContents")
             .MatchLoad(typeof(FactionDefOf), nameof(FactionDefOf.Mechanoid)).Keep()
             .MatchCall(typeof(List<FactionDef>), nameof(List<FactionDef>.Contains)).Keep()
-            .Insert(CodeInstruction.Call(typeof(Patch_Page_CreateWorldParams), nameof(Patch_Page_CreateWorldParams.ShouldSkipMechanoidsWarning)));
+            .Insert(CodeInstruction.Call(typeof(Patch_WorldFactionsUIUtility), nameof(ShouldSkipMechanoidsWarning)));
 
         return TranspilerPattern.Apply(instructions, pattern);
+    }
+
+    internal static bool ShouldSkipMechanoidsWarning(bool present)
+    {
+        return present || WorldTechLevel.Current < FactionDefOf.Mechanoid.techLevel;
     }
 }

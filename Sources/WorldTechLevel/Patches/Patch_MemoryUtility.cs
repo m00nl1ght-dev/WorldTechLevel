@@ -13,6 +13,6 @@ internal static class Patch_MemoryUtility
     [HarmonyPatch(nameof(MemoryUtility.ClearAllMapsAndWorld))]
     internal static void ClearAllMapsAndWorld_Postfix()
     {
-        DefFilteringEngine.ApplyTechLevel(TechLevel.Archotech);
+        WorldTechLevel.Current = TechLevel.Archotech;
     }
 }

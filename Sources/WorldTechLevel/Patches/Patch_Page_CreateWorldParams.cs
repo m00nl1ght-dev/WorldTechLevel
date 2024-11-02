@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,16 +14,13 @@ namespace WorldTechLevel.Patches;
 [HarmonyPatch(typeof(Page_CreateWorldParams))]
 internal static class Patch_Page_CreateWorldParams
 {
-    internal static readonly Type Self = typeof(Patch_Page_CreateWorldParams);
-
-    private static TechLevel _techLevel = TechLevel.Archotech;
     private static readonly List<FactionDef> _removedFactions = [];
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
     internal static void ResetFactionCounts_Prefix()
     {
-        _techLevel = TechLevel.Archotech;
+        WorldTechLevel.Current = TechLevel.Archotech;
         _removedFactions.Clear();
     }
 
@@ -33,8 +29,7 @@ internal static class Patch_Page_CreateWorldParams
     internal static void DoBack_Prefix(Page __instance)
     {
         if (__instance is not Page_CreateWorldParams) return;
-        DefFilteringEngine.ApplyTechLevel(TechLevel.Archotech);
-        _techLevel = TechLevel.Archotech;
+        WorldTechLevel.Current = TechLevel.Archotech;
         _removedFactions.Clear();
     }
 
@@ -59,7 +54,7 @@ internal static class Patch_Page_CreateWorldParams
             .OnlyMatchAfter(patternPos)
             .MatchStore(typeof(Page_CreateWorldParams), "population").Keep()
             .Insert(OpCodes.Ldarg_0).Insert(ldlocPos).Insert(ldlocWidth)
-            .Insert(CodeInstruction.Call(Self, nameof(DoExtraSliders)))
+            .Insert(CodeInstruction.Call(typeof(Patch_Page_CreateWorldParams), nameof(DoExtraSliders)))
             .Insert(stlocPos);
 
         return TranspilerPattern.Apply(instructions, patternPos, pattern);
@@ -71,13 +66,15 @@ internal static class Patch_Page_CreateWorldParams
 
         Widgets.Label(new Rect(0.0f, pos, 200f, 30f), "WorldTechLevel.Settings.TechLevel".Translate().CapitalizeFirst());
 
+        var levelBefore = WorldTechLevel.Current;
         var sliderRect = new Rect(200f, pos, width, 30f);
-        var currentLabel = _techLevel.ToStringHuman().CapitalizeFirst();
-        var techLevelNew = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) _techLevel, 2f, 7f, true, currentLabel));
+        var currentLabel = levelBefore.ToStringHuman().CapitalizeFirst();
 
-        if (techLevelNew < _techLevel)
+        WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
+
+        if (WorldTechLevel.Current < levelBefore)
         {
-            var toRemove = instance.factions.Where(f => f.techLevel > techLevelNew && f.displayInFactionSelection).ToList();
+            var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
 
             foreach (var faction in toRemove)
             {
@@ -85,9 +82,9 @@ internal static class Patch_Page_CreateWorldParams
                 _removedFactions.Add(faction);
             }
         }
-        else if (techLevelNew > _techLevel)
+        else if (WorldTechLevel.Current > levelBefore)
         {
-            var toAdd = _removedFactions.Where(f => f.techLevel <= techLevelNew).ToList();
+            var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();
 
             foreach (var faction in toAdd)
             {
@@ -95,23 +92,7 @@ internal static class Patch_Page_CreateWorldParams
                 _removedFactions.Remove(faction);
             }
         }
-        else
-        {
-            return pos;
-        }
 
-        Current.Game.TechLevel().WorldTechLevel = techLevelNew;
-        _techLevel = techLevelNew;
         return pos;
-    }
-
-    internal static bool CanAddFaction(FactionDef faction)
-    {
-        return faction.techLevel <= _techLevel;
-    }
-
-    internal static bool ShouldSkipMechanoidsWarning(bool present)
-    {
-        return present || _techLevel < FactionDefOf.Mechanoid.techLevel;
     }
 }

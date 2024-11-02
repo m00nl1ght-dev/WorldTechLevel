@@ -1,6 +1,7 @@
 using LunarFramework;
 using LunarFramework.Logging;
 using LunarFramework.Patching;
+using RimWorld;
 using Verse;
 
 namespace WorldTechLevel;
@@ -14,6 +15,8 @@ public class WorldTechLevel : Mod
 
     internal static PatchGroup MainPatchGroup;
     internal static PatchGroup CompatPatchGroup;
+
+    internal static TechLevel Current = TechLevel.Archotech;
 
     private static void Init()
     {
