@@ -1,0 +1,72 @@
+name: release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout latest commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Read version file and build file names
+        id: read_version
+        run: |
+          echo "version=$(cat About/Version.txt)" >> $GITHUB_OUTPUT
+          echo "version_v=v$(cat About/Version.txt)" >> $GITHUB_OUTPUT
+          echo "mod_zip=WorldTechLevel_v$(cat About/Version.txt).zip" >> $GITHUB_OUTPUT
+
+      - name: Create release zip
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: ${{ steps.read_version.outputs.mod_zip }}
+          exclusions: '/.git/* /Sources/* /.github/* .git*  *.pdb'
+
+      - name: Read changelog
+        id: read_changelog
+        run: |
+          awk -v RS= 'NR==2 {print > ("LatestChanges.txt")}' Changelog.md
+          echo 'changes<<EOF' >> $GITHUB_OUTPUT
+          echo "$(cat LatestChanges.txt)" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+          echo 'changes_h<<EOF' >> $GITHUB_OUTPUT
+          echo "Update $(cat About/Version.txt)" >> $GITHUB_OUTPUT
+          echo "" >> $GITHUB_OUTPUT
+          echo "$(cat LatestChanges.txt)" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+
+      - name: Publish release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: ${{ format('{0}', steps.read_version.outputs.mod_zip) }}
+          body: ${{ steps.read_changelog.outputs.changes }}
+          name: ${{ format('World Tech Level v{0}', steps.read_version.outputs.version) }}
+          tag: ${{ steps.read_version.outputs.version }}
+          commit: ${{ github.sha }}
+          makeLatest: true
+
+      - name: Extract zip for workshop upload
+        env:
+          ZIP_FILE: ${{ steps.read_version.outputs.mod_zip }}
+        run: |
+          sudo apt-get install unzip
+          mkdir ws-upload/
+          unzip $ZIP_FILE -d ws-upload
+
+      - name: Upload to workshop
+        uses: m00nl1ght-dev/steam-workshop-deploy@main
+        with:
+          username: ${{ secrets.STEAM_ACCOUNT }}
+          configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
+          appId: 294100
+          publishedFileId: 0
+          path: ws-upload
+          changeNote: ${{ steps.read_changelog.outputs.changes_h }}

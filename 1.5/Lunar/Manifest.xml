@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest>
+  <Name>World Tech Level</Name>
+  <PackageId>m00nl1ght.WorldTechLevel</PackageId>
+  <Authors>m00nl1ght</Authors>
+  <MinGameVersion>1.5</MinGameVersion>
+  <Components>
+    <Component>
+      <AssemblyName>WorldTechLevel</AssemblyName>
+    </Component>
+  </Components>
+  <Compatibility>
+  </Compatibility>
+</Manifest>

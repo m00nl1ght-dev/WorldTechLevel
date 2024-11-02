@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE34EC0-301F-12D3-BF4B-00C04F79EFBC}") = "WorldTechLevel", "WorldTechLevel\WorldTechLevel.csproj", "{143AC269-6FC6-4CD7-9C3B-1CE92D0B5573}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{143AC269-6FC6-4CD7-9C3B-1CE92D0B5573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{143AC269-6FC6-4CD7-9C3B-1CE92D0B5573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{143AC269-6FC6-4CD7-9C3B-1CE92D0B5573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{143AC269-6FC6-4CD7-9C3B-1CE92D0B5573}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
