@@ -2,6 +2,7 @@ using LunarFramework;
 using LunarFramework.Logging;
 using LunarFramework.Patching;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace WorldTechLevel;
@@ -17,6 +18,8 @@ public class WorldTechLevel : Mod
     internal static PatchGroup CompatPatchGroup;
 
     internal static TechLevel Current = TechLevel.Archotech;
+
+    internal static WorldTechLevelSettings Settings;
 
     private static void Init()
     {
@@ -35,8 +38,23 @@ public class WorldTechLevel : Mod
 
     public WorldTechLevel(ModContentPack content) : base(content)
     {
+        Settings = GetSettings<WorldTechLevelSettings>();
+
         MainPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Main");
         MainPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
         MainPatchGroup.Subscribe();
     }
+
+    public override void DoSettingsWindowContents(Rect inRect)
+    {
+        Settings.DoSettingsWindowContents(inRect);
+    }
+
+    public override void WriteSettings()
+    {
+        base.WriteSettings();
+        Settings.ApplyChangesIfDirty();
+    }
+
+    public override string SettingsCategory() => "World Tech Level";
 }

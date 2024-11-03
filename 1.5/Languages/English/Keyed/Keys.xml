@@ -4,4 +4,8 @@
   <WorldTechLevel.Name>world tech level</WorldTechLevel.Name>
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
 
+  <WorldTechLevel.Settings.Tab.General>General</WorldTechLevel.Settings.Tab.General>
+
+  <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Always allow neurotrainers</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
+
 </LanguageData>

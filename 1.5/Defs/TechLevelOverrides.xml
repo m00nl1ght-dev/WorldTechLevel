@@ -101,24 +101,6 @@
                 <techLevel>Industrial</techLevel>
             </li>
 
-            <!-- books -->
-
-            <li>
-                <defName>TextBook</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-            <li>
-                <defName>Schematic</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-            <li>
-                <defName>Novel</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-
             <!-- food -->
 
             <li>

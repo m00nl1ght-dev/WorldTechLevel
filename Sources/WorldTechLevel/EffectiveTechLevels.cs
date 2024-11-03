@@ -26,13 +26,19 @@ public static class EffectiveTechLevels
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
     {
-        if (def.techLevel != TechLevel.Undefined) return def.techLevel;
-
-        if (def.generated)
+        if (def is { generated: true, thingCategories: not null })
         {
-            var techprint = def.GetCompProperties<CompProperties_Techprint>();
-            if (techprint != null) return techprint.project.techLevel;
+            if (def.GetCompProperties<CompProperties_Techprint>() is { } techprint)
+                return techprint.project.techLevel;
+
+            if (def.thingCategories.Contains(ThingCategoryDefOf.NeurotrainersSkill))
+                return WorldTechLevel.Settings.AlwaysAllowNeurotrainers ? TechLevel.Undefined : def.techLevel;
+
+            if (def.thingCategories.Contains(ThingCategoryDefOf.NeurotrainersPsycast))
+                return WorldTechLevel.Settings.AlwaysAllowNeurotrainers ? TechLevel.Undefined : def.techLevel;
         }
+
+        if (def.techLevel != TechLevel.Undefined) return def.techLevel;
 
         _tmpList.Clear();
         _tmpList.Add(TechLevel.Undefined);
@@ -64,6 +70,12 @@ public static class EffectiveTechLevels
         if (def.costList != null)
             foreach (var entry in def.costList)
                 _tmpList.Add(entry.thingDef.EffectiveTechLevel());
+
+        if (def.GetCompProperties<CompProperties_Power>() != null)
+            _tmpList.Add(TechLevel.Industrial);
+
+        if (def.GetCompProperties<CompProperties_Book>() != null)
+            _tmpList.Add(TechLevel.Medieval);
 
         return _tmpList.Max();
     }

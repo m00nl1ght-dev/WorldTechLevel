@@ -8,7 +8,7 @@ namespace WorldTechLevel.Patches;
 
 [PatchGroup("Main")]
 [HarmonyPatch(typeof(ThingSetMaker))]
-internal static class Patch_ThingSetMaker
+internal static class Patch_ThingSetMaker // TODO review - does this cause e.g. empty empty quest rewards
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ThingSetMaker.Generate), [typeof(ThingSetMakerParams)])]
