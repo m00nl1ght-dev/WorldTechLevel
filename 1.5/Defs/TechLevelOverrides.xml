@@ -73,6 +73,14 @@
                 <defName>Apparel_PsychicFoilHelmet</defName>
                 <techLevel>Industrial</techLevel>
             </li>
+            <li>
+                <defName>Apparel_GasMask</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Sash</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
 
             <!-- culturally/historically not medieval -->
 
@@ -100,6 +108,10 @@
                 <defName>Apparel_Duster</defName>
                 <techLevel>Industrial</techLevel>
             </li>
+            <li>
+                <defName>Apparel_AuthorityCap</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
 
             <!-- food -->
 
@@ -112,6 +124,32 @@
                 <defName>MealNutrientPaste</defName>
                 <techLevel>Industrial</techLevel>
                 <priority>-1</priority>
+            </li>
+
+            <!-- ideology -->
+
+            <li>
+                <defName>Lectern</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Pew</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- biotech -->
+
+            <li>
+                <defName>ArchiteCapsule</defName>
+                <techLevel>Archotech</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>Genepack</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
             </li>
 
         </overrides>

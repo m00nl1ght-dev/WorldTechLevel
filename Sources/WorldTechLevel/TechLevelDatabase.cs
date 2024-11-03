@@ -40,6 +40,8 @@ internal static class TechLevelDatabase<T> where T : Def
         var overrides = DefDatabase<TechLevelOverrideDef>.AllDefs
             .Where(d => d.defType == typeof(T))
             .SelectMany(d => d.overrides)
+            .Where(d => d.unlessModPresent == null || !ModsConfig.IsActive(d.unlessModPresent))
+            .Where(d => d.ifModPresent == null || ModsConfig.IsActive(d.ifModPresent))
             .OrderBy(e => e.priority);
 
         foreach (var entry in overrides)

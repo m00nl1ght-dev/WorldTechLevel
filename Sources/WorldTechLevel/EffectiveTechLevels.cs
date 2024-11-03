@@ -38,6 +38,12 @@ public static class EffectiveTechLevels
                 return WorldTechLevel.Settings.AlwaysAllowNeurotrainers ? TechLevel.Undefined : def.techLevel;
         }
 
+        if (def is { techLevel: TechLevel.Archotech, thingCategories: not null })
+        {
+            if (def.thingCategories.Contains(WTL_DefOf.InertRelics))
+                return TechLevel.Undefined;
+        }
+
         if (def.techLevel != TechLevel.Undefined) return def.techLevel;
 
         _tmpList.Clear();

@@ -14,6 +14,8 @@ public class TechLevelOverrideDef : Def
     {
         public string defName;
         public TechLevel techLevel;
+        public string unlessModPresent;
+        public string ifModPresent;
         public int priority;
     }
 }
