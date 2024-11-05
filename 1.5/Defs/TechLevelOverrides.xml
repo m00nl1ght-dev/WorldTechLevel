@@ -152,6 +152,24 @@
                 <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
             </li>
 
+            <!-- VFEE -->
+
+            <li>
+                <defName>VFEE_Aperitif</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- DD Elves -->
+
+            <li>
+                <defName>DevDesigner_WoodElves_AlarielleStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+            <li>
+                <defName>DevDesigner_WoodElves_ShamanStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
         </overrides>
     </WorldTechLevel.TechLevelOverrideDef>
 

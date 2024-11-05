@@ -11,7 +11,7 @@ public static class EffectiveTechLevels
 
     public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
     {
-        var data = TechLevelDatabase<ThingDef>.Data;
+        var data = TechLevelDatabase<T>.Data;
         if (def.index < data.Length) return data[def.index];
         return TechLevel.Undefined;
     }
@@ -21,7 +21,11 @@ public static class EffectiveTechLevels
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
         TechLevelDatabase<ThingDef>.ApplyOverrides();
         TechLevelDatabase<ThingDef>.Apply(ThingDefSecondPass);
-        TechLevelDatabase<ThingDef>.DebugOutput();
+        // TechLevelDatabase<ThingDef>.DebugOutput();
+
+        TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
+        TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
+        TechLevelDatabase<ResearchProjectDef>.DebugOutput();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
@@ -84,5 +88,10 @@ public static class EffectiveTechLevels
             _tmpList.Add(TechLevel.Medieval);
 
         return _tmpList.Max();
+    }
+
+    private static TechLevel ResearchProjectDef(ResearchProjectDef def)
+    {
+        return def.techLevel;
     }
 }

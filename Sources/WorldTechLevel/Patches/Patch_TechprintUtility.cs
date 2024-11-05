@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
@@ -16,7 +17,7 @@ internal static class Patch_TechprintUtility
     {
         if (WorldTechLevel.Current != TechLevel.Archotech)
         {
-            // TODO
+            __result = __result.Where(def => def.EffectiveTechLevel() <= WorldTechLevel.Current);
         }
     }
 }
