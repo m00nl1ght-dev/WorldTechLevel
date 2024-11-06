@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
@@ -15,9 +14,6 @@ internal static class Patch_ThingSetMakerUtility
     [HarmonyPatch(nameof(ThingSetMakerUtility.GetAllowedThingDefs))]
     internal static void GetAllowedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {
-        if (WorldTechLevel.Current != TechLevel.Archotech)
-        {
-            __result = __result.Where(t => t.EffectiveTechLevel() <= WorldTechLevel.Current);
-        }
+        __result = __result.FilterByEffectiveTechLevel();
     }
 }

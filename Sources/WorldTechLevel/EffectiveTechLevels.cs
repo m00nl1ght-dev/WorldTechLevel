@@ -16,16 +16,36 @@ public static class EffectiveTechLevels
         return TechLevel.Undefined;
     }
 
+    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
+    {
+        if (techLevel == TechLevel.Archotech) return defs;
+        var data = TechLevelDatabase<T>.Data;
+        return defs.Where(def => def.index >= data.Length || data[def.index] <= techLevel);
+    }
+
+    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs) where T : Def
+    {
+        return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
+    }
+
     internal static void Initialize()
     {
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
         TechLevelDatabase<ThingDef>.ApplyOverrides();
         TechLevelDatabase<ThingDef>.Apply(ThingDefSecondPass);
-        // TechLevelDatabase<ThingDef>.DebugOutput();
+        TechLevelDatabase<ThingDef>.DebugOutput();
 
         TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
         TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
-        TechLevelDatabase<ResearchProjectDef>.DebugOutput();
+
+        TechLevelDatabase<IdeoPresetDef>.Initialize();
+        TechLevelDatabase<IdeoPresetDef>.ApplyOverrides();
+
+        TechLevelDatabase<MemeDef>.Initialize();
+        TechLevelDatabase<MemeDef>.ApplyOverrides();
+
+        TechLevelDatabase<PreceptDef>.Initialize();
+        TechLevelDatabase<PreceptDef>.ApplyOverrides();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

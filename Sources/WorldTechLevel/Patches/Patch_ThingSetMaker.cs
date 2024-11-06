@@ -76,10 +76,7 @@ internal static class Patch_ThingSetMaker
     [HarmonyPatch(typeof(ThingSetMaker_ResourcePod), nameof(ThingSetMaker_ResourcePod.PossiblePodContentsDefs))]
     internal static void ResourcePod_PossiblePodContentsDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {
-        if (WorldTechLevel.Current != TechLevel.Archotech)
-        {
-            __result = __result.Where(t => t.EffectiveTechLevel() <= WorldTechLevel.Current);
-        }
+        __result = __result.FilterByEffectiveTechLevel();
     }
 
     [HarmonyPostfix]

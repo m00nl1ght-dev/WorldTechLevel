@@ -173,4 +173,95 @@
         </overrides>
     </WorldTechLevel.TechLevelOverrideDef>
 
+    <WorldTechLevel.TechLevelOverrideDef>
+        <defName>WTL_IdeoPresetDefs</defName>
+        <defType>IdeoPresetDef</defType>
+        <overrides>
+
+            <li>
+                <defName>Techno_Utopians</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Progressive_Humanism</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
+        </overrides>
+    </WorldTechLevel.TechLevelOverrideDef>
+
+    <WorldTechLevel.TechLevelOverrideDef>
+        <defName>WTL_MemeDefs</defName>
+        <defType>MemeDef</defType>
+        <overrides>
+
+            <li>
+                <defName>Transhumanist</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
+        </overrides>
+    </WorldTechLevel.TechLevelOverrideDef>
+
+    <WorldTechLevel.TechLevelOverrideDef>
+        <defName>WTL_PreceptDefs</defName>
+        <defType>PreceptDef</defType>
+        <overrides>
+
+            <li>
+                <defName>NutrientPasteEating_DontMind</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>NutrientPasteEating_Disgusting</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>BioSculpter_Despised</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Biosculpting_Accelerated</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AgeReversal_Demanded</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>NeuralSupercharge_Preferred</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>SleepAccelerator_Preferred</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Prohibited</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Horrible</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Disapproved</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>GrowthVat_Essential</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>GrowthVat_Prohibited</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>MechanoidLabor_Enhanced</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
+        </overrides>
+    </WorldTechLevel.TechLevelOverrideDef>
+
 </Defs>

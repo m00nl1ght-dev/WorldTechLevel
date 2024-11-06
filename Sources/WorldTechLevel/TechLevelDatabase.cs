@@ -13,13 +13,14 @@ internal static class TechLevelDatabase<T> where T : Def
 {
     internal static TechLevel[] Data = [];
 
-    internal static void Initialize(Func<T, TechLevel> func)
+    internal static void Initialize(Func<T, TechLevel> func = null)
     {
         var defs = DefDatabase<T>.AllDefsListForReading;
         var data = new TechLevel[defs.Count];
 
-        for (int i = 0; i < defs.Count; i++)
-            data[i] = func(defs[i]);
+        if (func != null)
+            for (int i = 0; i < defs.Count; i++)
+                data[i] = func(defs[i]);
 
         Data = data;
     }
