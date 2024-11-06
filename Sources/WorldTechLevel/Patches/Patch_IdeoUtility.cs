@@ -9,6 +9,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_IdeoUtility
 {
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(IdeoUtility.IsMemeAllowedFor))]
     internal static void IsMemeAllowedFor_Postfix(MemeDef meme, ref bool __result)
     {

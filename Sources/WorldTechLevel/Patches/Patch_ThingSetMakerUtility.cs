@@ -11,6 +11,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_ThingSetMakerUtility
 {
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(ThingSetMakerUtility.GetAllowedThingDefs))]
     internal static void GetAllowedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {

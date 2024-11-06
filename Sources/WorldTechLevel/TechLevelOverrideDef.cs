@@ -16,6 +16,7 @@ public class TechLevelOverrideDef : Def
         public TechLevel techLevel;
         public string unlessModPresent;
         public string ifModPresent;
+        public bool offworld;
         public int priority;
     }
 }

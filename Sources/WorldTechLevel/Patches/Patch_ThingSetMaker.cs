@@ -12,6 +12,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_ThingSetMaker
 {
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(ThingSetMaker.Generate), [typeof(ThingSetMakerParams)])]
     internal static void Generate_Prefix(ref ThingSetMakerParams parms)
     {
@@ -81,8 +82,10 @@ internal static class Patch_ThingSetMaker
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_TraderStock), nameof(ThingSetMaker.Generate))]
-    internal static void TraderStock_Generate_Postfix(List<Thing> outThings)
+    internal static void TraderStock_Generate_Postfix(ThingSetMakerParams parms, List<Thing> outThings)
     {
+        if (parms.traderDef is { orbital: true } && WorldTechLevel.Settings.AlwaysAllowOffworld) return;
+
         if (WorldTechLevel.Current != TechLevel.Archotech)
         {
             outThings.RemoveAll(t => t.def.EffectiveTechLevel() > WorldTechLevel.Current);

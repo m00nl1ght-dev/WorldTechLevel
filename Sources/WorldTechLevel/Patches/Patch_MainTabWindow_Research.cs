@@ -11,6 +11,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_MainTabWindow_Research
 {
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(MainTabWindow_Research.VisibleResearchProjects), MethodType.Getter)]
     internal static void GetVisibleResearchProjects_Prefix(MainTabWindow_Research __instance, ref bool __state)
     {
@@ -18,6 +19,7 @@ internal static class Patch_MainTabWindow_Research
     }
 
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(MainTabWindow_Research.VisibleResearchProjects), MethodType.Getter)]
     internal static void GetVisibleResearchProjects_Postfix(MainTabWindow_Research __instance, ref bool __state, ref List<ResearchProjectDef> __result)
     {

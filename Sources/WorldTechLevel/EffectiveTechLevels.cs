@@ -46,6 +46,10 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<PreceptDef>.Initialize();
         TechLevelDatabase<PreceptDef>.ApplyOverrides();
+
+        TechLevelDatabase<IncidentDef>.Initialize();
+        TechLevelDatabase<IncidentDef>.ApplyOverrides();
+        TechLevelDatabase<IncidentDef>.DebugOutput();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

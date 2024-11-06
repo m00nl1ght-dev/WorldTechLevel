@@ -7,5 +7,6 @@
   <WorldTechLevel.Settings.Tab.General>General</WorldTechLevel.Settings.Tab.General>
 
   <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Always allow neurotrainers</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
+  <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow higher technology coming from space</WorldTechLevel.Settings.AlwaysAllowOffworld>
 
 </LanguageData>

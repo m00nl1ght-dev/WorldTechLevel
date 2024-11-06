@@ -9,6 +9,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_Dialog_ChooseMemes
 {
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(Dialog_ChooseMemes.CanUseMeme))]
     internal static void CanUseMeme_Postfix(MemeDef meme, ref bool __result)
     {

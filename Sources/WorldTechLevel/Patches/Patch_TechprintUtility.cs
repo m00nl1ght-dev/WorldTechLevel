@@ -11,6 +11,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_TechprintUtility
 {
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(TechprintUtility.GetResearchProjectsNeedingTechprintsNow))]
     internal static void GetResearchProjectsNeedingTechprintsNow_Postfix(ref IEnumerable<ResearchProjectDef> __result)
     {

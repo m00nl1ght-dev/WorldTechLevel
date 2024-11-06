@@ -11,6 +11,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_FactionGenerator
 {
     [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(FactionGenerator.ConfigurableFactions), MethodType.Getter)]
     internal static void GetConfigurableFactions(ref IEnumerable<FactionDef> __result)
     {

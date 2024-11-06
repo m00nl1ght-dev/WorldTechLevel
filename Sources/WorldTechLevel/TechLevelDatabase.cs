@@ -43,6 +43,7 @@ internal static class TechLevelDatabase<T> where T : Def
             .SelectMany(d => d.overrides)
             .Where(d => d.unlessModPresent == null || !ModsConfig.IsActive(d.unlessModPresent))
             .Where(d => d.ifModPresent == null || ModsConfig.IsActive(d.ifModPresent))
+            .Where(d => !d.offworld || WorldTechLevel.Settings.AlwaysAllowOffworld)
             .OrderBy(e => e.priority);
 
         foreach (var entry in overrides)
