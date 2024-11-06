@@ -265,6 +265,20 @@
     </WorldTechLevel.TechLevelOverrideDef>
 
     <WorldTechLevel.TechLevelOverrideDef>
+        <defName>WTL_RitualAttachableOutcomeEffectDefs</defName>
+        <defType>RitualAttachableOutcomeEffectDef</defType>
+        <overrides>
+
+            <li>
+                <defName>DiscoverAncientComplex</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+
+        </overrides>
+    </WorldTechLevel.TechLevelOverrideDef>
+
+    <WorldTechLevel.TechLevelOverrideDef>
         <defName>WTL_IncidentDefs</defName>
         <defType>IncidentDef</defType>
         <overrides>
@@ -323,8 +337,20 @@
                 <techLevel>Ultra</techLevel>
             </li>
             <li>
+                <defName>GiveQuest_AncientComplex_Mechanitor</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>GiveQuest_DistressCall</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+            <li>
                 <defName>GiveQuest_EndGame_ShipEscape</defName>
                 <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>GiveQuest_EndGame_ArchonexusVictory</defName>
+                <techLevel>Archotech</techLevel>
             </li>
             <li>
                 <defName>ResourcePodCrash</defName>
@@ -349,6 +375,41 @@
                 <techLevel>Industrial</techLevel>
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
                 <offworld>true</offworld>
+            </li>
+
+        </overrides>
+    </WorldTechLevel.TechLevelOverrideDef>
+
+    <WorldTechLevel.TechLevelOverrideDef>
+        <defName>WTL_QuestScriptDefs</defName>
+        <defType>QuestScriptDef</defType>
+        <overrides>
+
+            <li>
+                <defName>ThreatReward_MechPods_MiscReward</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Util_MechCluster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PollutionDump</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>SanguophageShip</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>RelicHunt</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>OpportunitySite_AncientComplex</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
             </li>
 
         </overrides>

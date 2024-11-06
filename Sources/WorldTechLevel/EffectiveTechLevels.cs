@@ -47,9 +47,15 @@ public static class EffectiveTechLevels
         TechLevelDatabase<PreceptDef>.Initialize();
         TechLevelDatabase<PreceptDef>.ApplyOverrides();
 
+        TechLevelDatabase<RitualAttachableOutcomeEffectDef>.Initialize();
+        TechLevelDatabase<RitualAttachableOutcomeEffectDef>.ApplyOverrides();
+
         TechLevelDatabase<IncidentDef>.Initialize();
         TechLevelDatabase<IncidentDef>.ApplyOverrides();
-        TechLevelDatabase<IncidentDef>.DebugOutput();
+
+        TechLevelDatabase<QuestScriptDef>.Initialize();
+        TechLevelDatabase<QuestScriptDef>.ApplyOverrides();
+        TechLevelDatabase<QuestScriptDef>.DebugOutput();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

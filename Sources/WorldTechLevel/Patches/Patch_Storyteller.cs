@@ -17,7 +17,13 @@ internal static class Patch_Storyteller
     {
         if (WorldTechLevel.Current != TechLevel.Archotech)
         {
-            __result = __result.Where(i => i.def.EffectiveTechLevel() <= WorldTechLevel.Current);
+            __result = __result.Where(IncidentFilter);
         }
+    }
+
+    private static bool IncidentFilter(FiringIncident i)
+    {
+        if (i.parms.questScriptDef?.EffectiveTechLevel() > WorldTechLevel.Current) return false;
+        return i.def.EffectiveTechLevel() <= WorldTechLevel.Current;
     }
 }
