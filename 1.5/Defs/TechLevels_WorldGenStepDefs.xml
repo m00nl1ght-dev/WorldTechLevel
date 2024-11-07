@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_WorldGenStepDefs</defName>
+        <defType>WorldGenStepDef</defType>
+        <entries>
+
+            <li>
+                <defName>AncientRoads</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

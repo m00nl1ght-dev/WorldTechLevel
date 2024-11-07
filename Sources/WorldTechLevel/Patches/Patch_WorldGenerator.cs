@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld.Planet;
@@ -9,6 +10,14 @@ namespace WorldTechLevel.Patches;
 [HarmonyPatch(typeof(WorldGenerator))]
 internal static class Patch_WorldGenerator
 {
+    [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
+    [HarmonyPatch(nameof(WorldGenerator.GenStepsInOrder), MethodType.Getter)]
+    private static void GetGenStepsInOrder_Postfix(ref IEnumerable<WorldGenStepDef> __result)
+    {
+        __result = __result.FilterByEffectiveTechLevel();
+    }
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(WorldGenerator.GenerateWorld))]
     internal static void GenerateWorld_Prefix()
