@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_PreceptDefs</defName>
+        <defType>PreceptDef</defType>
+        <entries>
+
+            <li>
+                <defName>NutrientPasteEating_DontMind</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>NutrientPasteEating_Disgusting</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>BioSculpter_Despised</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Biosculpting_Accelerated</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AgeReversal_Demanded</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>NeuralSupercharge_Preferred</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>SleepAccelerator_Preferred</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Prohibited</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Horrible</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AutonomousWeapons_Disapproved</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>GrowthVat_Essential</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>GrowthVat_Prohibited</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>MechanoidLabor_Enhanced</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

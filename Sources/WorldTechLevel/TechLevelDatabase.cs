@@ -38,9 +38,9 @@ internal static class TechLevelDatabase<T> where T : Def
 
     internal static void ApplyOverrides()
     {
-        var overrides = DefDatabase<TechLevelOverrideDef>.AllDefs
+        var overrides = DefDatabase<TechLevelConfigDef>.AllDefs
             .Where(d => d.defType == typeof(T))
-            .SelectMany(d => d.overrides)
+            .SelectMany(d => d.entries)
             .Where(d => d.unlessModPresent == null || !ModsConfig.IsActive(d.unlessModPresent))
             .Where(d => d.ifModPresent == null || ModsConfig.IsActive(d.ifModPresent))
             .Where(d => !d.offworld || WorldTechLevel.Settings.AlwaysAllowOffworld)

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_MemeDefs</defName>
+        <defType>MemeDef</defType>
+        <entries>
+
+            <li>
+                <defName>Transhumanist</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

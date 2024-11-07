@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_IdeoPresetDefs</defName>
+        <defType>IdeoPresetDef</defType>
+        <entries>
+
+            <li>
+                <defName>Techno_Utopians</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Progressive_Humanism</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

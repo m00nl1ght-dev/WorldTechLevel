@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_ThingDefs</defName>
+        <defType>ThingDef</defType>
+        <entries>
+
+            <!-- resources -->
+
+            <li>
+                <defName>Steel</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Plasteel</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Uranium</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Chemfuel</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Neutroamine</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Synthread</defName>
+                <techLevel>Spacer</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Hyperweave</defName>
+                <techLevel>Spacer</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ComponentIndustrial</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ReinforcedBarrel</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ComponentSpacer</defName>
+                <techLevel>Spacer</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- apparel with misconfigured tech level in vanilla -->
+
+            <li>
+                <defName>Apparel_FlakPants</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_FlakJacket</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_PsychicFoilHelmet</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_GasMask</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Sash</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- culturally/historically not medieval -->
+
+            <li>
+                <defName>PokerTable</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>BilliardsTable</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_CowboyHat</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_BowlerHat</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_CollarShirt</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Duster</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_AuthorityCap</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+            <!-- food -->
+
+            <li>
+                <defName>MealSurvivalPack</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>MealNutrientPaste</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- ideology -->
+
+            <li>
+                <defName>Lectern</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Pew</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- biotech -->
+
+            <li>
+                <defName>ArchiteCapsule</defName>
+                <techLevel>Archotech</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>Genepack</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+
+            <!-- VFEE -->
+
+            <li>
+                <defName>VFEE_Aperitif</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- DD Elves -->
+
+            <li>
+                <defName>DevDesigner_WoodElves_AlarielleStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+            <li>
+                <defName>DevDesigner_WoodElves_ShamanStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

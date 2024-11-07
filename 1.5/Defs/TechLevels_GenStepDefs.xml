@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_GenStepDefs</defName>
+        <defType>GenStepDef</defType>
+        <entries>
+
+            <li>
+                <defName>ScatterRoadDebris</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AncientJunkClusters</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AncientPipelineSection</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AncientPollutionJunk</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>ScatterCaveDebris</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>AncientFences</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>AncientTurret</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>AncientUtilityBuilding</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>AncientLandingPad</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>MechanoidRemains</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>AncientMechs</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>AncientExostriderRemains</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

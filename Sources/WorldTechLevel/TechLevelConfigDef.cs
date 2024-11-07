@@ -5,10 +5,10 @@ using Verse;
 
 namespace WorldTechLevel;
 
-public class TechLevelOverrideDef : Def
+public class TechLevelConfigDef : Def
 {
     public Type defType;
-    public List<Entry> overrides;
+    public List<Entry> entries;
 
     public struct Entry
     {

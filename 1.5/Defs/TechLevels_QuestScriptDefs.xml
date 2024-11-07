@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_QuestScriptDefs</defName>
+        <defType>QuestScriptDef</defType>
+        <entries>
+
+            <li>
+                <defName>ThreatReward_MechPods_MiscReward</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Util_MechCluster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PollutionDump</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>SanguophageShip</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>RelicHunt</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>OpportunitySite_AncientComplex</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

@@ -33,7 +33,6 @@ public static class EffectiveTechLevels
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
         TechLevelDatabase<ThingDef>.ApplyOverrides();
         TechLevelDatabase<ThingDef>.Apply(ThingDefSecondPass);
-        TechLevelDatabase<ThingDef>.DebugOutput();
 
         TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
         TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
@@ -55,7 +54,12 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<QuestScriptDef>.Initialize();
         TechLevelDatabase<QuestScriptDef>.ApplyOverrides();
-        TechLevelDatabase<QuestScriptDef>.DebugOutput();
+
+        TechLevelDatabase<ComplexThreatDef>.Initialize();
+        TechLevelDatabase<ComplexThreatDef>.ApplyOverrides();
+
+        TechLevelDatabase<GenStepDef>.Initialize();
+        TechLevelDatabase<GenStepDef>.ApplyOverrides();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

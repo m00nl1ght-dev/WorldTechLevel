@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_RitualAttachableOutcomeEffectDefs</defName>
+        <defType>RitualAttachableOutcomeEffectDef</defType>
+        <entries>
+
+            <li>
+                <defName>DiscoverAncientComplex</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
