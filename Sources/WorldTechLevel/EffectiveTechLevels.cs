@@ -63,6 +63,9 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<WorldGenStepDef>.Initialize();
         TechLevelDatabase<WorldGenStepDef>.ApplyOverrides();
+
+        TechLevelDatabase<TraitDef>.Initialize();
+        TechLevelDatabase<TraitDef>.ApplyOverrides();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

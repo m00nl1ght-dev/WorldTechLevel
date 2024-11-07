@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_TraitDefs</defName>
+        <defType>TraitDef</defType>
+        <entries>
+
+            <li>
+                <defName>Transhumanist</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>BodyPurist</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
