@@ -32,13 +32,6 @@ internal static class Patch_ThingSetMaker
         if (WorldTechLevel.Current < TechLevel.Medieval) __result = false;
     }
 
-    [HarmonyPrefix]
-    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), nameof(ThingSetMaker.Generate))]
-    internal static bool AncientPodContents_Generate_Prefix()
-    {
-        return WorldTechLevel.Current >= Faction.OfAncients.def.techLevel;
-    }
-
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_Meteorite), nameof(ThingSetMaker_Meteorite.FindRandomMineableDef))]
     internal static void Meteorite_FindRandomMineableDef_Postfix(ref ThingDef __result)

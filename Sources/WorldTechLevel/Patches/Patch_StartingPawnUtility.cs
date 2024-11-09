@@ -1,5 +1,6 @@
 using HarmonyLib;
 using LunarFramework.Patching;
+using RimWorld;
 using Verse;
 
 namespace WorldTechLevel.Patches;
@@ -13,7 +14,7 @@ internal static class Patch_StartingPawnUtility
     [HarmonyPatch(nameof(StartingPawnUtility.GeneratePossessions))]
     internal static void GeneratePossessions_Postfix(Pawn pawn)
     {
-        if (WorldTechLevel.Settings.FilterStartingPossessions)
+        if (pawn.Faction != null && pawn.Faction.def.techLevel != TechLevel.Undefined && pawn.Faction.def.techLevel <= WorldTechLevel.Current)
         {
             if (StartingPawnUtility.StartingPossessions.TryGetValue(pawn, out var list))
             {

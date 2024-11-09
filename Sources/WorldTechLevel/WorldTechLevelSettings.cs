@@ -7,7 +7,6 @@ public class WorldTechLevelSettings : LunarModSettings
 {
     public readonly Entry<bool> AlwaysAllowNeurotrainers = MakeEntry(false);
     public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
-    public readonly Entry<bool> FilterStartingPossessions = MakeEntry(true);
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -24,7 +23,6 @@ public class WorldTechLevelSettings : LunarModSettings
 
         LunarGUI.Checkbox(layout, ref AlwaysAllowNeurotrainers.Value, Label("AlwaysAllowNeurotrainers"));
         LunarGUI.Checkbox(layout, ref AlwaysAllowOffworld.Value, Label("AlwaysAllowOffworld"));
-        LunarGUI.Checkbox(layout, ref FilterStartingPossessions.Value, Label("FilterStartingPossessions"));
 
         if (layout.PopChanged())
         {

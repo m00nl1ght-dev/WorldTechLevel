@@ -8,6 +8,5 @@
 
   <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Allow neurotrainers regardless of tech level</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow higher technology coming from space</WorldTechLevel.Settings.AlwaysAllowOffworld>
-  <WorldTechLevel.Settings.FilterStartingPossessions>Filter starting possessions from scenario and backstories</WorldTechLevel.Settings.FilterStartingPossessions>
 
 </LanguageData>
