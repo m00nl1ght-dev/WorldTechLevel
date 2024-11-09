@@ -9,25 +9,6 @@ public static class EffectiveTechLevels
 {
     private static readonly List<TechLevel> _tmpList = [];
 
-    public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
-    {
-        var data = TechLevelDatabase<T>.Data;
-        if (def.index < data.Length) return data[def.index];
-        return TechLevel.Undefined;
-    }
-
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
-    {
-        if (techLevel == TechLevel.Archotech) return defs;
-        var data = TechLevelDatabase<T>.Data;
-        return defs.Where(def => def.index >= data.Length || data[def.index] <= techLevel);
-    }
-
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs) where T : Def
-    {
-        return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
-    }
-
     internal static void Initialize()
     {
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
@@ -68,8 +49,10 @@ public static class EffectiveTechLevels
         TechLevelDatabase<TraitDef>.ApplyOverrides();
 
         TechLevelDatabase<PawnKindDef>.Initialize(PawnKindDef);
-        AdjustPawnKindTechLevelsByFactionPawnGroupUsages();
         TechLevelDatabase<PawnKindDef>.ApplyOverrides();
+        TechLevelDatabase<PawnKindDef>.DebugOutput();
+
+        WarnPawnKindFactionUsages();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
@@ -145,18 +128,18 @@ public static class EffectiveTechLevels
         return def.defaultFactionType.techLevel;
     }
 
-    private static void AdjustPawnKindTechLevelsByFactionPawnGroupUsages()
+    private static void WarnPawnKindFactionUsages()
     {
         foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(d => d.pawnGroupMakers != null))
         {
-            foreach (var pawnGroupMaker in faction.pawnGroupMakers)
+            foreach (var kind in faction.pawnGroupMakers.SelectMany(g => g.options).Select(o => o.kind).Distinct())
             {
-                foreach (var option in pawnGroupMaker.options)
+                if (kind.EffectiveTechLevel() > faction.techLevel)
                 {
-                    if (option.kind.EffectiveTechLevel() > faction.techLevel)
-                    {
-                        TechLevelDatabase<PawnKindDef>.Data[option.kind.index] = faction.techLevel;
-                    }
+                    WorldTechLevel.Logger.Warn(
+                        $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +
+                        $"is used by faction {faction.defName} with lower tech level ({faction.techLevel})"
+                    );
                 }
             }
         }

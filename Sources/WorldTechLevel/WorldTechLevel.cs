@@ -23,6 +23,10 @@ public class WorldTechLevel : Mod
 
     private static void Init()
     {
+        MainPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Main");
+        MainPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
+        MainPatchGroup.Subscribe();
+
         CompatPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Compat");
         CompatPatchGroup.Subscribe();
 
@@ -33,16 +37,13 @@ public class WorldTechLevel : Mod
 
     private static void Cleanup()
     {
+        MainPatchGroup?.UnsubscribeAll();
         CompatPatchGroup?.UnsubscribeAll();
     }
 
     public WorldTechLevel(ModContentPack content) : base(content)
     {
         Settings = GetSettings<WorldTechLevelSettings>();
-
-        MainPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Main");
-        MainPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
-        MainPatchGroup.Subscribe();
     }
 
     public override void DoSettingsWindowContents(Rect inRect)

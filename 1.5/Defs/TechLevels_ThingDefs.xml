@@ -111,6 +111,10 @@
                 <defName>Apparel_AuthorityCap</defName>
                 <techLevel>Industrial</techLevel>
             </li>
+            <li>
+                <defName>Apparel_Slicecap</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
 
             <!-- food -->
 

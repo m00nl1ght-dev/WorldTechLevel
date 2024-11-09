@@ -4,7 +4,14 @@
         <defName>WTL_PawnKindDefs</defName>
         <defType>PawnKindDef</defType>
         <entries>
-
+            <li>
+                <defName>Grenadier*</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Mercenary*</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
             <li>
                 <defName>SpaceRefugee</defName>
                 <techLevel>Spacer</techLevel>
@@ -15,7 +22,241 @@
                 <techLevel>Spacer</techLevel>
                 <offworld>true</offworld>
             </li>
-
         </entries>
+        <alternatives>
+            <li>
+                <targets>
+                    <li>SpaceRefugee</li>
+                    <li>SpaceRefugee_Clothed</li>
+                </targets>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Villager</defName></li>
+                    <li><weight>1.0</weight><defName>Refugee</defName></li>
+                    <li><weight>0.5</weight><defName>Slave</defName></li>
+                    <li><weight>0.3</weight><defName>Miner</defName></li>
+                    <li><weight>0.3</weight><defName>Hunter</defName></li>
+                    <li><weight>0.3</weight><defName>Logger</defName></li>
+                    <li><weight>0.3</weight><defName>Farmer</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <li><weight>0.3</weight><defName>DankPyon_Medieval_Mercenary</defName></li>
+                    <li><weight>0.3</weight><defName>DankPyon_Medieval_Bowman</defName></li>
+                    <li><weight>0.3</weight><defName>DankPyon_Medieval_Billman</defName></li>
+                    <li><weight>0.5</weight><defName>DankPyon_BrigandThug</defName></li>
+                    <li><weight>0.3</weight><defName>DankPyon_BrigandMarksman</defName></li>
+                    <li><weight>0.2</weight><defName>BotchJob_DivineOrderCommoner</defName></li>
+                    <li><weight>0.1</weight><defName>BotchJob_DivineOrderFighter</defName></li>
+                    <li><weight>0.3</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
+                    <li><weight>0.3</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
+                    <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Mercenary</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Logger</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Farmer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Pirate</li>
+                    <li>Drifter</li>
+                    <li>Scavenger</li>
+                    <li>Thrasher</li>
+                </targets>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Mercenary_Gunner</defName></li>
+                    <li><weight>1.0</weight><defName>Mercenary_Slasher</defName></li>
+                    <li><weight>0.5</weight><defName>Mercenary_Heavy</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_BrigandThug</defName></li>
+                    <li><weight>1.0</weight><defName>DankPyon_BrigandRaider</defName></li>
+                    <li><weight>1.0</weight><defName>DankPyon_BrigandMarksman</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Warrior</defName></li>
+                    <li><weight>1.0</weight><defName>Tribal_Archer</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Berserker</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>PirateBoss</li>
+                    <li>Town_Councilman</li>
+                </targets>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Town_Councilman</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_BrigandLeader</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_ChiefMelee</defName></li>
+                    <li><weight>1.0</weight><defName>Tribal_ChiefRanged</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Mercenary*</li>
+                    <li>Grenadier*</li>
+                    <li>Town_Guard</li>
+                </targets>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Town_Guard</defName></li>
+                    <li><weight>1.0</weight><defName>Mercenary_Gunner</defName></li>
+                    <li><weight>1.0</weight><defName>Mercenary_Slasher</defName></li>
+                    <li><weight>0.5</weight><defName>Mercenary_Heavy</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Mercenary</defName></li>
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Bowman</defName></li>
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Billman</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Warrior</defName></li>
+                    <li><weight>1.0</weight><defName>Tribal_Archer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>AncientSoldier</li>
+                </targets>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>0.5</weight><defName>Mercenary_Gunner</defName></li>
+                    <li><weight>0.5</weight><defName>Mercenary_Slasher</defName></li>
+                    <li><weight>0.5</weight><defName>Mercenary_Heavy</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_MercenaryHeavy</defName></li>
+                    <li><weight>0.5</weight><defName>DankPyon_Medieval_Mercenary</defName></li>
+                    <li><weight>0.5</weight><defName>DankPyon_Medieval_Bowman</defName></li>
+                    <li><weight>0.5</weight><defName>DankPyon_Medieval_Billman</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Berserker</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Warrior</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Archer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Villager</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <li><weight>0.2</weight><defName>BotchJob_DivineOrderCommoner</defName></li>
+                    <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
+                    <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Logger</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Farmer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Villager_Child</li>
+                </targets>
+                <options>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Child</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Town_Trader</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Merchant</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Trader</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Miner</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Miner</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Hunter</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Hunter</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Logger</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Logger</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Farmer</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Farmer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Refugee</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
+                    <li><weight>0.2</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
+                    <li><weight>0.2</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Logger</defName></li>
+                    <li><weight>0.5</weight><defName>Tribal_Farmer</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>WellEquippedTraveler</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_HedgeKnight</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>PovertyPilgrim</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>StrangerInBlack</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Medieval_MercenaryHeavy</defName></li>
+                    <!-- Tribal -->
+                    <li><weight>1.0</weight><defName>Tribal_Berserker</defName></li>
+                </options>
+            </li>
+        </alternatives>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

@@ -11,18 +11,56 @@ namespace WorldTechLevel;
 
 internal static class TechLevelDatabase<T> where T : Def
 {
-    internal static TechLevel[] Data = [];
+    internal static TechLevel[] Levels = [];
+    internal static Alternative[][] Alternatives = [];
 
     internal static void Initialize(Func<T, TechLevel> func = null)
     {
         var defs = DefDatabase<T>.AllDefsListForReading;
-        var data = new TechLevel[defs.Count];
+        var levels = new TechLevel[defs.Count];
 
         if (func != null)
             for (int i = 0; i < defs.Count; i++)
-                data[i] = func(defs[i]);
+                levels[i] = func(defs[i]);
 
-        Data = data;
+        Levels = levels;
+
+        var altConfigs = DefDatabase<TechLevelConfigDef>.AllDefs
+            .Where(def => def.defType == typeof(T) && def.alternatives != null);
+
+        if (altConfigs.Any())
+        {
+            var alternatives = new Alternative[defs.Count][];
+
+            foreach (var altEntry in altConfigs.SelectMany(c => c.alternatives))
+            {
+                var options = altEntry.options
+                    .Select(e => new Alternative(DefDatabase<T>.GetNamedSilentFail(e.defName), e.weight))
+                    .Where(a => a is { def: not null, weight: > 0f })
+                    .ToArray();
+
+                foreach (var defName in altEntry.targets)
+                {
+                    if (defName.EndsWith("*"))
+                    {
+                        var prefix = defName.Substring(0, defName.Length - 1);
+
+                        foreach (var item in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                        {
+                            var existing = alternatives[item.index];
+                            alternatives[item.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
+                        }
+                    }
+                    else if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
+                    {
+                        var existing = alternatives[def.index];
+                        alternatives[def.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
+                    }
+                }
+            }
+
+            Alternatives = alternatives;
+        }
     }
 
     internal static void Apply(Func<T, TechLevel, TechLevel> func)
@@ -31,9 +69,9 @@ internal static class TechLevelDatabase<T> where T : Def
         var updated = new TechLevel[defs.Count];
 
         for (int i = 0; i < defs.Count; i++)
-            updated[i] = func(defs[i], Data[i]);
+            updated[i] = func(defs[i], Levels[i]);
 
-        Data = updated;
+        Levels = updated;
     }
 
     internal static void ApplyOverrides()
@@ -47,9 +85,35 @@ internal static class TechLevelDatabase<T> where T : Def
             .OrderBy(e => e.priority);
 
         foreach (var entry in overrides)
-            if (DefDatabase<T>.defsByName.TryGetValue(entry.defName, out var def) && def.index < Data.Length)
-                if (entry.priority >= 0 || Data[def.index] == TechLevel.Undefined)
-                    Data[def.index] = entry.techLevel;
+        {
+            if (entry.defName.EndsWith("*"))
+            {
+                var prefix = entry.defName.Substring(0, entry.defName.Length - 1);
+
+                foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                {
+                    if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
+                        Levels[def.index] = entry.techLevel;
+                }
+            }
+            else if (DefDatabase<T>.defsByName.TryGetValue(entry.defName, out var def))
+            {
+                if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
+                    Levels[def.index] = entry.techLevel;
+            }
+        }
+    }
+
+    public readonly struct Alternative
+    {
+        public readonly T def;
+        public readonly float weight;
+
+        public Alternative(T def, float weight)
+        {
+            this.def = def;
+            this.weight = weight;
+        }
     }
 
     private static readonly List<string> DebugExcludedPrefixes = [
@@ -64,7 +128,7 @@ internal static class TechLevelDatabase<T> where T : Def
         var file = Path.Combine(folder, $"{typeof(T).Name}.log");
         var lines = new List<string>();
 
-        foreach (var group in defs.GroupBy(d => Data[d.index]).OrderByDescending(g => g.Key))
+        foreach (var group in defs.GroupBy(d => Levels[d.index]).OrderByDescending(g => g.Key))
         {
             lines.Add("");
             lines.Add($"### {group.Key.ToString()} ###");

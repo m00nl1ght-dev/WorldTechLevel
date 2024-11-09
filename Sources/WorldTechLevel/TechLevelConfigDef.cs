@@ -8,9 +8,10 @@ namespace WorldTechLevel;
 public class TechLevelConfigDef : Def
 {
     public Type defType;
-    public List<Entry> entries;
+    public List<LevelEntry> entries;
+    public List<AlternativesEntry> alternatives;
 
-    public struct Entry
+    public struct LevelEntry
     {
         public string defName;
         public TechLevel techLevel;
@@ -18,5 +19,17 @@ public class TechLevelConfigDef : Def
         public string ifModPresent;
         public bool offworld;
         public int priority;
+    }
+
+    public struct AlternativesEntry
+    {
+        public List<string> targets;
+        public List<AlternativesGroupEntry> options;
+    }
+
+    public struct AlternativesGroupEntry
+    {
+        public string defName;
+        public float weight;
     }
 }
