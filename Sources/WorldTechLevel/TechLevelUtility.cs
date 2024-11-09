@@ -26,15 +26,15 @@ public static class TechLevelUtility
         return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
     }
 
-    public static T GetAlternative<T>(this T def) where T : Def
+    public static T GetAlternative<T>(this T def) where T : Def => def.GetAlternative(WorldTechLevel.Current);
+
+    public static T GetAlternative<T>(this T def, TechLevel targetLevel) where T : Def
     {
         var data = TechLevelDatabase<T>.Alternatives;
         if (def.index >= data.Length) return null;
 
         var alternatives = data[def.index];
         if (alternatives == null) return null;
-
-        var targetLevel = WorldTechLevel.Current;
 
         bool Filter(TechLevelDatabase<T>.Alternative option)
         {

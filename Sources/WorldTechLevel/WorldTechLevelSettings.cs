@@ -8,6 +8,7 @@ public class WorldTechLevelSettings : LunarModSettings
     public readonly Entry<bool> AlwaysAllowNeurotrainers = MakeEntry(false);
     public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
     public readonly Entry<bool> FilterPawnEquipment = MakeEntry(false);
+    public readonly Entry<bool> FilterPawnBackstories = MakeEntry(true);
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -25,6 +26,7 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.Checkbox(layout, ref AlwaysAllowNeurotrainers.Value, Label("AlwaysAllowNeurotrainers"));
         LunarGUI.Checkbox(layout, ref AlwaysAllowOffworld.Value, Label("AlwaysAllowOffworld"));
         LunarGUI.Checkbox(layout, ref FilterPawnEquipment.Value, Label("FilterPawnEquipment"));
+        LunarGUI.Checkbox(layout, ref FilterPawnBackstories.Value, Label("FilterPawnBackstories"));
 
         if (layout.PopChanged())
         {

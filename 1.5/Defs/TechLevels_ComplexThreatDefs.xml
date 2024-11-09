@@ -4,12 +4,10 @@
         <defName>WTL_ComplexThreatDefs</defName>
         <defType>ComplexThreatDef</defType>
         <entries>
-
             <li>
                 <defName>SleepingMechanoids</defName>
                 <techLevel>Ultra</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

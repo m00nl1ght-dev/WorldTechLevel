@@ -4,7 +4,6 @@
         <defName>WTL_IncidentDefs</defName>
         <defType>IncidentDef</defType>
         <entries>
-
             <li>
                 <defName>MechCluster</defName>
                 <techLevel>Ultra</techLevel>
@@ -98,7 +97,6 @@
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
                 <offworld>true</offworld>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

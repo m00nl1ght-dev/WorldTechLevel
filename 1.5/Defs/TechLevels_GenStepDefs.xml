@@ -4,7 +4,6 @@
         <defName>WTL_GenStepDefs</defName>
         <defType>GenStepDef</defType>
         <entries>
-
             <li>
                 <defName>ScatterRoadDebris</defName>
                 <techLevel>Industrial</techLevel>
@@ -57,7 +56,6 @@
                 <defName>AncientExostriderRemains</defName>
                 <techLevel>Ultra</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

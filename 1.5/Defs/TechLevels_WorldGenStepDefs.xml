@@ -4,12 +4,10 @@
         <defName>WTL_WorldGenStepDefs</defName>
         <defType>WorldGenStepDef</defType>
         <entries>
-
             <li>
                 <defName>AncientRoads</defName>
                 <techLevel>Industrial</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

@@ -4,7 +4,6 @@
         <defName>WTL_TraitDefs</defName>
         <defType>TraitDef</defType>
         <entries>
-
             <li>
                 <defName>Transhumanist</defName>
                 <techLevel>Spacer</techLevel>
@@ -13,7 +12,6 @@
                 <defName>BodyPurist</defName>
                 <techLevel>Industrial</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

@@ -4,12 +4,10 @@
         <defName>WTL_MemeDefs</defName>
         <defType>MemeDef</defType>
         <entries>
-
             <li>
                 <defName>Transhumanist</defName>
                 <techLevel>Spacer</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

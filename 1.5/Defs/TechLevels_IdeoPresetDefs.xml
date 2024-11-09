@@ -4,7 +4,6 @@
         <defName>WTL_IdeoPresetDefs</defName>
         <defType>IdeoPresetDef</defType>
         <entries>
-
             <li>
                 <defName>Techno_Utopians</defName>
                 <techLevel>Spacer</techLevel>
@@ -13,7 +12,6 @@
                 <defName>Progressive_Humanism</defName>
                 <techLevel>Spacer</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

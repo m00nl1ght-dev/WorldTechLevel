@@ -77,7 +77,7 @@ internal static class TechLevelDatabase<T> where T : Def
     internal static void ApplyOverrides()
     {
         var overrides = DefDatabase<TechLevelConfigDef>.AllDefs
-            .Where(d => d.defType == typeof(T))
+            .Where(d => d.defType == typeof(T) && d.entries != null)
             .SelectMany(d => d.entries)
             .Where(d => d.unlessModPresent == null || !ModsConfig.IsActive(d.unlessModPresent))
             .Where(d => d.ifModPresent == null || ModsConfig.IsActive(d.ifModPresent))
@@ -136,7 +136,6 @@ internal static class TechLevelDatabase<T> where T : Def
 
             lines.AddRange(group
                 .Where(def => !DebugExcludedPrefixes.Any(p => def.defName.StartsWith(p)))
-                .Where(def => def is not PawnKindDef pkd || pkd.race.race.Humanlike)
                 .Select(def => def.defName));
         }
 

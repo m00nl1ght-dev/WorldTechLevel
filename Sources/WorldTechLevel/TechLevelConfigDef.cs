@@ -10,6 +10,7 @@ public class TechLevelConfigDef : Def
     public Type defType;
     public List<LevelEntry> entries;
     public List<AlternativesEntry> alternatives;
+    public List<StoryFilterEntry> storyFilters;
 
     public struct LevelEntry
     {
@@ -31,5 +32,12 @@ public class TechLevelConfigDef : Def
     {
         public string defName;
         public float weight;
+    }
+
+    public struct StoryFilterEntry
+    {
+        public List<string> strongTerms;
+        public List<string> weakTerms;
+        public TechLevel techLevel;
     }
 }

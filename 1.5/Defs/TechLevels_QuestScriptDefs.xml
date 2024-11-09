@@ -4,7 +4,6 @@
         <defName>WTL_QuestScriptDefs</defName>
         <defType>QuestScriptDef</defType>
         <entries>
-
             <li>
                 <defName>ThreatReward_MechPods_MiscReward</defName>
                 <techLevel>Ultra</techLevel>
@@ -31,7 +30,6 @@
                 <techLevel>Industrial</techLevel>
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

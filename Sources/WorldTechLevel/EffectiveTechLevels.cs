@@ -50,7 +50,9 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<PawnKindDef>.Initialize(PawnKindDef);
         TechLevelDatabase<PawnKindDef>.ApplyOverrides();
-        TechLevelDatabase<PawnKindDef>.DebugOutput();
+
+        TechLevelDatabase<BackstoryDef>.Initialize(BackstoryDef);
+        TechLevelDatabase<BackstoryDef>.ApplyOverrides();
 
         WarnPawnKindFactionUsages();
     }
@@ -75,7 +77,8 @@ public static class EffectiveTechLevels
                 return TechLevel.Undefined;
         }
 
-        if (def.techLevel != TechLevel.Undefined) return def.techLevel;
+        if (def.techLevel != TechLevel.Undefined)
+            return def.techLevel;
 
         _tmpList.Clear();
         _tmpList.Add(TechLevel.Undefined);
@@ -99,7 +102,8 @@ public static class EffectiveTechLevels
 
     private static TechLevel ThingDefSecondPass(ThingDef def, TechLevel level)
     {
-        if (level != TechLevel.Undefined) return level;
+        if (level != TechLevel.Undefined)
+            return level;
 
         _tmpList.Clear();
         _tmpList.Add(TechLevel.Undefined);
@@ -124,8 +128,44 @@ public static class EffectiveTechLevels
 
     private static TechLevel PawnKindDef(PawnKindDef def)
     {
-        if (def.defaultFactionType is not { isPlayer: false }) return TechLevel.Undefined;
+        if (def.defaultFactionType is not { isPlayer: false })
+            return TechLevel.Undefined;
+
         return def.defaultFactionType.techLevel;
+    }
+
+    private static TechLevel BackstoryDef(BackstoryDef def)
+    {
+        if (!def.shuffleable)
+            return TechLevel.Undefined;
+
+        if (def.spawnCategories?.Contains("Tribal") ?? false)
+            return TechLevel.Neolithic;
+
+        var title = def.untranslatedTitle.ToLower();
+        var desc = def.untranslatedDesc.ToLower();
+
+        var techLevel = TechLevel.Medieval;
+
+        foreach (var config in DefDatabase<TechLevelConfigDef>.AllDefs)
+        {
+            if (config.storyFilters != null)
+            {
+                foreach (var filter in config.storyFilters)
+                {
+                    if (filter.techLevel > techLevel)
+                    {
+                        if (filter.strongTerms?.Any(term => title.Contains(term) || desc.Contains(term)) ?? false)
+                            return filter.techLevel;
+
+                        if (filter.weakTerms?.Any(term => title.Contains(term) || desc.Contains(term)) ?? false)
+                            techLevel = filter.techLevel;
+                    }
+                }
+            }
+        }
+
+        return techLevel;
     }
 
     private static void WarnPawnKindFactionUsages()
@@ -134,7 +174,7 @@ public static class EffectiveTechLevels
         {
             foreach (var kind in faction.pawnGroupMakers.SelectMany(g => g.options).Select(o => o.kind).Distinct())
             {
-                if (kind.EffectiveTechLevel() > faction.techLevel)
+                if (kind.EffectiveTechLevel() > faction.techLevel && kind.GetAlternative(faction.techLevel) == null)
                 {
                     WorldTechLevel.Logger.Warn(
                         $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +

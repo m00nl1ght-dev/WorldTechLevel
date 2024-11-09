@@ -4,7 +4,6 @@
         <defName>WTL_PreceptDefs</defName>
         <defType>PreceptDef</defType>
         <entries>
-
             <li>
                 <defName>NutrientPasteEating_DontMind</defName>
                 <techLevel>Industrial</techLevel>
@@ -57,7 +56,6 @@
                 <defName>MechanoidLabor_Enhanced</defName>
                 <techLevel>Ultra</techLevel>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

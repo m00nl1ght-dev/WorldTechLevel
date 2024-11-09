@@ -4,13 +4,11 @@
         <defName>WTL_RitualAttachableOutcomeEffectDefs</defName>
         <defType>RitualAttachableOutcomeEffectDef</defType>
         <entries>
-
             <li>
                 <defName>DiscoverAncientComplex</defName>
                 <techLevel>Industrial</techLevel>
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
             </li>
-
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
