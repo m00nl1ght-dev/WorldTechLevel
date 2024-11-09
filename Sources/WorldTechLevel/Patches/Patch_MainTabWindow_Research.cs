@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
-using Verse;
 
 namespace WorldTechLevel.Patches;
 
@@ -21,11 +19,13 @@ internal static class Patch_MainTabWindow_Research
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(MainTabWindow_Research.VisibleResearchProjects), MethodType.Getter)]
-    internal static void GetVisibleResearchProjects_Postfix(MainTabWindow_Research __instance, ref bool __state, ref List<ResearchProjectDef> __result)
+    internal static void GetVisibleResearchProjects_Postfix(MainTabWindow_Research __instance, ref bool __state)
     {
         if (__state && WorldTechLevel.Current != TechLevel.Archotech)
         {
-            __instance.cachedVisibleResearchProjects.RemoveAll(def => def.EffectiveTechLevel() > WorldTechLevel.Current);
+            __instance.cachedVisibleResearchProjects.RemoveAll(
+                def => def.EffectiveTechLevel() > WorldTechLevel.Current && !def.IsFinished
+            );
         }
     }
 }

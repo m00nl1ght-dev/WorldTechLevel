@@ -142,8 +142,8 @@ public static class EffectiveTechLevels
         if (def.spawnCategories?.Contains("Tribal") ?? false)
             return TechLevel.Neolithic;
 
-        var title = def.untranslatedTitle.ToLower();
-        var desc = def.untranslatedDesc.ToLower();
+        var title = def.untranslatedTitle?.ToLower() ?? "";
+        var desc = def.untranslatedDesc?.ToLower() ?? "";
 
         var techLevel = TechLevel.Medieval;
 
