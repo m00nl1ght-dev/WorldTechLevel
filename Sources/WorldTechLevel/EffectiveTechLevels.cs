@@ -66,6 +66,10 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<TraitDef>.Initialize();
         TechLevelDatabase<TraitDef>.ApplyOverrides();
+
+        TechLevelDatabase<PawnKindDef>.Initialize(PawnKindDef);
+        AdjustPawnKindTechLevelsByFactionPawnGroupUsages();
+        TechLevelDatabase<PawnKindDef>.ApplyOverrides();
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
@@ -133,5 +137,28 @@ public static class EffectiveTechLevels
     private static TechLevel ResearchProjectDef(ResearchProjectDef def)
     {
         return def.techLevel;
+    }
+
+    private static TechLevel PawnKindDef(PawnKindDef def)
+    {
+        if (def.defaultFactionType is not { isPlayer: false }) return TechLevel.Undefined;
+        return def.defaultFactionType.techLevel;
+    }
+
+    private static void AdjustPawnKindTechLevelsByFactionPawnGroupUsages()
+    {
+        foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(d => d.pawnGroupMakers != null))
+        {
+            foreach (var pawnGroupMaker in faction.pawnGroupMakers)
+            {
+                foreach (var option in pawnGroupMaker.options)
+                {
+                    if (option.kind.EffectiveTechLevel() > faction.techLevel)
+                    {
+                        TechLevelDatabase<PawnKindDef>.Data[option.kind.index] = faction.techLevel;
+                    }
+                }
+            }
+        }
     }
 }

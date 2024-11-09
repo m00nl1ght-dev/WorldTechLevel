@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_PawnKindDefs</defName>
+        <defType>PawnKindDef</defType>
+        <entries>
+
+            <li>
+                <defName>SpaceRefugee</defName>
+                <techLevel>Spacer</techLevel>
+                <offworld>true</offworld>
+            </li>
+            <li>
+                <defName>SpaceRefugee_Clothed</defName>
+                <techLevel>Spacer</techLevel>
+                <offworld>true</offworld>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
