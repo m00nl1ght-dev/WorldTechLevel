@@ -16,9 +16,9 @@ internal static class Patch_PawnApparelGenerator
     {
         if (__result && WorldTechLevel.Settings.FilterPawnEquipment)
         {
-            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current)
+            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current || pair.stuff.EffectiveTechLevel() > WorldTechLevel.Current)
             {
-                WorldTechLevel.Logger.Log($"Filtered out apparel candidate {pair.thing.defName} for pawn {pawn.Name}");
+                WorldTechLevel.Logger.Log($"Filtered out apparel candidate {pair.thing} ({pair.stuff}) for pawn {pawn}");
                 __result = false;
             }
         }

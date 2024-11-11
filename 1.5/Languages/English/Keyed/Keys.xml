@@ -10,5 +10,6 @@
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow higher technology coming from space</WorldTechLevel.Settings.AlwaysAllowOffworld>
   <WorldTechLevel.Settings.FilterPawnEquipment>Enable strict weapon and apparel filtering</WorldTechLevel.Settings.FilterPawnEquipment>
   <WorldTechLevel.Settings.FilterPawnBackstories>Enable backstory filtering</WorldTechLevel.Settings.FilterPawnBackstories>
+  <WorldTechLevel.Settings.FilterBuildingMaterials>Enable filtering of building materials</WorldTechLevel.Settings.FilterBuildingMaterials>
 
 </LanguageData>

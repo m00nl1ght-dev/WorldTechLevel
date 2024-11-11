@@ -5,12 +5,24 @@
         <defType>QuestScriptDef</defType>
         <entries>
             <li>
+                <defName>Util_MechCluster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
                 <defName>ThreatReward_MechPods_MiscReward</defName>
                 <techLevel>Ultra</techLevel>
             </li>
             <li>
-                <defName>Util_MechCluster</defName>
+                <defName>ThreatReward_GameCondition_ItemPod</defName>
                 <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ThreatReward_GameCondition_Joiner</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Util_GameConditionNegativeRandom</defName>
+                <techLevel>Spacer</techLevel>
             </li>
             <li>
                 <defName>PollutionDump</defName>

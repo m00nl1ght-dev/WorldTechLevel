@@ -16,9 +16,9 @@ internal static class Patch_PawnWeaponGenerator
     {
         if (__result > 0f && WorldTechLevel.Settings.FilterPawnEquipment)
         {
-            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current)
+            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current || pair.stuff.EffectiveTechLevel() > WorldTechLevel.Current)
             {
-                WorldTechLevel.Logger.Log($"Filtered out weapon candidate {pair.thing.defName} for pawn {pawn.Name}");
+                WorldTechLevel.Logger.Log($"Filtered out weapon candidate {pair.thing} ({pair.stuff}) for pawn {pawn}");
                 __result = 0f;
             }
         }

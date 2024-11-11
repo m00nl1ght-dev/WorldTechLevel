@@ -15,6 +15,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<ThingDef>.ApplyOverrides();
         TechLevelDatabase<ThingDef>.Apply(ThingDefSecondPass);
 
+        TechLevelDatabase<TerrainDef>.Initialize(TerrainDef);
+        TechLevelDatabase<TerrainDef>.ApplyOverrides();
+
         TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
         TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
 
@@ -117,6 +120,18 @@ public static class EffectiveTechLevels
 
         if (def.GetCompProperties<CompProperties_Book>() != null)
             _tmpList.Add(TechLevel.Medieval);
+
+        return _tmpList.Max();
+    }
+
+    private static TechLevel TerrainDef(TerrainDef def)
+    {
+        _tmpList.Clear();
+        _tmpList.Add(TechLevel.Undefined);
+
+        if (def.costList != null)
+            foreach (var entry in def.costList)
+                _tmpList.Add(entry.thingDef.EffectiveTechLevel());
 
         return _tmpList.Max();
     }

@@ -52,6 +52,13 @@ internal static class Patch_ThingSetMaker
         return faction == null || WorldTechLevel.Current >= faction.techLevel;
     }
 
+    [HarmonyPrefix]
+    [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), nameof(ThingSetMaker_MapGen_AncientPodContents.MakeIntoContainer))]
+    internal static bool AncientPodContents_MakeIntoContainer_Prefix(ThingDef def)
+    {
+        return def.EffectiveTechLevel() <= WorldTechLevel.Current;
+    }
+
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_RandomGeneralGoods), nameof(ThingSetMaker_RandomGeneralGoods.RandomMeals))]
     internal static void RandomGeneralGoods_RandomMeals_Postfix(ref Thing __result)

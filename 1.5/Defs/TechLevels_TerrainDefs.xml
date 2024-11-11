@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_TerrainDefs</defName>
+        <defType>TerrainDef</defType>
+        <entries>
+            <li>
+                <defName>Concrete</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>PavedTile</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>MetalTile</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>SterileTile</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>RG_AncientConcrete</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
