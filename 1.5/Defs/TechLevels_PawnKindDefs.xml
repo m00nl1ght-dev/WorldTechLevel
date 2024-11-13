@@ -253,6 +253,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_MercenaryHeavy</defName></li>
+                    <li><weight>1.0</weight><defName>DevDesigner_WoodElves_StrangerInBlack</defName></li>
                     <!-- Tribal -->
                     <li><weight>1.0</weight><defName>Tribal_Berserker</defName></li>
                 </options>
