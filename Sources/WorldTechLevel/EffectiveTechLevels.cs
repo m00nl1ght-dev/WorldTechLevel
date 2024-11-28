@@ -39,6 +39,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<QuestScriptDef>.Initialize();
         TechLevelDatabase<QuestScriptDef>.ApplyOverrides();
 
+        TechLevelDatabase<SitePartDef>.Initialize();
+        TechLevelDatabase<SitePartDef>.ApplyOverrides();
+
         TechLevelDatabase<ComplexThreatDef>.Initialize();
         TechLevelDatabase<ComplexThreatDef>.ApplyOverrides();
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_SitePartDefs</defName>
+        <defType>SitePartDef</defType>
+        <entries>
+            <li>
+                <defName>SunBlocker</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SmokeSpewer</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>ToxicSpewer</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>WeatherController</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ClimateAdjuster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PsychicDroner</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+            <li>
+                <defName>PsychicSuppressor</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+            <li>
+                <defName>EMIDynamo</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
