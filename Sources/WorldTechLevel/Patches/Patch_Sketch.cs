@@ -11,7 +11,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_Sketch
 {
     [HarmonyPrefix]
-    [HarmonyPatch( nameof(Sketch.AddTerrain))]
+    [HarmonyPatch(nameof(Sketch.AddTerrain))]
     private static void AddTerrain_Prefix(ref TerrainDef def)
     {
         if (WorldTechLevel.Settings.FilterBuildingMaterials)
