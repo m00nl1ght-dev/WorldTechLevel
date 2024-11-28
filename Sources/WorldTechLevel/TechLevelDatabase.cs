@@ -63,6 +63,15 @@ internal static class TechLevelDatabase<T> where T : Def
         }
     }
 
+    internal static void EnsureInitialized()
+    {
+        if (DefDatabase<T>.defsList.Count != Levels.Length && Levels.Length > 0)
+        {
+            WorldTechLevel.Logger.Warn($"{typeof(T).Name} database was modified, re-initializing tech levels.");
+            EffectiveTechLevels.Initialize();
+        }
+    }
+
     internal static void Apply(Func<T, TechLevel, TechLevel> func)
     {
         var defs = DefDatabase<T>.AllDefsListForReading;

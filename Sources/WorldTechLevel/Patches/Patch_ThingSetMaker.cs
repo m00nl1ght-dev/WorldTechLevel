@@ -48,8 +48,7 @@ internal static class Patch_ThingSetMaker
     [HarmonyPatch(typeof(ThingSetMaker_Pawn), nameof(ThingSetMaker.Generate))]
     internal static bool Pawn_Generate_Prefix(ThingSetMaker_Pawn __instance)
     {
-        var faction = __instance.pawnKind.defaultFactionType;
-        return faction == null || WorldTechLevel.Current >= faction.techLevel;
+        return __instance.pawnKind.EffectiveTechLevel() <= WorldTechLevel.Current;
     }
 
     [HarmonyPrefix]

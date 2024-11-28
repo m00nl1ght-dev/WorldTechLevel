@@ -12,9 +12,9 @@ internal static class Patch_PawnTechHediffsGenerator
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(PawnTechHediffsGenerator.InstallPart))]
-    private static bool InstallPart_Prefix(ThingDef partDef)
+    private static bool InstallPart_Prefix(Pawn pawn, ThingDef partDef)
     {
-        if (!WorldTechLevel.Settings.FilterPawnEquipment) return true;
+        if (!TechLevelUtility.ShouldFilterEquipmentFor(pawn)) return true;
         return partDef.EffectiveTechLevel() <= WorldTechLevel.Current;
     }
 }

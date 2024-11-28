@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using RimWorld;
 using RimWorld.BaseGen;
 using Verse;
@@ -17,14 +16,22 @@ public static class TechLevelUtility
 
     public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
     {
+        TechLevelDatabase<T>.EnsureInitialized();
+
         var data = TechLevelDatabase<T>.Levels;
-        if (def != null && def.index < data.Length) return data[def.index];
+        if (def != null && def.index < data.Length)
+            return data[def.index];
+
         return TechLevel.Undefined;
     }
 
     public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
     {
-        if (techLevel == TechLevel.Archotech) return defs;
+        if (techLevel == TechLevel.Archotech)
+            return defs;
+
+        TechLevelDatabase<T>.EnsureInitialized();
+
         var data = TechLevelDatabase<T>.Levels;
         return defs.Where(def => def.index >= data.Length || data[def.index] <= techLevel);
     }
@@ -38,6 +45,8 @@ public static class TechLevelUtility
 
     public static T GetAlternative<T>(this T def, TechLevel targetLevel) where T : Def
     {
+        TechLevelDatabase<T>.EnsureInitialized();
+
         var data = TechLevelDatabase<T>.Alternatives;
         if (def.index >= data.Length) return null;
 
@@ -149,5 +158,10 @@ public static class TechLevelUtility
             return false;
 
         return true;
+    }
+
+    public static bool ShouldFilterEquipmentFor(Pawn pawn)
+    {
+        return pawn.kindDef is { modContentPack.IsOfficialMod: true } || WorldTechLevel.Settings.FilterPawnEquipment;
     }
 }

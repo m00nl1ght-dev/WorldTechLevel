@@ -14,11 +14,10 @@ internal static class Patch_PawnApparelGenerator
     [HarmonyPatch(nameof(PawnApparelGenerator.CanUsePair))]
     internal static void CanUsePair_Postfix(Pawn pawn, ThingStuffPair pair, ref bool __result)
     {
-        if (__result && WorldTechLevel.Settings.FilterPawnEquipment)
+        if (__result && TechLevelUtility.ShouldFilterEquipmentFor(pawn))
         {
-            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current || pair.stuff.EffectiveTechLevel() > WorldTechLevel.Current)
+            if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current || pair.stuff?.EffectiveTechLevel() > WorldTechLevel.Current)
             {
-                // WorldTechLevel.Logger.Log($"Filtered out apparel candidate {pair.thing} ({pair.stuff}) for pawn {pawn}");
                 __result = false;
             }
         }

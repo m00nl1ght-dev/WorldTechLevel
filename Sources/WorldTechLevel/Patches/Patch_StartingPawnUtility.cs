@@ -14,7 +14,9 @@ internal static class Patch_StartingPawnUtility
     [HarmonyPatch(nameof(StartingPawnUtility.GeneratePossessions))]
     internal static void GeneratePossessions_Postfix(Pawn pawn)
     {
-        if (pawn.Faction != null && pawn.Faction.def.techLevel != TechLevel.Undefined && pawn.Faction.def.techLevel <= WorldTechLevel.Current)
+        var faction = pawn.Faction?.def;
+
+        if (faction != null && faction.techLevel != TechLevel.Undefined && faction.techLevel <= WorldTechLevel.Current)
         {
             if (StartingPawnUtility.StartingPossessions.TryGetValue(pawn, out var list))
             {

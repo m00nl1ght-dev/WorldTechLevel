@@ -14,7 +14,7 @@ internal static class Patch_PawnInventoryGenerator
     [HarmonyPatch(nameof(PawnInventoryGenerator.GenerateInventoryFor))]
     private static void GenerateInventoryFor_Postfix(Pawn p)
     {
-        if (WorldTechLevel.Settings.FilterPawnEquipment)
+        if (TechLevelUtility.ShouldFilterEquipmentFor(p))
         {
             p.inventory.innerContainer.RemoveAll(thing =>
             {

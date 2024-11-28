@@ -14,11 +14,10 @@ internal static class Patch_PawnWeaponGenerator
     [HarmonyPatch(nameof(PawnWeaponGenerator.GetCommonality))]
     internal static void GetCommonality_Postfix(Pawn pawn, ThingStuffPair pair, ref float __result)
     {
-        if (__result > 0f && WorldTechLevel.Settings.FilterPawnEquipment)
+        if (__result > 0f && TechLevelUtility.ShouldFilterEquipmentFor(pawn))
         {
             if (pair.thing.EffectiveTechLevel() > WorldTechLevel.Current || pair.stuff.EffectiveTechLevel() > WorldTechLevel.Current)
             {
-                // WorldTechLevel.Logger.Log($"Filtered out weapon candidate {pair.thing} ({pair.stuff}) for pawn {pawn}");
                 __result = 0f;
             }
         }

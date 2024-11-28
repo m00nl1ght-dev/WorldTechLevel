@@ -17,7 +17,7 @@ internal static class Patch_QuestNode_Root_Mission_BanditCamp
     {
         if (!__result && Find.FactionManager.AllFactions.Where(f => !f.temporary && f.HostileTo(Faction.OfPlayer)).TryRandomElement(out faction))
         {
-            Log.Message($"Using fallback faction {faction.name} for QuestNode_Root_Mission_BanditCamp");
+            WorldTechLevel.Logger.Log($"Selecting faction {faction.name} for QuestNode_Root_Mission_BanditCamp");
             __result = true;
         }
     }
