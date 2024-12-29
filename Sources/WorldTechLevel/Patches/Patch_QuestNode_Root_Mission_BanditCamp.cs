@@ -7,10 +7,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(QuestNode_Root_Mission_BanditCamp))]
 internal static class Patch_QuestNode_Root_Mission_BanditCamp
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
+
     [HarmonyPostfix]
     [HarmonyPatch(nameof(QuestNode_Root_Mission_BanditCamp.TryGetSiteFaction))]
     internal static void TryGetSiteFaction_Postfix(ref Faction faction, ref bool __result)

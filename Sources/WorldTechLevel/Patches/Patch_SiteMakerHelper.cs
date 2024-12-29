@@ -7,10 +7,13 @@ using RimWorld.Planet;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(SiteMakerHelper))]
 internal static class Patch_SiteMakerHelper
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Quests;
+
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(SiteMakerHelper.SitePartDefsWithTag))]

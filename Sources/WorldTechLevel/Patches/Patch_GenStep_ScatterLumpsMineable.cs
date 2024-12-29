@@ -8,10 +8,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(GenStep_ScatterLumpsMineable))]
 internal static class Patch_GenStep_ScatterLumpsMineable
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_MineableResources;
+
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(GenStep_ScatterLumpsMineable.ChooseThingDef))]
     private static IEnumerable<CodeInstruction> ChooseThingDef_Transpiler(IEnumerable<CodeInstruction> instructions)

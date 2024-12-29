@@ -4,10 +4,13 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(MainTabWindow_Research))]
 internal static class Patch_MainTabWindow_Research
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Research;
+
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(MainTabWindow_Research.VisibleResearchProjects), MethodType.Getter)]
@@ -23,8 +26,10 @@ internal static class Patch_MainTabWindow_Research
     {
         if (__state && WorldTechLevel.Current != TechLevel.Archotech)
         {
+            var filterLevel = TechLevelUtility.PlayerResearchFilterLevel();
+
             __instance.cachedVisibleResearchProjects.RemoveAll(
-                def => def.EffectiveTechLevel() > WorldTechLevel.Current && !def.IsFinished
+                def => def.EffectiveTechLevel() > filterLevel && !def.IsFinished
             );
         }
     }

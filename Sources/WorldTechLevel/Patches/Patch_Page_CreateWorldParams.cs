@@ -16,12 +16,49 @@ internal static class Patch_Page_CreateWorldParams
 {
     private static readonly List<FactionDef> _removedFactions = [];
 
+    private static bool _confirmedScenarioWarning;
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
-    internal static void ResetFactionCounts_Prefix()
+    internal static void ResetFactionCounts_Prefix(Page_CreateWorldParams __instance)
     {
         WorldTechLevel.Current = TechLevel.Archotech;
         _removedFactions.Clear();
+
+        _confirmedScenarioWarning = false;
+
+        var factionTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
+        if (factionTechLevel is < TechLevel.Industrial)
+        {
+            WorldTechLevel.Current = factionTechLevel.Value;
+            UpdateFactions(__instance);
+        }
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(Page_CreateWorldParams.CanDoNext))]
+    internal static bool CanDoNext_Prefix(Page_CreateWorldParams __instance, ref bool __result)
+    {
+        var scenarioTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
+        if (scenarioTechLevel != null && scenarioTechLevel > WorldTechLevel.Current && !_confirmedScenarioWarning)
+        {
+            var msg = "WorldTechLevel.ScenarioWarning".Translate(
+                Find.Scenario.name, scenarioTechLevel.ToString(), WorldTechLevel.Current.ToString()
+            );
+
+            Find.WindowStack.Add(new Dialog_MessageBox(msg, "Confirm".Translate(), Confirm, "Cancel".Translate()));
+
+            void Confirm()
+            {
+                _confirmedScenarioWarning = true;
+                __instance.CanDoNext();
+            }
+
+            __result = false;
+            return false;
+        }
+
+        return true;
     }
 
     [HarmonyPrefix]
@@ -72,7 +109,15 @@ internal static class Patch_Page_CreateWorldParams
 
         WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
 
-        if (WorldTechLevel.Current < levelBefore)
+        if (WorldTechLevel.Current != levelBefore)
+            UpdateFactions(instance);
+
+        return pos;
+    }
+
+    private static void UpdateFactions(Page_CreateWorldParams instance)
+    {
+        if (WorldTechLevel.Settings.Filter_Factions)
         {
             var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
 
@@ -82,17 +127,13 @@ internal static class Patch_Page_CreateWorldParams
                 _removedFactions.Add(faction);
             }
         }
-        else if (WorldTechLevel.Current > levelBefore)
+
+        var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();
+
+        foreach (var faction in toAdd)
         {
-            var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();
-
-            foreach (var faction in toAdd)
-            {
-                instance.factions.Add(faction);
-                _removedFactions.Remove(faction);
-            }
+            instance.factions.Add(faction);
+            _removedFactions.Remove(faction);
         }
-
-        return pos;
     }
 }

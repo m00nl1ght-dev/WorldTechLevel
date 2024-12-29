@@ -4,10 +4,13 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(Dialog_ChooseMemes))]
 internal static class Patch_Dialog_ChooseMemes
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Ideoligions;
+
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(Dialog_ChooseMemes.CanUseMeme))]

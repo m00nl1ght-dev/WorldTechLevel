@@ -4,10 +4,13 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(BiomeDef))]
 internal static class Patch_BiomeDef
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Diseases;
+
     [HarmonyPostfix]
     [HarmonyPatch(nameof(BiomeDef.CommonalityOfDisease))]
     private static void CommonalityOfDisease_Postfix(IncidentDef diseaseInc, ref float __result)

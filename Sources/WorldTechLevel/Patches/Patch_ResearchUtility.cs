@@ -6,10 +6,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(ResearchUtility))]
 internal static class Patch_ResearchUtility
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Research;
+
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(ResearchUtility.ApplyPlayerStartingResearch))]
     private static IEnumerable<CodeInstruction> ApplyPlayerStartingResearch_Transpiler(IEnumerable<CodeInstruction> instructions)
@@ -23,6 +26,6 @@ internal static class Patch_ResearchUtility
 
     private static IEnumerable<ResearchProjectDef> FilteredProjects()
     {
-        return DefDatabase<ResearchProjectDef>.AllDefs.FilterByEffectiveTechLevel();
+        return DefDatabase<ResearchProjectDef>.AllDefs.FilterByEffectiveTechLevel(TechLevelUtility.PlayerResearchFilterLevel());
     }
 }

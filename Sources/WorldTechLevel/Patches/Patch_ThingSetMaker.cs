@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
@@ -7,10 +8,25 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(ThingSetMaker))]
 internal static class Patch_ThingSetMaker
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled(MethodBase original)
+    {
+        if (original == null)
+            return true;
+
+        if (original.DeclaringType == typeof(ThingSetMaker_Meteorite))
+            return WorldTechLevel.Settings.Filter_MineableResources;
+
+        if (original.DeclaringType == typeof(ThingSetMaker_Pawn))
+            return WorldTechLevel.Settings.Filter_PawnKinds;
+
+        return WorldTechLevel.Settings.Filter_Items;
+    }
+
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(ThingSetMaker.Generate), [typeof(ThingSetMakerParams)])]

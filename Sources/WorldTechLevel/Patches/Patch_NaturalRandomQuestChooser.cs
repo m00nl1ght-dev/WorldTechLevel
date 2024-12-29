@@ -8,10 +8,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(NaturalRandomQuestChooser))]
 internal static class Patch_NaturalRandomQuestChooser
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Quests;
+
     [HarmonyTargetMethod]
     private static MethodInfo TargetMethod() =>
         AccessTools.FindIncludingInnerTypes(typeof(NaturalRandomQuestChooser), type => AccessTools.FirstMethod(type, method =>

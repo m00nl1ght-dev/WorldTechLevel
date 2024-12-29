@@ -6,10 +6,13 @@ using RimWorld.QuestGen;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(QuestNode_RandomNode))]
 internal static class Patch_QuestNode_RandomNode
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Quests;
+
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(QuestNode_RandomNode.GetNodesCanRun))]

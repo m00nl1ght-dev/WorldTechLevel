@@ -6,10 +6,13 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(StockGenerator))]
 internal static class Patch_StockGenerator
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Items;
+
     [HarmonyTargetMethods]
     private static IEnumerable<MethodInfo> TargetMethods()
     {

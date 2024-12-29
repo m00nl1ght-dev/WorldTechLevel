@@ -5,11 +5,55 @@
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
 
   <WorldTechLevel.Settings.Tab.General>General</WorldTechLevel.Settings.Tab.General>
+  <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
 
-  <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Allow neurotrainers regardless of tech level</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
-  <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow higher technology coming from space</WorldTechLevel.Settings.AlwaysAllowOffworld>
-  <WorldTechLevel.Settings.FilterPawnEquipment>Enable weapon and apparel filtering for custom factions</WorldTechLevel.Settings.FilterPawnEquipment>
-  <WorldTechLevel.Settings.FilterPawnBackstories>Enable backstory filtering</WorldTechLevel.Settings.FilterPawnBackstories>
-  <WorldTechLevel.Settings.FilterBuildingMaterials>Enable filtering of building materials</WorldTechLevel.Settings.FilterBuildingMaterials>
+  <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
+  <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Allow neurotrainers regardless of the world's tech level</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
+
+  <WorldTechLevel.Settings.Filter_Factions>Factions</WorldTechLevel.Settings.Filter_Factions>
+  <WorldTechLevel.Settings.Filter_Research>Research</WorldTechLevel.Settings.Filter_Research>
+  <WorldTechLevel.Settings.Filter_Items>Items</WorldTechLevel.Settings.Filter_Items>
+  <WorldTechLevel.Settings.Filter_Quests>Quests</WorldTechLevel.Settings.Filter_Quests>
+  <WorldTechLevel.Settings.Filter_Incidents>Incidents</WorldTechLevel.Settings.Filter_Incidents>
+  <WorldTechLevel.Settings.Filter_PawnKinds>Creatures</WorldTechLevel.Settings.Filter_PawnKinds>
+  <WorldTechLevel.Settings.Filter_Apparel>Apparel</WorldTechLevel.Settings.Filter_Apparel>
+  <WorldTechLevel.Settings.Filter_Weapons>Weapons</WorldTechLevel.Settings.Filter_Weapons>
+  <WorldTechLevel.Settings.Filter_Possessions>Possessions</WorldTechLevel.Settings.Filter_Possessions>
+  <WorldTechLevel.Settings.Filter_Prosthetics>Prosthetics</WorldTechLevel.Settings.Filter_Prosthetics>
+  <WorldTechLevel.Settings.Filter_Backstories>Backstories</WorldTechLevel.Settings.Filter_Backstories>
+  <WorldTechLevel.Settings.Filter_Traits>Traits</WorldTechLevel.Settings.Filter_Traits>
+  <WorldTechLevel.Settings.Filter_Diseases>Diseases</WorldTechLevel.Settings.Filter_Diseases>
+  <WorldTechLevel.Settings.Filter_Addictions>Addictions</WorldTechLevel.Settings.Filter_Addictions>
+  <WorldTechLevel.Settings.Filter_DamageTypes>Damage types</WorldTechLevel.Settings.Filter_DamageTypes>
+  <WorldTechLevel.Settings.Filter_Ideoligions>Ideoligions</WorldTechLevel.Settings.Filter_Ideoligions>
+  <WorldTechLevel.Settings.Filter_Xenotypes>Xenotypes</WorldTechLevel.Settings.Filter_Xenotypes>
+  <WorldTechLevel.Settings.Filter_BuildingMaterials>Building materials</WorldTechLevel.Settings.Filter_BuildingMaterials>
+  <WorldTechLevel.Settings.Filter_MineableResources>Mineable resources</WorldTechLevel.Settings.Filter_MineableResources>
+  <WorldTechLevel.Settings.Filter_GenSteps>Ancient debris</WorldTechLevel.Settings.Filter_GenSteps>
+  <WorldTechLevel.Settings.Filter_WorldGenSteps>Asphalt roads</WorldTechLevel.Settings.Filter_WorldGenSteps>
+
+  <WorldTechLevel.Settings.Filter_Factions.Hint>Filters factions based on the tech level defined by their author. Also applies to temporary factions generated for quests.</WorldTechLevel.Settings.Filter_Factions.Hint>
+  <WorldTechLevel.Settings.Filter_Research.Hint>Filters research projects available to the player. Also filters the corresponding techprints.</WorldTechLevel.Settings.Filter_Research.Hint>
+  <WorldTechLevel.Settings.Filter_Items.Hint>Filters quest rewards, trader stock and other randomly generated sources of items in the world.</WorldTechLevel.Settings.Filter_Items.Hint>
+  <WorldTechLevel.Settings.Filter_Quests.Hint>Filters out quests and quest sub nodes that contain content exceeding the world's tech level. Does not reduce the overall amount of quests given.</WorldTechLevel.Settings.Filter_Quests.Hint>
+  <WorldTechLevel.Settings.Filter_Incidents.Hint>Filters out storyteller-triggered incidents that contain content exceeding the world's tech level, for example mech clusters or toxic fallout in a medieval world.</WorldTechLevel.Settings.Filter_Incidents.Hint>
+  <WorldTechLevel.Settings.Filter_PawnKinds.Hint>Replaces creatures that exceed the world's tech level with the closest alternatives that do not. For example, ensures that quest sites and incidents such as visitor arrival generate with appropriate creatures. Only affects vanilla and DLC creatures. Does not replace creatures added by other mods, unless specifically configured to do so by their authors.</WorldTechLevel.Settings.Filter_PawnKinds.Hint>
+  <WorldTechLevel.Settings.Filter_Apparel.Hint>Filters possible apparel that creatures wear when they are generated. Only ever affects creatures that would have generated with apparel that exceeds the world's tech level, does not mess with anything else.</WorldTechLevel.Settings.Filter_Apparel.Hint>
+  <WorldTechLevel.Settings.Filter_Weapons.Hint>Filters possible weapons that creatures carry when they are generated. Only ever affects creatures that would have generated with weapons that exceed the world's tech level, does not mess with anything else.</WorldTechLevel.Settings.Filter_Weapons.Hint>
+  <WorldTechLevel.Settings.Filter_Possessions.Hint>Filters initial inventory items that colonists and enemies can generate with, such as food, medicine and drugs.</WorldTechLevel.Settings.Filter_Possessions.Hint>
+  <WorldTechLevel.Settings.Filter_Prosthetics.Hint>Filters artificial body parts and prosthetics already installed in the bodies of colonists and enemies when they are generated.</WorldTechLevel.Settings.Filter_Prosthetics.Hint>
+  <WorldTechLevel.Settings.Filter_Backstories.Hint>Filters backstories based on assumed tech level. Note that the classification is keyword based and not perfect. If you spot any backstory that slipped through, please report it in the Bug Reports section on the Steam workshop page.</WorldTechLevel.Settings.Filter_Backstories.Hint>
+  <WorldTechLevel.Settings.Filter_Traits.Hint>Prevents creatures from generating with traits that conflict with the word's tech level, such as the Transhumanist trait in a medieval world.</WorldTechLevel.Settings.Filter_Traits.Hint>
+  <WorldTechLevel.Settings.Filter_Diseases.Hint>Filters technology related diseases such as Sensory Mechanites.</WorldTechLevel.Settings.Filter_Diseases.Hint>
+  <WorldTechLevel.Settings.Filter_Addictions.Hint>Prevents addictions from randomly being applied to generated creatures if the corresponding drug would be unobtainable because it exceeds the world's tech level.</WorldTechLevel.Settings.Filter_Addictions.Hint>
+  <WorldTechLevel.Settings.Filter_DamageTypes.Hint>If the world's tech level is below Industrial, prevents gunshot wounds/scars from randomly being applied to creatures when they are generated.</WorldTechLevel.Settings.Filter_DamageTypes.Hint>
+  <WorldTechLevel.Settings.Filter_Ideoligions.Hint>Filters possible memes and precepts of ideoligions. Affects both randomly generated faction ideoligions and the player ideoligion editor.</WorldTechLevel.Settings.Filter_Ideoligions.Hint>
+  <WorldTechLevel.Settings.Filter_Xenotypes.Hint>Filters possible options when a xenotype is randomly assigned to a creature. Does not affect creatures that are generated with a fixed xenotype, for example as part of some quests.</WorldTechLevel.Settings.Filter_Xenotypes.Hint>
+  <WorldTechLevel.Settings.Filter_BuildingMaterials.Hint>Filters the materials of ruins and other structures on the map. Only affects map generation.</WorldTechLevel.Settings.Filter_BuildingMaterials.Hint>
+  <WorldTechLevel.Settings.Filter_MineableResources.Hint>Filters mineable ores generated on the map. For example, Compacted Components will not appear if the world's tech level is below Industrial. Also affects meteors.</WorldTechLevel.Settings.Filter_MineableResources.Hint>
+  <WorldTechLevel.Settings.Filter_GenSteps.Hint>Filters ancient structures and debris on the map, such as derelict vehicles, mechanoid parts and other junk.</WorldTechLevel.Settings.Filter_GenSteps.Hint>
+  <WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>Prevents asphalt roads from being generated into the world if tech level is below Industrial.</WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>
+
+  <WorldTechLevel.ScenarioWarning>Warning: In the selected scenario "{0}" your faction will have the tech level "{1}", which exceeds the selected world tech level "{2}".\n\nThis means you are starting with equipment and knowledge that is more advanced than the rest of the world. Are you sure?</WorldTechLevel.ScenarioWarning>
 
 </LanguageData>

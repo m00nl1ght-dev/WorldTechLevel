@@ -6,10 +6,12 @@
         <entries>
             <li>
                 <defName>Grenadier*</defName>
+                <contentPack>Core</contentPack>
                 <techLevel>Industrial</techLevel>
             </li>
             <li>
                 <defName>Mercenary*</defName>
+                <contentPack>Core</contentPack>
                 <techLevel>Industrial</techLevel>
             </li>
             <li>

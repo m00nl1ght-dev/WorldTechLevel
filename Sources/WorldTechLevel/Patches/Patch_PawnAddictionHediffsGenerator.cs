@@ -5,18 +5,24 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(PawnAddictionHediffsGenerator))]
 internal static class Patch_PawnAddictionHediffsGenerator
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Addictions;
+
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(PawnAddictionHediffsGenerator.PossibleWithTechLevel))]
-    private static bool PossibleWithTechLevel_Prefix(ChemicalDef chemical, Faction faction)
+    private static bool PossibleWithTechLevel_Prefix(ChemicalDef chemical, Faction faction, ref bool __result)
     {
-        var techLevel = faction?.def.techLevel.ClampToWorld() ?? WorldTechLevel.Current;
+        if (faction != null && faction.def.techLevel <= WorldTechLevel.Current) return true;
+        if (Current.ProgramState == ProgramState.Entry && faction is { IsPlayer: true }) return true;
 
-        return PawnAddictionHediffsGenerator.allDrugs
-            .Any(x => x.GetCompProperties<CompProperties_Drug>().chemical == chemical && x.techLevel <= techLevel);
+        __result = PawnAddictionHediffsGenerator.allDrugs
+            .Any(x => x.GetCompProperties<CompProperties_Drug>().chemical == chemical && x.techLevel <= WorldTechLevel.Current);
+
+        return false;
     }
 }

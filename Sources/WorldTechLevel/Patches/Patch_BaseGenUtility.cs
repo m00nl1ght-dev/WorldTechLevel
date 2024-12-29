@@ -10,15 +10,18 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(BaseGenUtility))]
 internal static class Patch_BaseGenUtility
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_BuildingMaterials;
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(BaseGenUtility.RandomCheapWallStuff), [typeof(TechLevel), typeof(bool)])]
     private static bool RandomCheapWallStuff_Prefix(TechLevel techLevel, bool notVeryFlammable, ref ThingDef __result)
     {
-        if (MapGenerator.mapBeingGenerated is not { } map || !WorldTechLevel.Settings.FilterBuildingMaterials) return true;
+        if (MapGenerator.mapBeingGenerated is not { } map) return true;
         Predicate<ThingDef> validator = notVeryFlammable ? def => def.BaseFlammability < 0.5 : null;
         __result = TechLevelUtility.RandomAppropriateBuildingMaterialFor(map, ThingDefOf.Wall, techLevel, validator);
         return __result == null;
@@ -28,7 +31,7 @@ internal static class Patch_BaseGenUtility
     [HarmonyPatch(nameof(BaseGenUtility.CheapStuffFor))]
     private static bool CheapStuffFor_Prefix(ThingDef thingDef, Faction faction, ref ThingDef __result)
     {
-        if (MapGenerator.mapBeingGenerated is not { } map || !WorldTechLevel.Settings.FilterBuildingMaterials) return true;
+        if (MapGenerator.mapBeingGenerated is not { } map) return true;
         __result = TechLevelUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, faction?.def.techLevel ?? TechLevel.Undefined);
         return __result == null;
     }
@@ -37,7 +40,7 @@ internal static class Patch_BaseGenUtility
     [HarmonyPatch(nameof(BaseGenUtility.RandomBasicFloorDef))]
     private static bool RandomBasicFloorDef_Prefix(Faction faction, bool allowCarpet, ref TerrainDef __result)
     {
-        if (MapGenerator.mapBeingGenerated is not { } map || !WorldTechLevel.Settings.FilterBuildingMaterials) return true;
+        if (MapGenerator.mapBeingGenerated is not { } map) return true;
         __result = TechLevelUtility.RandomAppropriateBasicFloorFor(map, faction, allowCarpet);
         return __result == null;
     }

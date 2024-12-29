@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -60,6 +61,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<BackstoryDef>.Initialize(BackstoryDef);
         TechLevelDatabase<BackstoryDef>.ApplyOverrides();
 
+        TechLevelDatabase<XenotypeDef>.Initialize();
+        TechLevelDatabase<XenotypeDef>.ApplyOverrides();
+
         WarnPawnKindFactionUsages();
     }
 
@@ -79,7 +83,7 @@ public static class EffectiveTechLevels
 
         if (def is { techLevel: TechLevel.Archotech, thingCategories: not null })
         {
-            if (def.thingCategories.Contains(WTL_DefOf.InertRelics))
+            if (def.thingCategories.Contains(WorldTechLevel_DefOf.InertRelics))
                 return TechLevel.Undefined;
         }
 
@@ -188,18 +192,27 @@ public static class EffectiveTechLevels
 
     private static void WarnPawnKindFactionUsages()
     {
+        var warnFactions = new List<FactionDef>();
+
         foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(d => d.pawnGroupMakers != null))
         {
             foreach (var kind in faction.pawnGroupMakers.SelectMany(g => g.options).Select(o => o.kind).Distinct())
             {
                 if (kind.EffectiveTechLevel() > faction.techLevel && kind.GetAlternative(faction.techLevel) == null)
                 {
-                    WorldTechLevel.Logger.Warn(
+                    warnFactions.AddDistinct(faction);
+
+                    WorldTechLevel.Logger.Debug(
                         $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +
                         $"is used by faction {faction.defName} with lower tech level ({faction.techLevel})"
                     );
                 }
             }
+        }
+
+        if (warnFactions.Any())
+        {
+            WorldTechLevel.Logger.Warn($"Some factions contain pawn kinds that exceed the faction's tech level: {warnFactions.Join()}");
         }
     }
 }

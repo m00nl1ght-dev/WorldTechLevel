@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld.Planet;
@@ -6,10 +7,22 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(WorldGenerator))]
 internal static class Patch_WorldGenerator
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled(MethodBase original)
+    {
+        if (original == null)
+            return true;
+
+        if (original.Name == "get_GenStepsInOrder")
+            return WorldTechLevel.Settings.Filter_WorldGenSteps;
+
+        return true;
+    }
+
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(WorldGenerator.GenStepsInOrder), MethodType.Getter)]

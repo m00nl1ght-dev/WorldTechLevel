@@ -15,6 +15,7 @@ public class WorldTechLevel : Mod
     internal static LogContext Logger => LunarAPI.LogContext;
 
     internal static PatchGroup MainPatchGroup;
+    internal static PatchGroup FiltersPatchGroup;
     internal static PatchGroup CompatPatchGroup;
 
     internal static TechLevel Current = TechLevel.Archotech;
@@ -27,10 +28,17 @@ public class WorldTechLevel : Mod
         MainPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
         MainPatchGroup.Subscribe();
 
+        FiltersPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Filters");
+        FiltersPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
+        FiltersPatchGroup.Subscribe();
+
         CompatPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Compat");
         CompatPatchGroup.Subscribe();
 
         ModCompat.ApplyAll(LunarAPI, CompatPatchGroup);
+
+        MainPatchGroup.CheckForConflicts(Logger);
+        FiltersPatchGroup.CheckForConflicts(Logger);
 
         EffectiveTechLevels.Initialize();
     }
@@ -38,6 +46,7 @@ public class WorldTechLevel : Mod
     private static void Cleanup()
     {
         MainPatchGroup?.UnsubscribeAll();
+        FiltersPatchGroup?.UnsubscribeAll();
         CompatPatchGroup?.UnsubscribeAll();
     }
 

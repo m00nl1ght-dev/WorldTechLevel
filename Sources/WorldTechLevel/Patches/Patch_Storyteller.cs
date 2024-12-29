@@ -6,10 +6,13 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(Storyteller))]
 internal static class Patch_Storyteller
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Incidents;
+
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(Storyteller.MakeIncidentsForInterval), [typeof(StorytellerComp), typeof(List<IIncidentTarget>)])]

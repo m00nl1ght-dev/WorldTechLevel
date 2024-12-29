@@ -18,6 +18,7 @@ public class TechLevelConfigDef : Def
         public TechLevel techLevel;
         public string unlessModPresent;
         public string ifModPresent;
+        public string contentPack;
         public bool offworld;
         public int priority;
     }

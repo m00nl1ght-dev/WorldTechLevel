@@ -7,10 +7,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(Page_ChooseIdeoPreset))]
 internal static class Patch_Page_ChooseIdeoPreset
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Ideoligions;
+
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(Page_ChooseIdeoPreset.DrawCategory))]
     private static IEnumerable<CodeInstruction> DrawCategory_Transpiler(IEnumerable<CodeInstruction> instructions)

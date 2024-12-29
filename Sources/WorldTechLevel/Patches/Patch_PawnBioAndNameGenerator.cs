@@ -7,16 +7,18 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(PawnBioAndNameGenerator))]
 internal static class Patch_PawnBioAndNameGenerator
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Backstories;
+
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(PawnBioAndNameGenerator.TryGetRandomUnusedSolidBioFor))]
     internal static bool TryGetRandomUnusedSolidBioFor_Prefix(ref bool __result)
     {
-        if (!WorldTechLevel.Settings.FilterPawnBackstories) return true;
         __result = false;
         return false;
     }
@@ -26,15 +28,15 @@ internal static class Patch_PawnBioAndNameGenerator
     private static IEnumerable<CodeInstruction> FillBackstorySlotShuffled_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         var pattern = TranspilerPattern.Build("FillBackstorySlotShuffled")
+            .Insert(OpCodes.Ldarg_0)
             .MatchCall(typeof(DefDatabase<BackstoryDef>), "get_AllDefs")
             .Replace(OpCodes.Call, AccessTools.Method(typeof(Patch_PawnBioAndNameGenerator), nameof(FilteredBackstories)));
 
         return TranspilerPattern.Apply(instructions, pattern);
     }
 
-    private static IEnumerable<BackstoryDef> FilteredBackstories()
+    private static IEnumerable<BackstoryDef> FilteredBackstories(Pawn pawn)
     {
-        if (!WorldTechLevel.Settings.FilterPawnBackstories) return DefDatabase<BackstoryDef>.AllDefs;
-        return DefDatabase<BackstoryDef>.AllDefs.FilterByEffectiveTechLevel();
+        return DefDatabase<BackstoryDef>.AllDefs.FilterByEffectiveTechLevel(pawn.GenFilterTechLevel());
     }
 }

@@ -5,16 +5,18 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(PawnTechHediffsGenerator))]
 internal static class Patch_PawnTechHediffsGenerator
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Prosthetics;
+
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(PawnTechHediffsGenerator.InstallPart))]
     private static bool InstallPart_Prefix(Pawn pawn, ThingDef partDef)
     {
-        if (!TechLevelUtility.ShouldFilterEquipmentFor(pawn)) return true;
-        return partDef.EffectiveTechLevel() <= WorldTechLevel.Current;
+        return pawn.IsStartingPawnGen() || partDef.EffectiveTechLevel() <= WorldTechLevel.Current;
     }
 }

@@ -41,20 +41,22 @@ internal static class TechLevelDatabase<T> where T : Def
 
                 foreach (var defName in altEntry.targets)
                 {
+                    void Process(T value)
+                    {
+                        var existing = alternatives[value.index];
+                        alternatives[value.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
+                    }
+
                     if (defName.EndsWith("*"))
                     {
                         var prefix = defName.Substring(0, defName.Length - 1);
 
-                        foreach (var item in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
-                        {
-                            var existing = alternatives[item.index];
-                            alternatives[item.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
-                        }
+                        foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                            Process(def);
                     }
                     else if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
                     {
-                        var existing = alternatives[def.index];
-                        alternatives[def.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
+                        Process(def);
                     }
                 }
             }
@@ -95,20 +97,28 @@ internal static class TechLevelDatabase<T> where T : Def
 
         foreach (var entry in overrides)
         {
-            if (entry.defName.EndsWith("*"))
+            void Process(T def)
+            {
+                if (entry.contentPack == null || def.modContentPack?.PackageId == entry.contentPack)
+                    if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
+                        Levels[def.index] = entry.techLevel;
+            }
+
+            if (entry.defName == null)
+            {
+                foreach (var def in DefDatabase<T>.AllDefs)
+                    Process(def);
+            }
+            else if (entry.defName.EndsWith("*"))
             {
                 var prefix = entry.defName.Substring(0, entry.defName.Length - 1);
 
                 foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
-                {
-                    if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
-                        Levels[def.index] = entry.techLevel;
-                }
+                    Process(def);
             }
             else if (DefDatabase<T>.defsByName.TryGetValue(entry.defName, out var def))
             {
-                if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
-                    Levels[def.index] = entry.techLevel;
+                Process(def);
             }
         }
     }

@@ -9,9 +9,16 @@ namespace WorldTechLevel;
 
 public static class TechLevelUtility
 {
+    public static TechLevel Max(TechLevel a, TechLevel b) => a > b ? a : b;
+
     public static TechLevel ClampToWorld(this TechLevel techLevel)
     {
         return techLevel == TechLevel.Undefined || techLevel > WorldTechLevel.Current ? WorldTechLevel.Current : techLevel;
+    }
+
+    public static TechLevel GenFilterTechLevel(this Pawn pawn)
+    {
+        return pawn.IsStartingPawnGen() ? Max(pawn.Faction.def.techLevel, WorldTechLevel.Current) : WorldTechLevel.Current;
     }
 
     public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
@@ -160,8 +167,13 @@ public static class TechLevelUtility
         return true;
     }
 
-    public static bool ShouldFilterEquipmentFor(Pawn pawn)
+    public static bool IsStartingPawnGen(this Pawn pawn)
     {
-        return pawn.kindDef is { modContentPack.IsOfficialMod: true } || WorldTechLevel.Settings.FilterPawnEquipment;
+        return Current.ProgramState == ProgramState.Entry && pawn.Faction is { IsPlayer: true };
+    }
+
+    public static TechLevel PlayerResearchFilterLevel()
+    {
+        return Max(Faction.OfPlayer.def.techLevel, WorldTechLevel.Current);
     }
 }

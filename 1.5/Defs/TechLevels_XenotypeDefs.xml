@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_XenotypeDefs</defName>
+        <defType>XenotypeDef</defType>
+        <entries>
+            <li>
+                <defName>Hussar</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Waster</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Highmate</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Genie</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

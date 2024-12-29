@@ -9,10 +9,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(QuestNode_Root_WorkSite))]
 internal static class Patch_QuestNode_Root_WorkSite
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
+
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(QuestNode_Root_WorkSite.GenerateSite))]
     private static IEnumerable<CodeInstruction> GenerateSite_Transpiler(IEnumerable<CodeInstruction> instructions)

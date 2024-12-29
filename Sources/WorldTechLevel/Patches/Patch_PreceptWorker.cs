@@ -8,10 +8,13 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(PreceptWorker))]
 internal static class Patch_PreceptWorker
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Ideoligions;
+
     [HarmonyTargetMethods]
     private static IEnumerable<MethodInfo> TargetMethods() =>
         typeof(PreceptWorker).AllSubclasses().Prepend(typeof(PreceptWorker))

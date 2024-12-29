@@ -6,24 +6,24 @@ using Verse;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Main")]
+[PatchGroup("Filters")]
 [HarmonyPatch(typeof(Sketch))]
 internal static class Patch_Sketch
 {
+    [HarmonyPrepare]
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_BuildingMaterials;
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Sketch.AddTerrain))]
     private static void AddTerrain_Prefix(ref TerrainDef def)
     {
-        if (WorldTechLevel.Settings.FilterBuildingMaterials)
+        if (MapGenerator.mapBeingGenerated is { IsPocketMap: false } map)
         {
-            if (MapGenerator.mapBeingGenerated is { IsPocketMap: false } map)
+            if (!TechLevelUtility.IsAppropriateFloorMaterial(map, def))
             {
-                if (!TechLevelUtility.IsAppropriateFloorMaterial(map, def))
-                {
-                    Rand.PushState(def.index);
-                    def = BaseGenUtility.RegionalRockTerrainDef(map.Tile, false);
-                    Rand.PopState();
-                }
+                Rand.PushState(def.index);
+                def = BaseGenUtility.RegionalRockTerrainDef(map.Tile, false);
+                Rand.PopState();
             }
         }
     }
