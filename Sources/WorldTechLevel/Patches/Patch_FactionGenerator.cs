@@ -6,13 +6,10 @@ using RimWorld;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Filters")]
+[PatchGroup("Main")]
 [HarmonyPatch(typeof(FactionGenerator))]
 internal static class Patch_FactionGenerator
 {
-    [HarmonyPrepare]
-    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
-
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(FactionGenerator.ConfigurableFactions), MethodType.Getter)]

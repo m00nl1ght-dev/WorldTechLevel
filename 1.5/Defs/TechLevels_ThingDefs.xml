@@ -173,6 +173,19 @@
                 <techLevel>Medieval</techLevel>
             </li>
 
+            <!-- MFTQR -->
+
+            <li>
+                <defName>Neurotrainer_*</defName>
+                <techLevel>Medieval</techLevel>
+                <ifModPresent>BotchJob.MedievalFantasyThemedRelicQuests</ifModPresent>
+            </li>
+            <li>
+                <defName>Psytrainer_*</defName>
+                <techLevel>Medieval</techLevel>
+                <ifModPresent>BotchJob.MedievalFantasyThemedRelicQuests</ifModPresent>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

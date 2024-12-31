@@ -6,13 +6,10 @@ using RimWorld.Planet;
 
 namespace WorldTechLevel.Patches;
 
-[PatchGroup("Filters")]
+[PatchGroup("Main")]
 [HarmonyPatch(typeof(WorldFactionsUIUtility))]
 internal static class Patch_WorldFactionsUIUtility
 {
-    [HarmonyPrepare]
-    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
-
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(WorldFactionsUIUtility.DoWindowContents))]
     private static IEnumerable<CodeInstruction> DoWindowContents_Transpiler(IEnumerable<CodeInstruction> instructions)

@@ -121,9 +121,20 @@ internal static class TechLevelDatabase<T> where T : Def
                 Process(def);
             }
         }
+
+        var defTypePrefix = $"{typeof(T).Name}:";
+
+        foreach (var (key, value) in WorldTechLevel.Settings.Overrides.Value)
+        {
+            if (key.StartsWith(defTypePrefix))
+            {
+                var def = DefDatabase<T>.GetNamedSilentFail(key.Substring(defTypePrefix.Length));
+                if (def != null && def.index < Levels.Length) Levels[def.index] = value;
+            }
+        }
     }
 
-    public readonly struct Alternative
+    public readonly record struct Alternative
     {
         public readonly T def;
         public readonly float weight;

@@ -14,7 +14,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_QuestNode_Root_WorkSite
 {
     [HarmonyPrepare]
-    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_PawnKinds;
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(QuestNode_Root_WorkSite.GenerateSite))]

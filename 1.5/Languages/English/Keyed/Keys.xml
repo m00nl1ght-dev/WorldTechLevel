@@ -3,12 +3,13 @@
 
   <WorldTechLevel.Name>world tech level</WorldTechLevel.Name>
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
+  <WorldTechLevel.Unrestricted>unrestricted</WorldTechLevel.Unrestricted>
 
-  <WorldTechLevel.Settings.Tab.General>General</WorldTechLevel.Settings.Tab.General>
   <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
+  <WorldTechLevel.Settings.Tab.Overrides>Overrides</WorldTechLevel.Settings.Tab.Overrides>
+  <WorldTechLevel.Settings.Tab.Experimental>Experimental</WorldTechLevel.Settings.Tab.Experimental>
 
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
-  <WorldTechLevel.Settings.AlwaysAllowNeurotrainers>Allow neurotrainers regardless of the world's tech level</WorldTechLevel.Settings.AlwaysAllowNeurotrainers>
 
   <WorldTechLevel.Settings.Filter_Factions>Factions</WorldTechLevel.Settings.Filter_Factions>
   <WorldTechLevel.Settings.Filter_Research>Research</WorldTechLevel.Settings.Filter_Research>
@@ -53,6 +54,33 @@
   <WorldTechLevel.Settings.Filter_MineableResources.Hint>Filters mineable ores generated on the map. For example, Compacted Components will not appear if the world's tech level is below Industrial. Also affects meteors.</WorldTechLevel.Settings.Filter_MineableResources.Hint>
   <WorldTechLevel.Settings.Filter_GenSteps.Hint>Filters ancient structures and debris on the map, such as derelict vehicles, mechanoid parts and other junk.</WorldTechLevel.Settings.Filter_GenSteps.Hint>
   <WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>Prevents asphalt roads from being generated into the world if tech level is below Industrial.</WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>
+
+  <WorldTechLevel.Settings.DefListing.TerrainDef>floors</WorldTechLevel.Settings.DefListing.TerrainDef>
+  <WorldTechLevel.Settings.DefListing.ResearchProjectDef>research projects</WorldTechLevel.Settings.DefListing.ResearchProjectDef>
+  <WorldTechLevel.Settings.DefListing.IdeoPresetDef>ideoligion presets</WorldTechLevel.Settings.DefListing.IdeoPresetDef>
+  <WorldTechLevel.Settings.DefListing.MemeDef>ideoligion memes</WorldTechLevel.Settings.DefListing.MemeDef>
+  <WorldTechLevel.Settings.DefListing.PreceptDef>ideoligion precepts</WorldTechLevel.Settings.DefListing.PreceptDef>
+  <WorldTechLevel.Settings.DefListing.RitualAttachableOutcomeEffectDef>ideoligion ritual rewards</WorldTechLevel.Settings.DefListing.RitualAttachableOutcomeEffectDef>
+  <WorldTechLevel.Settings.DefListing.IncidentDef>incidents</WorldTechLevel.Settings.DefListing.IncidentDef>
+  <WorldTechLevel.Settings.DefListing.QuestScriptDef>quests</WorldTechLevel.Settings.DefListing.QuestScriptDef>
+  <WorldTechLevel.Settings.DefListing.SitePartDef>quest site parts</WorldTechLevel.Settings.DefListing.SitePartDef>
+  <WorldTechLevel.Settings.DefListing.ComplexThreatDef>quest threats</WorldTechLevel.Settings.DefListing.ComplexThreatDef>
+  <WorldTechLevel.Settings.DefListing.GenStepDef>map generation</WorldTechLevel.Settings.DefListing.GenStepDef>
+  <WorldTechLevel.Settings.DefListing.WorldGenStepDef>world generation</WorldTechLevel.Settings.DefListing.WorldGenStepDef>
+  <WorldTechLevel.Settings.DefListing.TraitDef>traits</WorldTechLevel.Settings.DefListing.TraitDef>
+  <WorldTechLevel.Settings.DefListing.PawnKindDef>creatures</WorldTechLevel.Settings.DefListing.PawnKindDef>
+  <WorldTechLevel.Settings.DefListing.BackstoryDef>backstories</WorldTechLevel.Settings.DefListing.BackstoryDef>
+  <WorldTechLevel.Settings.DefListing.XenotypeDef>xenotypes</WorldTechLevel.Settings.DefListing.XenotypeDef>
+
+  <WorldTechLevel.Settings.DefListing.AnyContentSource>(any content source)</WorldTechLevel.Settings.DefListing.AnyContentSource>
+
+  <WorldTechLevel.Settings.TechLevelOption.Undefined>Allow at any tech level</WorldTechLevel.Settings.TechLevelOption.Undefined>
+  <WorldTechLevel.Settings.TechLevelOption.Neolithic>Allow at tech level Neolithic or above</WorldTechLevel.Settings.TechLevelOption.Neolithic>
+  <WorldTechLevel.Settings.TechLevelOption.Medieval>Allow at tech level Medieval or above</WorldTechLevel.Settings.TechLevelOption.Medieval>
+  <WorldTechLevel.Settings.TechLevelOption.Industrial>Allow at tech level Industrial or above</WorldTechLevel.Settings.TechLevelOption.Industrial>
+  <WorldTechLevel.Settings.TechLevelOption.Spacer>Allow at tech level Spacer or above</WorldTechLevel.Settings.TechLevelOption.Spacer>
+  <WorldTechLevel.Settings.TechLevelOption.Ultra>Allow at tech level Ultra or above</WorldTechLevel.Settings.TechLevelOption.Ultra>
+  <WorldTechLevel.Settings.TechLevelOption.Archotech>Allow at tech level Archotech</WorldTechLevel.Settings.TechLevelOption.Archotech>
 
   <WorldTechLevel.ScenarioWarning>Warning: In the selected scenario "{0}" your faction will have the tech level "{1}", which exceeds the selected world tech level "{2}".\n\nThis means you are starting with equipment and knowledge that is more advanced than the rest of the world. Are you sure?</WorldTechLevel.ScenarioWarning>
 

@@ -105,7 +105,10 @@ internal static class Patch_Page_CreateWorldParams
 
         var levelBefore = WorldTechLevel.Current;
         var sliderRect = new Rect(200f, pos, width, 30f);
-        var currentLabel = levelBefore.ToStringHuman().CapitalizeFirst();
+
+        string currentLabel = levelBefore == TechLevel.Archotech
+            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
+            : levelBefore.ToStringHuman().CapitalizeFirst();
 
         WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
 
@@ -117,15 +120,12 @@ internal static class Patch_Page_CreateWorldParams
 
     private static void UpdateFactions(Page_CreateWorldParams instance)
     {
-        if (WorldTechLevel.Settings.Filter_Factions)
-        {
-            var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
+        var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
 
-            foreach (var faction in toRemove)
-            {
-                instance.factions.Remove(faction);
-                _removedFactions.Add(faction);
-            }
+        foreach (var faction in toRemove)
+        {
+            instance.factions.Remove(faction);
+            _removedFactions.Add(faction);
         }
 
         var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();

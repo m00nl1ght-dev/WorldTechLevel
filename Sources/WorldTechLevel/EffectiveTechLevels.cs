@@ -73,12 +73,6 @@ public static class EffectiveTechLevels
         {
             if (def.GetCompProperties<CompProperties_Techprint>() is { } techprint)
                 return techprint.project.techLevel;
-
-            if (def.thingCategories.Contains(ThingCategoryDefOf.NeurotrainersSkill))
-                return WorldTechLevel.Settings.AlwaysAllowNeurotrainers ? TechLevel.Undefined : def.techLevel;
-
-            if (def.thingCategories.Contains(ThingCategoryDefOf.NeurotrainersPsycast))
-                return WorldTechLevel.Settings.AlwaysAllowNeurotrainers ? TechLevel.Undefined : def.techLevel;
         }
 
         if (def is { techLevel: TechLevel.Archotech, thingCategories: not null })
