@@ -24,6 +24,7 @@ internal static class Patch_PawnBioAndNameGenerator
     }
 
     [HarmonyTranspiler]
+    [PatchExcludedFromConflictCheck]
     [HarmonyPatch(nameof(PawnBioAndNameGenerator.FillBackstorySlotShuffled))]
     private static IEnumerable<CodeInstruction> FillBackstorySlotShuffled_Transpiler(IEnumerable<CodeInstruction> instructions)
     {

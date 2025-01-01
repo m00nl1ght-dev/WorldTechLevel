@@ -199,7 +199,7 @@ public class WorldTechLevelSettings : LunarModSettings
         foreach (var categoryDef in ThingCategoryDefOf.Root.childCategories.Except(excluded))
             _listings.Add(new ThingDefCategoryListing(categoryDef));
 
-        _listings.Add(new DefListing<TerrainDef>());
+        _listings.Add(new DefListing<TerrainDef>(d => d.BuildableByPlayer));
         _listings.Add(new DefListing<ResearchProjectDef>());
         _listings.Add(new DefListing<IncidentDef>());
         _listings.Add(new DefListing<QuestScriptDef>());
@@ -221,7 +221,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         if (ModsConfig.BiotechActive)
         {
-            _listings.Add(new DefListing<XenotypeDef>());
+            _listings.Add(new DefListing<XenotypeDef>(d => d != XenotypeDefOf.Baseliner));
         }
 
         SelectListing(_listings.First());
@@ -291,9 +291,16 @@ public class WorldTechLevelSettings : LunarModSettings
     {
         public string Label => $"WorldTechLevel.Settings.DefListing.{typeof(T).Name}".Translate().CapitalizeFirst();
 
+        private readonly Predicate<T> _filter;
+
+        public DefListing(Predicate<T> filter = null)
+        {
+            _filter = filter;
+        }
+
         public IEnumerable<Def> BuildDefList()
         {
-            return DefDatabase<T>.AllDefs;
+            return _filter == null ? DefDatabase<T>.AllDefs : DefDatabase<T>.AllDefs.Where(d => _filter(d));
         }
 
         public TechLevel GetLevelFor(Def def)
@@ -308,7 +315,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         public bool CanList(Def def)
         {
-            return def is T;
+            return def is T tDef && (_filter == null || _filter(tDef));
         }
     }
 
