@@ -88,6 +88,10 @@
                 <defName>Shipcracker37</defName>
                 <techLevel>Spacer</techLevel>
             </li>
+            <li>
+                <defName>CrashBaby32</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

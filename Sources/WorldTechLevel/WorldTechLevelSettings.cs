@@ -145,23 +145,30 @@ public class WorldTechLevelSettings : LunarModSettings
 
             if (Widgets.ButtonInvisible(_listingLayout))
             {
-                var options = new List<FloatMenuOption>();
-
-                foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+                if (Input.GetKey(KeyCode.LeftShift) && Current.ProgramState == ProgramState.Playing)
                 {
-                    if (value != TechLevel.Animal)
-                    {
-                        options.Add(new FloatMenuOption(Label($"TechLevelOption.{value}"), SetOverride));
+                    Find.WindowStack.Add(new Dialog_InfoCard(def));
+                }
+                else
+                {
+                    var options = new List<FloatMenuOption>();
 
-                        void SetOverride()
+                    foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+                    {
+                        if (value != TechLevel.Animal)
                         {
-                            _currentListing.SetLevelFor(def, value);
-                            Overrides.Value[$"{def.GetType().Name}:{def.defName}"] = value;
+                            options.Add(new FloatMenuOption(Label($"TechLevelOption.{value}"), SetOverride));
+
+                            void SetOverride()
+                            {
+                                _currentListing.SetLevelFor(def, value);
+                                Overrides.Value[$"{def.GetType().Name}:{def.defName}"] = value;
+                            }
                         }
                     }
-                }
 
-                Find.WindowStack.Add(new FloatMenu(options));
+                    Find.WindowStack.Add(new FloatMenu(options));
+                }
             }
 
             _listingLayout.End();
@@ -349,7 +356,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         public bool CanList(Def def)
         {
-            return def is ThingDef { thingCategories: not null } thingDef && thingDef.thingCategories.Contains(Category);
+            return def is ThingDef thingDef && Category.ContainedInThisOrDescendant(thingDef);
         }
     }
 }

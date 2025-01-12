@@ -31,7 +31,7 @@ internal static class Patch_Page_CreateWorldParams
         if (factionTechLevel is < TechLevel.Industrial)
         {
             WorldTechLevel.Current = factionTechLevel.Value;
-            UpdateFactions(__instance);
+            if (__instance.factions != null) UpdateFactions(__instance);
         }
     }
 
