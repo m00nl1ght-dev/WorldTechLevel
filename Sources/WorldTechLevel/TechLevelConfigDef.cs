@@ -26,6 +26,7 @@ public class TechLevelConfigDef : Def
     public struct AlternativesEntry
     {
         public List<string> targets;
+        public List<string> categories;
         public List<AlternativesGroupEntry> options;
     }
 

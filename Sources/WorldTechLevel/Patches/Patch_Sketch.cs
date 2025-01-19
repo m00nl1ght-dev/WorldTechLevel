@@ -19,7 +19,7 @@ internal static class Patch_Sketch
     {
         if (MapGenerator.mapBeingGenerated is { IsPocketMap: false } map)
         {
-            if (!TechLevelUtility.IsAppropriateFloorMaterial(map, def))
+            if (!BuildingMaterialUtility.IsAppropriateFloorMaterial(map, def))
             {
                 Rand.PushState(def.index);
                 def = BaseGenUtility.RegionalRockTerrainDef(map.Tile, false);

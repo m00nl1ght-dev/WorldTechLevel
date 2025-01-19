@@ -64,7 +64,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<XenotypeDef>.Initialize();
         TechLevelDatabase<XenotypeDef>.ApplyOverrides();
 
+        #if DEBUG
         WarnPawnKindFactionUsages();
+        #endif
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

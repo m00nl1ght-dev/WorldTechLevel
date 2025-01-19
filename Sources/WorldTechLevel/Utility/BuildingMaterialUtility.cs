@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using RimWorld.BaseGen;
@@ -7,74 +6,8 @@ using Verse;
 
 namespace WorldTechLevel;
 
-public static class TechLevelUtility
+public class BuildingMaterialUtility
 {
-    public static TechLevel Max(TechLevel a, TechLevel b) => a > b ? a : b;
-
-    public static TechLevel ClampToWorld(this TechLevel techLevel)
-    {
-        return techLevel == TechLevel.Undefined || techLevel > WorldTechLevel.Current ? WorldTechLevel.Current : techLevel;
-    }
-
-    public static TechLevel GenFilterTechLevel(this Pawn pawn)
-    {
-        return pawn.IsStartingPawnGen() ? Max(pawn.Faction.def.techLevel, WorldTechLevel.Current) : WorldTechLevel.Current;
-    }
-
-    public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
-    {
-        TechLevelDatabase<T>.EnsureInitialized();
-
-        var data = TechLevelDatabase<T>.Levels;
-        if (def != null && def.index < data.Length)
-            return data[def.index];
-
-        return TechLevel.Undefined;
-    }
-
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
-    {
-        if (techLevel == TechLevel.Archotech)
-            return defs;
-
-        TechLevelDatabase<T>.EnsureInitialized();
-
-        var data = TechLevelDatabase<T>.Levels;
-        return defs.Where(def => def.index >= data.Length || data[def.index] <= techLevel);
-    }
-
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs) where T : Def
-    {
-        return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
-    }
-
-    public static T GetAlternative<T>(this T def) where T : Def => def.GetAlternative(WorldTechLevel.Current);
-
-    public static T GetAlternative<T>(this T def, TechLevel targetLevel) where T : Def
-    {
-        TechLevelDatabase<T>.EnsureInitialized();
-
-        var data = TechLevelDatabase<T>.Alternatives;
-        if (def.index >= data.Length) return null;
-
-        var alternatives = data[def.index];
-        if (alternatives == null) return null;
-
-        bool Filter(TechLevelDatabase<T>.Alternative option)
-        {
-            var level = option.def.EffectiveTechLevel();
-            return level == targetLevel || level == TechLevel.Undefined;
-        }
-
-        while (!alternatives.Any(Filter))
-        {
-            if (targetLevel == TechLevel.Neolithic) return null;
-            targetLevel -= 1;
-        }
-
-        return alternatives.Where(Filter).RandomElementByWeight(a => a.weight).def;
-    }
-
     public static ThingDef RandomAppropriateBuildingMaterialFor(Map map, ThingDef thingDef, TechLevel techLevel, Predicate<ThingDef> validator = null)
     {
         if (!thingDef.MadeFromStuff) return null;
@@ -165,15 +98,5 @@ public static class TechLevelUtility
             return false;
 
         return true;
-    }
-
-    public static bool IsStartingPawnGen(this Pawn pawn)
-    {
-        return Current.ProgramState == ProgramState.Entry && pawn.Faction is { IsPlayer: true };
-    }
-
-    public static TechLevel PlayerResearchFilterLevel()
-    {
-        return Max(Faction.OfPlayer.def.techLevel, WorldTechLevel.Current);
     }
 }

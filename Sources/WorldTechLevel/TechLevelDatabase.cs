@@ -39,24 +39,41 @@ internal static class TechLevelDatabase<T> where T : Def
                     .Where(a => a is { def: not null, weight: > 0f })
                     .ToArray();
 
-                foreach (var defName in altEntry.targets)
+                void Process(Def value)
                 {
-                    void Process(T value)
-                    {
-                        var existing = alternatives[value.index];
-                        alternatives[value.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
-                    }
+                    var existing = alternatives[value.index];
+                    alternatives[value.index] = existing != null ? existing.Concat(options).Distinct().ToArray() : options;
+                }
 
-                    if (defName.EndsWith("*"))
+                if (altEntry.targets != null)
+                {
+                    foreach (var defName in altEntry.targets)
                     {
-                        var prefix = defName.Substring(0, defName.Length - 1);
+                        if (defName.EndsWith("*"))
+                        {
+                            var prefix = defName.Substring(0, defName.Length - 1);
 
-                        foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                            foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                                Process(def);
+                        }
+                        else if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
+                        {
                             Process(def);
+                        }
                     }
-                    else if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
+                }
+
+                if (altEntry.categories != null && typeof(T) == typeof(ThingDef))
+                {
+                    foreach (var categoryName in altEntry.categories)
                     {
-                        Process(def);
+                        if (DefDatabase<ThingCategoryDef>.defsByName.TryGetValue(categoryName, out var category))
+                        {
+                            foreach (var def in category.DescendantThingDefs)
+                            {
+                                Process(def);
+                            }
+                        }
                     }
                 }
             }

@@ -120,12 +120,15 @@ internal static class Patch_Page_CreateWorldParams
 
     private static void UpdateFactions(Page_CreateWorldParams instance)
     {
-        var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
-
-        foreach (var faction in toRemove)
+        if (WorldTechLevel.Settings.Filter_Factions)
         {
-            instance.factions.Remove(faction);
-            _removedFactions.Add(faction);
+            var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
+
+            foreach (var faction in toRemove)
+            {
+                instance.factions.Remove(faction);
+                _removedFactions.Add(faction);
+            }
         }
 
         var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();

@@ -52,7 +52,7 @@
                     <li><weight>0.3</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
                     <li><weight>0.3</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
                     <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Mercenary</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
@@ -76,7 +76,7 @@
                     <li><weight>1.0</weight><defName>DankPyon_BrigandThug</defName></li>
                     <li><weight>1.0</weight><defName>DankPyon_BrigandRaider</defName></li>
                     <li><weight>1.0</weight><defName>DankPyon_BrigandMarksman</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Warrior</defName></li>
                     <li><weight>1.0</weight><defName>Tribal_Archer</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Berserker</defName></li>
@@ -92,7 +92,7 @@
                     <li><weight>1.0</weight><defName>Town_Councilman</defName></li>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_BrigandLeader</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_ChiefMelee</defName></li>
                     <li><weight>1.0</weight><defName>Tribal_ChiefRanged</defName></li>
                 </options>
@@ -113,7 +113,7 @@
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Mercenary</defName></li>
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Bowman</defName></li>
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Billman</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Warrior</defName></li>
                     <li><weight>1.0</weight><defName>Tribal_Archer</defName></li>
                 </options>
@@ -132,7 +132,7 @@
                     <li><weight>0.5</weight><defName>DankPyon_Medieval_Mercenary</defName></li>
                     <li><weight>0.5</weight><defName>DankPyon_Medieval_Bowman</defName></li>
                     <li><weight>0.5</weight><defName>DankPyon_Medieval_Billman</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Berserker</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Warrior</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Archer</defName></li>
@@ -148,7 +148,7 @@
                     <li><weight>0.2</weight><defName>BotchJob_DivineOrderCommoner</defName></li>
                     <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
                     <li><weight>0.1</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
@@ -161,7 +161,7 @@
                     <li>Villager_Child</li>
                 </targets>
                 <options>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Child</defName></li>
                 </options>
             </li>
@@ -172,7 +172,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Merchant</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Trader</defName></li>
                 </options>
             </li>
@@ -183,7 +183,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Miner</defName></li>
                 </options>
             </li>
@@ -194,7 +194,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Hunter</defName></li>
                 </options>
             </li>
@@ -205,7 +205,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Logger</defName></li>
                 </options>
             </li>
@@ -216,7 +216,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Farmer</defName></li>
                 </options>
             </li>
@@ -229,7 +229,7 @@
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_Peasant</defName></li>
                     <li><weight>0.2</weight><defName>Accurex_Medieval_Empire_Peasant</defName></li>
                     <li><weight>0.2</weight><defName>Accurex_Medieval_Empire_Laborer</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Penitent</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Hunter</defName></li>
                     <li><weight>0.5</weight><defName>Tribal_Miner</defName></li>
@@ -244,7 +244,7 @@
                 <options>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_HedgeKnight</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>PovertyPilgrim</defName></li>
                 </options>
             </li>
@@ -256,7 +256,7 @@
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>DankPyon_Medieval_MercenaryHeavy</defName></li>
                     <li><weight>1.0</weight><defName>DevDesigner_WoodElves_StrangerInBlack</defName></li>
-                    <!-- Tribal -->
+                    <!-- Neolithic -->
                     <li><weight>1.0</weight><defName>Tribal_Berserker</defName></li>
                 </options>
             </li>

@@ -92,6 +92,10 @@
                 <defName>CrashBaby32</defName>
                 <techLevel>Spacer</techLevel>
             </li>
+            <li>
+                <defName>WreckageExplorer93</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

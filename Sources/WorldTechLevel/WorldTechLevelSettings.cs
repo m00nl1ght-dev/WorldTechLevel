@@ -13,6 +13,7 @@ public class WorldTechLevelSettings : LunarModSettings
 {
     public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
 
+    public readonly Entry<bool> Filter_Factions = MakeEntry(true);
     public readonly Entry<bool> Filter_Research = MakeEntry(true);
     public readonly Entry<bool> Filter_Items = MakeEntry(true);
     public readonly Entry<bool> Filter_Quests = MakeEntry(true);

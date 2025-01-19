@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -18,16 +19,21 @@ internal static class Patch_PawnGenerator
         if (original == null)
             return true;
 
+        var settings = WorldTechLevel.Settings;
+
+        if (original.Name == nameof(PawnGenerator.GenerateGearFor))
+            return settings.Filter_Weapons || settings.Filter_Apparel || settings.Filter_Possessions;
+
         if (original.Name == nameof(PawnGenerator.GenerateTraitsFor))
-            return WorldTechLevel.Settings.Filter_Traits;
+            return settings.Filter_Traits;
 
         if (original.Name == nameof(PawnGenerator.XenotypesAvailableFor))
-            return WorldTechLevel.Settings.Filter_Xenotypes;
+            return settings.Filter_Xenotypes;
 
         if (original.Name == nameof(PawnGenerator.AdjustXenotypeForFactionlessPawn))
-            return WorldTechLevel.Settings.Filter_Xenotypes;
+            return settings.Filter_Xenotypes;
 
-        return WorldTechLevel.Settings.Filter_PawnKinds;
+        return settings.Filter_PawnKinds;
     }
 
     [HarmonyPrefix]
@@ -58,9 +64,56 @@ internal static class Patch_PawnGenerator
         var alternative = kindDef.GetAlternative();
 
         if (alternative != null) WorldTechLevel.Logger.Log($"Generating pawn of kind {alternative.defName} in place of {kindDef.defName}");
-        else WorldTechLevel.Logger.Warn($"No valid alternative found for {kindDef.EffectiveTechLevel()} tech level pawn kind {kindDef.defName}");
+        else WorldTechLevel.Logger.Log($"No alternative found for {kindDef.EffectiveTechLevel()} tech level pawn kind {kindDef.defName}");
 
         return alternative;
+    }
+
+    [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
+    [HarmonyPatch(nameof(PawnGenerator.GenerateGearFor))]
+    private static void GenerateGearFor_Postfix(Pawn pawn)
+    {
+        if (pawn.IsStartingPawnGen()) return;
+
+        if (WorldTechLevel.Settings.Filter_Possessions && pawn.inventory != null)
+        {
+            var toFilter = pawn.inventory.innerContainer
+                .Where(t => t.EffectiveTechLevel() > WorldTechLevel.Current).ToList();
+
+            foreach (var thing in toFilter)
+                pawn.inventory.innerContainer.Remove(thing);
+
+            foreach (var thing in toFilter)
+                if (ReplacementUtility.TryMakeReplacementFor(thing, pawn) is { } replacement)
+                    pawn.inventory.innerContainer.TryAdd(replacement);
+        }
+
+        if (WorldTechLevel.Settings.Filter_Apparel && pawn.apparel != null)
+        {
+            var toFilter = pawn.apparel.WornApparel
+                .Where(t => t.EffectiveTechLevel() > WorldTechLevel.Current).ToList();
+
+            foreach (var apparel in toFilter)
+                pawn.apparel.Remove(apparel);
+
+            foreach (var apparel in toFilter)
+                if (ReplacementUtility.TryMakeReplacementFor(apparel, pawn) is Apparel replacement)
+                    pawn.apparel.Wear(replacement, false);
+        }
+
+        if (WorldTechLevel.Settings.Filter_Weapons && pawn.equipment != null)
+        {
+            var toFilter = pawn.equipment.AllEquipmentListForReading
+                .Where(t => t.EffectiveTechLevel() > WorldTechLevel.Current).ToList();
+
+            foreach (var equipment in toFilter)
+                pawn.equipment.Remove(equipment);
+
+            foreach (var equipment in toFilter)
+                if (ReplacementUtility.TryMakeReplacementFor(equipment, pawn) is ThingWithComps replacement)
+                    pawn.equipment.AddEquipment(replacement);
+        }
     }
 
     [HarmonyTranspiler]

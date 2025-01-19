@@ -8,11 +8,6 @@
             <!-- resources -->
 
             <li>
-                <defName>Steel</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-            <li>
                 <defName>Plasteel</defName>
                 <techLevel>Medieval</techLevel>
                 <priority>-1</priority>
@@ -129,19 +124,6 @@
                 <priority>-1</priority>
             </li>
 
-            <!-- ideology -->
-
-            <li>
-                <defName>Lectern</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-            <li>
-                <defName>Pew</defName>
-                <techLevel>Medieval</techLevel>
-                <priority>-1</priority>
-            </li>
-
             <!-- biotech -->
 
             <li>
@@ -173,7 +155,7 @@
                 <techLevel>Medieval</techLevel>
             </li>
 
-            <!-- MFTQR -->
+            <!-- MFTRQ -->
 
             <li>
                 <defName>Neurotrainer_*</defName>
@@ -187,5 +169,95 @@
             </li>
 
         </entries>
+        <alternatives>
+            <li>
+                <categories>
+                    <li>FoodMeals</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>MealSurvivalPack</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_MealRations</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MealSimple</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>Medicine</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>MedicineIndustrial</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MedicineHerbal</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>WeaponsMelee</li>
+                    <li>WeaponsMeleeBladelink</li>
+                </categories>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>MeleeWeapon_LongSword</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Gladius</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Mace</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MeleeWeapon_Knife</defName></li>
+                    <li><weight>1.0</weight><defName>MeleeWeapon_Spear</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Ikwa</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Club</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>WeaponsRanged</li>
+                    <li>Grenades</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Gun_Revolver</defName></li>
+                    <li><weight>1.0</weight><defName>Gun_AssaultRifle</defName></li>
+                    <li><weight>0.5</weight><defName>Gun_BoltActionRifle</defName></li>
+                    <li><weight>0.5</weight><defName>Gun_PumpShotgun</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>Bow_Short</defName></li>
+                    <li><weight>0.5</weight><defName>Bow_Recurve</defName></li>
+                    <li><weight>0.5</weight><defName>Bow_Great</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>ApparelMisc</li>
+                    <li>ApparelNoble</li>
+                </categories>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>Apparel_BasicShirt</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidShirt</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidPants</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>Apparel_TribalA</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidTribal</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>ApparelArmor</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Apparel_FlakVest</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_FlakJacket</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_FlakPants</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>Apparel_PlateArmor</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
+                </options>
+            </li>
+        </alternatives>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

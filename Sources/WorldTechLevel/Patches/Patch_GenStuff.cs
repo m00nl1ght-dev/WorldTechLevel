@@ -18,7 +18,7 @@ internal static class Patch_GenStuff
     private static bool RandomStuffInexpensiveFor_Prefix(ThingDef thingDef, TechLevel maxTechLevel, Predicate<ThingDef> validator, ref ThingDef __result)
     {
         if (MapGenerator.mapBeingGenerated is not { } map || thingDef.building == null) return true;
-        __result = TechLevelUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, maxTechLevel, validator);
+        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, maxTechLevel, validator);
         return __result == null;
     }
 }

@@ -12,7 +12,7 @@ namespace WorldTechLevel.Patches;
 internal static class Patch_QuestNode_Root_Mission_BanditCamp
 {
     [HarmonyPrepare]
-    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_PawnKinds;
+    private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Factions;
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(QuestNode_Root_Mission_BanditCamp.TryGetSiteFaction))]

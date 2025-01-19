@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 using LunarFramework.Patching;
@@ -29,15 +30,23 @@ internal static class Patch_PawnBioAndNameGenerator
     private static IEnumerable<CodeInstruction> FillBackstorySlotShuffled_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         var pattern = TranspilerPattern.Build("FillBackstorySlotShuffled")
-            .Insert(OpCodes.Ldarg_0)
-            .MatchCall(typeof(DefDatabase<BackstoryDef>), "get_AllDefs")
-            .Replace(OpCodes.Call, AccessTools.Method(typeof(Patch_PawnBioAndNameGenerator), nameof(FilteredBackstories)));
+            .MatchCall(typeof(DefDatabase<BackstoryDef>), "get_AllDefs").Keep()
+            .MatchLdloc().Keep().Match(OpCodes.Ldftn).Keep()
+            .Match(OpCodes.Newobj).Keep().Match(OpCodes.Call).Keep()
+            .Insert(OpCodes.Ldarg_0).Insert(OpCodes.Ldarg_1)
+            .InsertCall(typeof(Patch_PawnBioAndNameGenerator), nameof(FilteredBackstories))
+            .MatchStloc().Keep();
 
         return TranspilerPattern.Apply(instructions, pattern);
     }
 
-    private static IEnumerable<BackstoryDef> FilteredBackstories(Pawn pawn)
+    private static IEnumerable<BackstoryDef> FilteredBackstories(IEnumerable<BackstoryDef> original, Pawn pawn, BackstorySlot slot)
     {
-        return DefDatabase<BackstoryDef>.AllDefs.FilterByEffectiveTechLevel(pawn.GenFilterTechLevel());
+        var filtered = original.FilterByEffectiveTechLevel(pawn.GenFilterTechLevel());
+        if (filtered.Any(bs => bs.slot == slot)) return filtered;
+
+        return DefDatabase<BackstoryDef>.AllDefs
+            .FilterByEffectiveTechLevel(pawn.GenFilterTechLevel())
+            .Where(bs => bs.shuffleable);
     }
 }
