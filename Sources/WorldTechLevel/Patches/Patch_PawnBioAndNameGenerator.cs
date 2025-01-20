@@ -30,12 +30,12 @@ internal static class Patch_PawnBioAndNameGenerator
     private static IEnumerable<CodeInstruction> FillBackstorySlotShuffled_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         var pattern = TranspilerPattern.Build("FillBackstorySlotShuffled")
-            .MatchCall(typeof(DefDatabase<BackstoryDef>), "get_AllDefs").Keep()
-            .MatchLdloc().Keep().Match(OpCodes.Ldftn).Keep()
-            .Match(OpCodes.Newobj).Keep().Match(OpCodes.Call).Keep()
             .Insert(OpCodes.Ldarg_0).Insert(OpCodes.Ldarg_1)
             .InsertCall(typeof(Patch_PawnBioAndNameGenerator), nameof(FilteredBackstories))
-            .MatchStloc().Keep();
+            .MatchStloc().Keep()
+            .MatchLoad(typeof(PawnBioAndNameGenerator), nameof(PawnBioAndNameGenerator.tmpBackstories)).Keep()
+            .MatchCall(typeof(List<BackstoryDef>), nameof(List<BackstoryDef>.Clear)).Keep()
+            .Greedy(1, 1);
 
         return TranspilerPattern.Apply(instructions, pattern);
     }
