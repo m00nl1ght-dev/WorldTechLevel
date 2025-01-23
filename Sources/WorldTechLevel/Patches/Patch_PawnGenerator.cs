@@ -63,8 +63,8 @@ internal static class Patch_PawnGenerator
 
         var alternative = kindDef.GetAlternative();
 
-        if (alternative != null) WorldTechLevel.Logger.Log($"Generating pawn of kind {alternative.defName} in place of {kindDef.defName}");
-        else WorldTechLevel.Logger.Log($"No alternative found for {kindDef.EffectiveTechLevel()} tech level pawn kind {kindDef.defName}");
+        if (alternative != null) WorldTechLevel.Logger.Debug($"Generating pawn of kind {alternative.defName} in place of {kindDef.defName}");
+        else WorldTechLevel.Logger.Debug($"No alternative found for {kindDef.EffectiveTechLevel()} tech level pawn kind {kindDef.defName}");
 
         return alternative;
     }

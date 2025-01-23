@@ -49,7 +49,7 @@ public static class ReplacementUtility
 
         if (newDef == null)
         {
-            WorldTechLevel.Logger.Log($"No replacement found for {thing.def} [{thing.Stuff}]");
+            WorldTechLevel.Logger.Debug($"No replacement found for {thing.def} [{thing.Stuff}]");
             return null;
         }
 
@@ -57,7 +57,7 @@ public static class ReplacementUtility
         var newThing = ThingMaker.MakeThing(newDef, newStuff);
         newThing.stackCount = Math.Min(thing.stackCount, newDef.stackLimit);
 
-        WorldTechLevel.Logger.Log($"Replacement for {thing.def} [{thing.Stuff}] -> {newThing.def} [{newThing.Stuff}]");
+        WorldTechLevel.Logger.Debug($"Replacement for {thing.def} [{thing.Stuff}] -> {newThing.def} [{newThing.Stuff}]");
 
         if (thing.TryGetComp<CompQuality>(out var quality) && newThing.TryGetComp<CompQuality>(out var newQuality))
             newQuality.SetQuality(quality.Quality, ArtGenerationContext.Outsider);

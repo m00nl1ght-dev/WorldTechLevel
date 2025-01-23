@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using HarmonyLib;
 using RimWorld;
 using Verse;
 
@@ -188,27 +187,18 @@ public static class EffectiveTechLevels
 
     private static void WarnPawnKindFactionUsages()
     {
-        var warnFactions = new List<FactionDef>();
-
         foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(d => d.pawnGroupMakers != null))
         {
             foreach (var kind in faction.pawnGroupMakers.SelectMany(g => g.options).Select(o => o.kind).Distinct())
             {
                 if (kind.EffectiveTechLevel() > faction.techLevel && kind.GetAlternative(faction.techLevel) == null)
                 {
-                    warnFactions.AddDistinct(faction);
-
-                    WorldTechLevel.Logger.Debug(
+                    WorldTechLevel.Logger.Warn(
                         $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +
                         $"is used by faction {faction.defName} with lower tech level ({faction.techLevel})"
                     );
                 }
             }
-        }
-
-        if (warnFactions.Any())
-        {
-            WorldTechLevel.Logger.Warn($"Some factions contain pawn kinds that exceed the faction's tech level: {warnFactions.Join()}");
         }
     }
 }

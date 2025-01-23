@@ -24,6 +24,10 @@ public class WorldTechLevel : Mod
 
     private static void Init()
     {
+        #if DEBUG
+        Logger.Level = LogContext.LogLevel.Debug;
+        #endif
+
         MainPatchGroup ??= LunarAPI.RootPatchGroup.NewSubGroup("Main");
         MainPatchGroup.AddPatches(typeof(WorldTechLevel).Assembly);
         MainPatchGroup.Subscribe();
