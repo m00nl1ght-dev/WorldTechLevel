@@ -9,7 +9,10 @@ public static class ReplacementUtility
 {
     public static T GetAlternative<T>(this T def) where T : Def => def.GetAlternative(WorldTechLevel.Current);
 
-    public static T GetAlternative<T>(this T def, TechLevel targetLevel, Predicate<T> validator = null) where T : Def
+    public static T GetAlternative<T>(
+        this T def, TechLevel targetLevel,
+        TechLevel minLevel = TechLevel.Neolithic,
+        Predicate<T> validator = null) where T : Def
     {
         TechLevelDatabase<T>.EnsureInitialized();
 
@@ -28,7 +31,7 @@ public static class ReplacementUtility
 
         while (!alternatives.Any(Filter))
         {
-            if (targetLevel == TechLevel.Neolithic) return null;
+            if (targetLevel <= minLevel) return null;
             targetLevel -= 1;
         }
 
@@ -39,8 +42,10 @@ public static class ReplacementUtility
     {
         var newDef = thing.def;
 
+        var minLevel = TechLevelUtility.Min(WorldTechLevel.Current, TechLevel.Medieval);
+
         if (thing.def.EffectiveTechLevel() > WorldTechLevel.Current)
-            newDef = thing.def.GetAlternative(WorldTechLevel.Current, owner == null ? null : ApparelValidator);
+            newDef = thing.def.GetAlternative(WorldTechLevel.Current, minLevel, owner == null ? null : ApparelValidator);
 
         if (newDef == null)
         {

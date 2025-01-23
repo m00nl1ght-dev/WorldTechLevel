@@ -9,6 +9,8 @@ public static class TechLevelUtility
 {
     public static TechLevel Max(TechLevel a, TechLevel b) => a > b ? a : b;
 
+    public static TechLevel Min(TechLevel a, TechLevel b) => a < b ? a : b;
+
     public static TechLevel ClampToWorld(this TechLevel techLevel)
     {
         return techLevel == TechLevel.Undefined || techLevel > WorldTechLevel.Current ? WorldTechLevel.Current : techLevel;
