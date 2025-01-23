@@ -106,9 +106,7 @@ internal static class Patch_Page_CreateWorldParams
         var levelBefore = WorldTechLevel.Current;
         var sliderRect = new Rect(200f, pos, width, 30f);
 
-        string currentLabel = levelBefore == TechLevel.Archotech
-            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
-            : levelBefore.ToStringHuman().CapitalizeFirst();
+        string currentLabel = levelBefore.SelectionLabel();
 
         WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
 

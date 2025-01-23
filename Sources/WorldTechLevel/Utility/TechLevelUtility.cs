@@ -57,4 +57,11 @@ public static class TechLevelUtility
     {
         return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
     }
+
+    public static string SelectionLabel(this TechLevel techLevel)
+    {
+        return techLevel == TechLevel.Archotech
+            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
+            : techLevel.ToStringHuman().CapitalizeFirst();
+    }
 }

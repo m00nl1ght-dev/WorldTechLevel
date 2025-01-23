@@ -4,6 +4,7 @@
   <WorldTechLevel.Name>world tech level</WorldTechLevel.Name>
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
   <WorldTechLevel.Unrestricted>unrestricted</WorldTechLevel.Unrestricted>
+  <WorldTechLevel.ChangeTechLevel>change tech level</WorldTechLevel.ChangeTechLevel>
 
   <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
   <WorldTechLevel.Settings.Tab.Overrides>Overrides</WorldTechLevel.Settings.Tab.Overrides>
