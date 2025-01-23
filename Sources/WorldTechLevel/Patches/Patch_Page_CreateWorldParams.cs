@@ -17,6 +17,7 @@ internal static class Patch_Page_CreateWorldParams
     private static readonly List<FactionDef> _removedFactions = [];
 
     private static bool _confirmedScenarioWarning;
+    private static bool _removedPollutionPreIndustrial;
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
@@ -24,14 +25,19 @@ internal static class Patch_Page_CreateWorldParams
     {
         WorldTechLevel.Current = TechLevel.Archotech;
         _removedFactions.Clear();
-
         _confirmedScenarioWarning = false;
+        _removedPollutionPreIndustrial = false;
+    }
 
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
+    internal static void ResetFactionCounts_Postfix(Page_CreateWorldParams __instance)
+    {
         var factionTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
         if (factionTechLevel is < TechLevel.Industrial)
         {
             WorldTechLevel.Current = factionTechLevel.Value;
-            if (__instance.factions != null) UpdateFactions(__instance);
+            UpdateFactions(__instance);
         }
     }
 
@@ -135,6 +141,12 @@ internal static class Patch_Page_CreateWorldParams
         {
             instance.factions.Add(faction);
             _removedFactions.Remove(faction);
+        }
+
+        if (WorldTechLevel.Current < TechLevel.Industrial && !_removedPollutionPreIndustrial)
+        {
+            _removedPollutionPreIndustrial = true;
+            instance.pollution = 0f;
         }
     }
 }

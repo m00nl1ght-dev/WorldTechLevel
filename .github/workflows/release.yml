@@ -67,6 +67,6 @@ jobs:
           username: ${{ secrets.STEAM_ACCOUNT }}
           configVdf: ${{ secrets.STEAM_CONFIG_VDF }}
           appId: 294100
-          publishedFileId: 0
+          publishedFileId: 3414187030
           path: ws-upload
           changeNote: ${{ steps.read_changelog.outputs.changes_h }}

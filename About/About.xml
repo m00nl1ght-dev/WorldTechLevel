@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <packageId>m00nl1ght.WorldTechLevel</packageId>
-  <url>https://github.com/m00nl1ght-dev</url>
+  <url>https://github.com/m00nl1ght-dev/WorldTechLevel</url>
   <name>World Tech Level</name>
   <author>m00nl1ght</author>
-  <description>Limits all aspects of the generated world to the selected tech level.</description>
+  <description>Limits the level of technology available in the world. Filters out all game content above the desired tech level, which you can select on the world creation page.</description>
   <supportedVersions>
-	<li>1.5</li>
+	  <li>1.5</li>
   </supportedVersions>
   <modDependencies>
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
-	<li>ludeon.rimworld.ideology</li>
-	<li>ludeon.rimworld.anomaly</li>
+	  <li>ludeon.rimworld.ideology</li>
+	  <li>ludeon.rimworld.anomaly</li>
   </loadAfter>
 </ModMetaData>
