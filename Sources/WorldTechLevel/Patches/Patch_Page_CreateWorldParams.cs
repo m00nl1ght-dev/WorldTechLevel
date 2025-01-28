@@ -126,7 +126,9 @@ internal static class Patch_Page_CreateWorldParams
     {
         if (WorldTechLevel.Settings.Filter_Factions)
         {
-            var toRemove = instance.factions.Where(f => f.techLevel > WorldTechLevel.Current && f.displayInFactionSelection).ToList();
+            var toRemove = instance.factions
+                .Where(f => f.EffectiveTechLevel() > WorldTechLevel.Current && f.displayInFactionSelection)
+                .ToList();
 
             foreach (var faction in toRemove)
             {
@@ -135,7 +137,9 @@ internal static class Patch_Page_CreateWorldParams
             }
         }
 
-        var toAdd = _removedFactions.Where(f => f.techLevel <= WorldTechLevel.Current).ToList();
+        var toAdd = _removedFactions
+            .Where(f => f.EffectiveTechLevel() <= WorldTechLevel.Current)
+            .ToList();
 
         foreach (var faction in toAdd)
         {

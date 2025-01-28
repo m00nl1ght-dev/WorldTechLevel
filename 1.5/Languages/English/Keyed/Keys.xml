@@ -72,6 +72,7 @@
   <WorldTechLevel.Settings.DefListing.PawnKindDef>creatures</WorldTechLevel.Settings.DefListing.PawnKindDef>
   <WorldTechLevel.Settings.DefListing.BackstoryDef>backstories</WorldTechLevel.Settings.DefListing.BackstoryDef>
   <WorldTechLevel.Settings.DefListing.XenotypeDef>xenotypes</WorldTechLevel.Settings.DefListing.XenotypeDef>
+  <WorldTechLevel.Settings.DefListing.FactionDef>factions</WorldTechLevel.Settings.DefListing.FactionDef>
 
   <WorldTechLevel.Settings.DefListing.AnyContentSource>(any content source)</WorldTechLevel.Settings.DefListing.AnyContentSource>
 

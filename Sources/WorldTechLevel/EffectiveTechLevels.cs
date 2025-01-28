@@ -18,7 +18,7 @@ public static class EffectiveTechLevels
         TechLevelDatabase<TerrainDef>.Initialize(TerrainDef);
         TechLevelDatabase<TerrainDef>.ApplyOverrides();
 
-        TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
+        TechLevelDatabase<ResearchProjectDef>.Initialize(d => d.techLevel);
         TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
 
         TechLevelDatabase<IdeoPresetDef>.Initialize();
@@ -62,6 +62,9 @@ public static class EffectiveTechLevels
 
         TechLevelDatabase<XenotypeDef>.Initialize();
         TechLevelDatabase<XenotypeDef>.ApplyOverrides();
+
+        TechLevelDatabase<FactionDef>.Initialize(d => d.techLevel);
+        TechLevelDatabase<FactionDef>.ApplyOverrides();
 
         #if DEBUG
         WarnPawnKindFactionUsages();
@@ -136,11 +139,6 @@ public static class EffectiveTechLevels
                 _tmpList.Add(entry.thingDef.EffectiveTechLevel());
 
         return _tmpList.Max();
-    }
-
-    private static TechLevel ResearchProjectDef(ResearchProjectDef def)
-    {
-        return def.techLevel;
     }
 
     private static TechLevel PawnKindDef(PawnKindDef def)

@@ -52,7 +52,7 @@ public class BuildingMaterialUtility
 
     public static TerrainDef RandomAppropriateBasicFloorFor(Map map, Faction faction, bool allowCarpet)
     {
-        var techLevel = faction?.def.techLevel.ClampToWorld() ?? WorldTechLevel.Current;
+        var techLevel = faction?.def.EffectiveTechLevel().ClampToWorld() ?? WorldTechLevel.Current;
         var isCarpet = allowCarpet && !techLevel.IsNeolithicOrWorse() && Rand.Chance(0.1f);
 
         if (faction is { ideos: not null } && BaseGenUtility.IdeoFloorTypes(faction, isCarpet).TryRandomElement(out var result))

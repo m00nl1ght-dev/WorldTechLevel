@@ -32,7 +32,8 @@ internal static class Patch_BaseGenUtility
     private static bool CheapStuffFor_Prefix(ThingDef thingDef, Faction faction, ref ThingDef __result)
     {
         if (MapGenerator.mapBeingGenerated is not { } map) return true;
-        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, faction?.def.techLevel ?? TechLevel.Undefined);
+        var techLevel = faction?.def.EffectiveTechLevel() ?? TechLevel.Undefined;
+        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, techLevel);
         return __result == null;
     }
 
