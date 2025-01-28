@@ -16,6 +16,7 @@ internal static class Patch_WITab_Planet
 {
     [HarmonyPostfix]
     [HarmonyPatch("get_Desc")]
+    [HarmonyPriority(Priority.Low)]
     internal static void GetDesc_Postfix(ref string __result)
     {
         __result += "WorldTechLevel.TechLevel".Translate().CapitalizeFirst() + ": " + WorldTechLevel.Current.SelectionLabel() + "\n";
@@ -23,9 +24,9 @@ internal static class Patch_WITab_Planet
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(WITab_Planet.FillTab))]
-    internal static void FillTab_Postfix()
+    internal static void FillTab_Postfix(WITab_Planet __instance)
     {
-        var rect = new Rect(10f, WITab_Planet.WinSize.y - 40f, 200f, 30f);
+        var rect = new Rect(10f, __instance.size.y - 40f, 200f, 30f);
 
         if (Widgets.ButtonText(rect, "WorldTechLevel.ChangeTechLevel".Translate().CapitalizeFirst()))
         {

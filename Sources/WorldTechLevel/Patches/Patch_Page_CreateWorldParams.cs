@@ -21,7 +21,7 @@ internal static class Patch_Page_CreateWorldParams
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
-    internal static void ResetFactionCounts_Prefix(Page_CreateWorldParams __instance)
+    internal static void ResetFactionCounts_Prefix()
     {
         WorldTechLevel.Current = TechLevel.Archotech;
         _removedFactions.Clear();
@@ -31,19 +31,19 @@ internal static class Patch_Page_CreateWorldParams
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
-    internal static void ResetFactionCounts_Postfix(Page_CreateWorldParams __instance)
+    internal static void ResetFactionCounts_Postfix(ref List<FactionDef> ___factions, ref float ___pollution)
     {
         var factionTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
         if (factionTechLevel is < TechLevel.Industrial)
         {
             WorldTechLevel.Current = factionTechLevel.Value;
-            UpdateFactions(__instance);
+            ApplyChanges(___factions, ref ___pollution);
         }
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(nameof(Page_CreateWorldParams.CanDoNext))]
-    internal static bool CanDoNext_Prefix(Page_CreateWorldParams __instance, ref bool __result)
+    internal static bool CanDoNext_Prefix(Page __instance, ref bool __result)
     {
         var scenarioTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
         if (scenarioTechLevel != null && scenarioTechLevel > WorldTechLevel.Current && !_confirmedScenarioWarning)
@@ -71,9 +71,11 @@ internal static class Patch_Page_CreateWorldParams
     [HarmonyPatch(typeof(Page), nameof(Page.DoBack))]
     internal static void DoBack_Prefix(Page __instance)
     {
-        if (__instance is not Page_CreateWorldParams) return;
-        WorldTechLevel.Current = TechLevel.Archotech;
-        _removedFactions.Clear();
+        if (__instance is Page_CreateWorldParams or Page_SelectScenario)
+        {
+            WorldTechLevel.Current = TechLevel.Archotech;
+            _removedFactions.Clear();
+        }
     }
 
     [HarmonyTranspiler]
@@ -97,13 +99,18 @@ internal static class Patch_Page_CreateWorldParams
             .OnlyMatchAfter(patternPos)
             .MatchStore(typeof(Page_CreateWorldParams), "population").Keep()
             .Insert(OpCodes.Ldarg_0).Insert(ldlocPos).Insert(ldlocWidth)
-            .Insert(CodeInstruction.Call(typeof(Patch_Page_CreateWorldParams), nameof(DoExtraSliders)))
+            .Insert(CodeInstruction.Call(typeof(Patch_Page_CreateWorldParams), nameof(DoExtraWorldSettings)))
             .Insert(stlocPos);
 
         return TranspilerPattern.Apply(instructions, patternPos, pattern);
     }
 
-    internal static float DoExtraSliders(Page_CreateWorldParams instance, float pos, float width)
+    private static float DoExtraWorldSettings(Page_CreateWorldParams instance, float pos, float width)
+    {
+        return DoTechLevelSlider(instance.factions, ref instance.pollution, pos, width);
+    }
+
+    internal static float DoTechLevelSlider(List<FactionDef> factions, ref float pollution, float pos, float width)
     {
         pos += 40f;
 
@@ -117,22 +124,22 @@ internal static class Patch_Page_CreateWorldParams
         WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
 
         if (WorldTechLevel.Current != levelBefore)
-            UpdateFactions(instance);
+            ApplyChanges(factions, ref pollution);
 
         return pos;
     }
 
-    private static void UpdateFactions(Page_CreateWorldParams instance)
+    private static void ApplyChanges(List<FactionDef> factions, ref float pollution)
     {
         if (WorldTechLevel.Settings.Filter_Factions)
         {
-            var toRemove = instance.factions
+            var toRemove = factions
                 .Where(f => f.EffectiveTechLevel() > WorldTechLevel.Current && f.displayInFactionSelection)
                 .ToList();
 
             foreach (var faction in toRemove)
             {
-                instance.factions.Remove(faction);
+                factions.Remove(faction);
                 _removedFactions.Add(faction);
             }
         }
@@ -143,14 +150,14 @@ internal static class Patch_Page_CreateWorldParams
 
         foreach (var faction in toAdd)
         {
-            instance.factions.Add(faction);
+            factions.Add(faction);
             _removedFactions.Remove(faction);
         }
 
         if (WorldTechLevel.Current < TechLevel.Industrial && !_removedPollutionPreIndustrial)
         {
             _removedPollutionPreIndustrial = true;
-            instance.pollution = 0f;
+            pollution = 0f;
         }
     }
 }
