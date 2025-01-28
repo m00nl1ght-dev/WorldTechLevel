@@ -111,6 +111,11 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.Dropdown(layout.Abs(200f), _currentContentPack, _contentPacks, SelectMcp,
             d => d != null ? d.Name : Label("DefListing.AnyContentSource"));
 
+        if (LunarGUI.Button(layout.Abs(30f), "R"))
+        {
+            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(Label("DefListing.ConfirmResetAllInList"), ResetAllInList));
+        }
+
         layout.PushChanged();
 
         LunarGUI.TextField(layout.Rel(-1), ref _searchString);
@@ -266,6 +271,15 @@ public class WorldTechLevelSettings : LunarModSettings
         _currentDefs = enumerable.OrderBy(d => d.defName).ToList();
         _listingScrollPosition = Vector2.zero;
         _listingViewRect.height = 450f;
+    }
+
+    private void ResetAllInList()
+    {
+        foreach (var def in _currentDefs)
+            Overrides.Value.Remove($"{def.GetType().Name}:{def.defName}");
+
+        EffectiveTechLevels.Initialize();
+        _changedLevels = false;
     }
 
     public void ApplyChangesIfDirty()
