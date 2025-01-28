@@ -19,9 +19,22 @@ internal static class TechLevelDatabase<T> where T : Def
         var defs = DefDatabase<T>.AllDefsListForReading;
         var levels = new TechLevel[defs.Count];
 
+        DefDatabase<T>.SetIndices();
+
         if (func != null)
+        {
             for (int i = 0; i < defs.Count; i++)
-                levels[i] = func(defs[i]);
+            {
+                try
+                {
+                    levels[i] = func(defs[i]);
+                }
+                catch (Exception e)
+                {
+                    WorldTechLevel.Logger.Error($"Failed to determine tech level for {typeof(T).Name} {defs[i].defName}", e);
+                }
+            }
+        }
 
         Levels = levels;
 
