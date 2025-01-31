@@ -11,15 +11,15 @@ public static class EffectiveTechLevels
 
     internal static void Initialize()
     {
+        TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
+        TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
+
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
         TechLevelDatabase<ThingDef>.ApplyOverrides();
         TechLevelDatabase<ThingDef>.Apply(ThingDefSecondPass);
 
         TechLevelDatabase<TerrainDef>.Initialize(TerrainDef);
         TechLevelDatabase<TerrainDef>.ApplyOverrides();
-
-        TechLevelDatabase<ResearchProjectDef>.Initialize(d => d.techLevel);
-        TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
 
         TechLevelDatabase<IdeoPresetDef>.Initialize();
         TechLevelDatabase<IdeoPresetDef>.ApplyOverrides();
@@ -68,7 +68,32 @@ public static class EffectiveTechLevels
 
         #if DEBUG
         WarnPawnKindFactionUsages();
+        WarnResearchTechLevels();
         #endif
+    }
+
+    private static TechLevel ResearchProjectDef(ResearchProjectDef def)
+    {
+        if (def.prerequisites == null) return def.techLevel;
+
+        var techLevel = TechLevel.Undefined;
+        var queue = new Queue<ResearchProjectDef>();
+
+        queue.Enqueue(def);
+
+        while (queue.Count is > 0 and < 20)
+        {
+            var other = queue.Dequeue();
+
+            if (other.prerequisites != null)
+                foreach (var pre in other.prerequisites)
+                    queue.Enqueue(pre);
+
+            if (other.techLevel > techLevel)
+                techLevel = other.techLevel;
+        }
+
+        return techLevel;
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
@@ -76,7 +101,7 @@ public static class EffectiveTechLevels
         if (def is { generated: true, thingCategories: not null })
         {
             if (def.GetCompProperties<CompProperties_Techprint>() is { } techprint)
-                return techprint.project.techLevel;
+                return techprint.project.EffectiveTechLevel();
         }
 
         if (def is { techLevel: TechLevel.Archotech, thingCategories: not null })
@@ -93,16 +118,16 @@ public static class EffectiveTechLevels
 
         if (def.researchPrerequisites != null)
             foreach (var project in def.researchPrerequisites)
-                _tmpList.Add(project.techLevel);
+                _tmpList.Add(project.EffectiveTechLevel());
 
         if (def.recipeMaker != null)
         {
             if (def.recipeMaker.researchPrerequisite != null)
-                _tmpList.Add(def.recipeMaker.researchPrerequisite.techLevel);
+                _tmpList.Add(def.recipeMaker.researchPrerequisite.EffectiveTechLevel());
 
             if (def.recipeMaker.researchPrerequisites != null)
                 foreach (var project in def.recipeMaker.researchPrerequisites)
-                    _tmpList.Add(project.techLevel);
+                    _tmpList.Add(project.EffectiveTechLevel());
         }
 
         return _tmpList.Max();
@@ -194,6 +219,33 @@ public static class EffectiveTechLevels
                     WorldTechLevel.Logger.Warn(
                         $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +
                         $"is used by faction {faction.defName} with lower tech level ({faction.techLevel})"
+                    );
+                }
+            }
+        }
+    }
+
+    public static void WarnResearchTechLevels()
+    {
+        var queue = new Queue<ResearchProjectDef>();
+
+        foreach (var root in DefDatabase<ResearchProjectDef>.AllDefs)
+        {
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                var def = queue.Dequeue();
+
+                if (def.prerequisites != null)
+                    foreach (var pre in def.prerequisites)
+                        queue.Enqueue(pre);
+
+                if (def.techLevel > root.techLevel)
+                {
+                    WorldTechLevel.Logger.Warn(
+                        $"Research project {root.defName} ({root.techLevel}) " +
+                        $"has prerequisite {def.defName} with higher tech level ({def.techLevel})"
                     );
                 }
             }
