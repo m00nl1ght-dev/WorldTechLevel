@@ -11,8 +11,6 @@ namespace WorldTechLevel;
 
 public class WorldTechLevelSettings : LunarModSettings
 {
-    public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
-
     public readonly Entry<bool> Filter_Factions = MakeEntry(true);
     public readonly Entry<bool> Filter_Research = MakeEntry(true);
     public readonly Entry<bool> Filter_Items = MakeEntry(true);
@@ -36,6 +34,9 @@ public class WorldTechLevelSettings : LunarModSettings
     public readonly Entry<bool> Filter_WorldGenSteps = MakeEntry(true);
 
     public readonly Entry<Dictionary<string, TechLevel>> Overrides = MakeEntry(new Dictionary<string, TechLevel>());
+
+    public readonly Entry<bool> MarkThingDefsAsHidden = MakeEntry(false);
+    public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -188,6 +189,15 @@ public class WorldTechLevelSettings : LunarModSettings
 
     public void DoExperimentalSettingsTab(LayoutRect layout)
     {
+        layout.PushChanged();
+
+        LunarGUI.Checkbox(layout, ref MarkThingDefsAsHidden.Value, Label("MarkThingDefsAsHidden"));
+
+        if (layout.PopChanged())
+        {
+            _changedFilters = true;
+        }
+
         layout.PushChanged();
 
         LunarGUI.Checkbox(layout, ref AlwaysAllowOffworld.Value, Label("AlwaysAllowOffworld"));

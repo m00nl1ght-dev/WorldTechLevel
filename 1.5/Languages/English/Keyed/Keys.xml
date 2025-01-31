@@ -3,14 +3,13 @@
 
   <WorldTechLevel.Name>world tech level</WorldTechLevel.Name>
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
+  <WorldTechLevel.WorldTechLevel>world tech level</WorldTechLevel.WorldTechLevel>
   <WorldTechLevel.Unrestricted>unrestricted</WorldTechLevel.Unrestricted>
   <WorldTechLevel.ChangeTechLevel>change tech level</WorldTechLevel.ChangeTechLevel>
 
   <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
   <WorldTechLevel.Settings.Tab.Overrides>Overrides</WorldTechLevel.Settings.Tab.Overrides>
   <WorldTechLevel.Settings.Tab.Experimental>Experimental</WorldTechLevel.Settings.Tab.Experimental>
-
-  <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
 
   <WorldTechLevel.Settings.Filter_Factions>Factions</WorldTechLevel.Settings.Filter_Factions>
   <WorldTechLevel.Settings.Filter_Research>Research</WorldTechLevel.Settings.Filter_Research>
@@ -84,6 +83,9 @@
   <WorldTechLevel.Settings.TechLevelOption.Spacer>Allow at tech level Spacer or above</WorldTechLevel.Settings.TechLevelOption.Spacer>
   <WorldTechLevel.Settings.TechLevelOption.Ultra>Allow at tech level Ultra or above</WorldTechLevel.Settings.TechLevelOption.Ultra>
   <WorldTechLevel.Settings.TechLevelOption.Archotech>Allow at tech level Archotech</WorldTechLevel.Settings.TechLevelOption.Archotech>
+
+  <WorldTechLevel.Settings.MarkThingDefsAsHidden>Hide items in stockpile/storage settings and other places in the UI</WorldTechLevel.Settings.MarkThingDefsAsHidden>
+  <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
 
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nScenario: {1}\nWorld: {2}\n\nAre you sure?</WorldTechLevel.ScenarioWarning>
 
