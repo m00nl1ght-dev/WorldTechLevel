@@ -45,8 +45,8 @@ internal static class Patch_Page_CreateWorldParams
     [HarmonyPatch(nameof(Page_CreateWorldParams.CanDoNext))]
     internal static bool CanDoNext_Prefix(Page __instance, ref bool __result)
     {
-        var scenarioTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
-        if (scenarioTechLevel != null && scenarioTechLevel > WorldTechLevel.Current && !_confirmedScenarioWarning)
+        var scenarioTechLevel = ScenarioUtility.InherentResearchLevelFor(Find.Scenario);
+        if (scenarioTechLevel > WorldTechLevel.Current && !_confirmedScenarioWarning)
         {
             var msg = "WorldTechLevel.ScenarioWarning".Translate(
                 Find.Scenario.name, scenarioTechLevel.ToString(), WorldTechLevel.Current.ToString()

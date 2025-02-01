@@ -74,14 +74,14 @@ public static class EffectiveTechLevels
 
     private static TechLevel ResearchProjectDef(ResearchProjectDef def)
     {
-        if (def.prerequisites == null) return def.techLevel;
-
-        var techLevel = TechLevel.Undefined;
+        var level = TechLevel.Undefined;
         var queue = new Queue<ResearchProjectDef>();
 
         queue.Enqueue(def);
 
-        while (queue.Count is > 0 and < 20)
+        var iterations = 0;
+
+        while (queue.Count > 0 && iterations < 999)
         {
             var other = queue.Dequeue();
 
@@ -89,11 +89,20 @@ public static class EffectiveTechLevels
                 foreach (var pre in other.prerequisites)
                     queue.Enqueue(pre);
 
-            if (other.techLevel > techLevel)
-                techLevel = other.techLevel;
+            if (other.hiddenPrerequisites != null)
+                foreach (var pre in other.hiddenPrerequisites)
+                    queue.Enqueue(pre);
+
+            if (other.techLevel > level)
+                level = other.techLevel;
+
+            iterations++;
         }
 
-        return techLevel;
+        if (def.requiresMechanitor && level < TechLevel.Ultra)
+            level = TechLevel.Ultra;
+
+        return level;
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)
