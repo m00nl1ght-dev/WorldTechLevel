@@ -14,6 +14,7 @@ internal static class Patch_MemoryUtility
     internal static void ClearAllMapsAndWorld_Postfix()
     {
         WorldTechLevel.Current = TechLevel.Archotech;
-        ScenarioUtility.InherentResearchLevel = TechLevel.Undefined;
+        ResearchUtility.InitialResearchLevel = TechLevel.Undefined;
+        ResearchUtility.CurrentResearchLevel = TechLevel.Undefined;
     }
 }

@@ -23,7 +23,7 @@ public static class TechLevelUtility
 
     public static TechLevel PlayerResearchFilterLevel()
     {
-        return Max(WorldTechLevel.Current, ScenarioUtility.InherentResearchLevel);
+        return Max(WorldTechLevel.Current, ResearchUtility.InitialResearchLevel);
     }
 
     public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def

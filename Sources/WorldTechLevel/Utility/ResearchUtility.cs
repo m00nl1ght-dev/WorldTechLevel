@@ -4,20 +4,30 @@ using Verse;
 
 namespace WorldTechLevel;
 
-public static class ScenarioUtility
+public static class ResearchUtility
 {
-    public static TechLevel InherentResearchLevel = TechLevel.Undefined;
+    public static TechLevel InitialResearchLevel = TechLevel.Undefined;
+    public static TechLevel CurrentResearchLevel = TechLevel.Undefined;
 
     public static void InitializeFor(Scenario scenario)
     {
-        InherentResearchLevel = InherentResearchLevelFor(scenario);
+        InitialResearchLevel = CurrentResearchLevel = InitialResearchLevelFor(scenario);
+    }
+
+    public static void RefreshCurrentResearchLevel()
+    {
+        CurrentResearchLevel = DefDatabase<ResearchProjectDef>.AllDefs
+            .Where(r => r.IsFinished)
+            .Select(r => r.EffectiveTechLevel())
+            .Prepend(InitialResearchLevel)
+            .Max();
     }
 
     /// <summary>
     /// Determine the research tech level that the player faction from the given scenario
     /// should have access to at minimum, regardless of world tech level.
     /// </summary>
-    public static TechLevel InherentResearchLevelFor(Scenario scenario)
+    public static TechLevel InitialResearchLevelFor(Scenario scenario)
     {
         if (scenario == null)
         {

@@ -36,7 +36,7 @@ internal static class Patch_WorldGenerator
     internal static void GenerateWorld_Prefix()
     {
         Current.Game.TechLevel().WorldTechLevel = WorldTechLevel.Current;
-        ScenarioUtility.InitializeFor(Find.Scenario);
+        ResearchUtility.InitializeFor(Find.Scenario);
     }
 
     [HarmonyPrefix]
@@ -44,7 +44,8 @@ internal static class Patch_WorldGenerator
     internal static void GenerateWithoutWorldData_Prefix()
     {
         WorldTechLevel.Current = Current.Game.TechLevel().WorldTechLevel;
-        ScenarioUtility.InitializeFor(Find.Scenario);
+        ResearchUtility.InitializeFor(Find.Scenario);
+        ResearchUtility.RefreshCurrentResearchLevel();
     }
 
     [HarmonyPrefix]
@@ -52,7 +53,8 @@ internal static class Patch_WorldGenerator
     internal static void GenerateFromScribe_Prefix()
     {
         WorldTechLevel.Current = Current.Game.TechLevel().WorldTechLevel;
-        ScenarioUtility.InitializeFor(Find.Scenario);
+        ResearchUtility.InitializeFor(Find.Scenario);
+        ResearchUtility.RefreshCurrentResearchLevel();
     }
 
     internal static GameComponent_TechLevel TechLevel(this Game game)

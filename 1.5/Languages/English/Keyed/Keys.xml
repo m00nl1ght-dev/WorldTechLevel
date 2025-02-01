@@ -32,6 +32,7 @@
   <WorldTechLevel.Settings.Filter_MineableResources>Mineable resources</WorldTechLevel.Settings.Filter_MineableResources>
   <WorldTechLevel.Settings.Filter_GenSteps>Ancient debris</WorldTechLevel.Settings.Filter_GenSteps>
   <WorldTechLevel.Settings.Filter_WorldGenSteps>Asphalt roads</WorldTechLevel.Settings.Filter_WorldGenSteps>
+  <WorldTechLevel.Settings.Filter_UserInterface>User interface</WorldTechLevel.Settings.Filter_UserInterface>
 
   <WorldTechLevel.Settings.Filter_Factions.Hint>Filters factions based on the tech level defined by their author. Also applies to temporary factions generated for quests.</WorldTechLevel.Settings.Filter_Factions.Hint>
   <WorldTechLevel.Settings.Filter_Research.Hint>Filters research projects available to the player. Also filters the corresponding techprints.</WorldTechLevel.Settings.Filter_Research.Hint>
@@ -54,6 +55,7 @@
   <WorldTechLevel.Settings.Filter_MineableResources.Hint>Filters mineable ores generated on the map. For example, Compacted Components will not appear if the world's tech level is below Industrial. Also affects meteors.</WorldTechLevel.Settings.Filter_MineableResources.Hint>
   <WorldTechLevel.Settings.Filter_GenSteps.Hint>Filters ancient structures and debris on the map, such as derelict vehicles, mechanoid parts and other junk.</WorldTechLevel.Settings.Filter_GenSteps.Hint>
   <WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>Prevents asphalt roads from being generated into the world if tech level is below Industrial.</WorldTechLevel.Settings.Filter_WorldGenSteps.Hint>
+  <WorldTechLevel.Settings.Filter_UserInterface.Hint>Filters items displayed in stockpile settings and other places in the user interface. In some places, the items will appear as "(undiscovered)" or grouped into an "Undiscovered" category.</WorldTechLevel.Settings.Filter_UserInterface.Hint>
 
   <WorldTechLevel.Settings.DefListing.TerrainDef>floors</WorldTechLevel.Settings.DefListing.TerrainDef>
   <WorldTechLevel.Settings.DefListing.ResearchProjectDef>research projects</WorldTechLevel.Settings.DefListing.ResearchProjectDef>
@@ -87,7 +89,6 @@
   <WorldTechLevel.Settings.TechLevelOption.Ultra>Allow at tech level Ultra or above</WorldTechLevel.Settings.TechLevelOption.Ultra>
   <WorldTechLevel.Settings.TechLevelOption.Archotech>Allow at tech level Archotech</WorldTechLevel.Settings.TechLevelOption.Archotech>
 
-  <WorldTechLevel.Settings.MarkThingDefsAsHidden>Hide items in stockpile/storage settings and other places in the UI</WorldTechLevel.Settings.MarkThingDefsAsHidden>
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
 
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nScenario: {1}\nWorld: {2}\n\nAre you sure?</WorldTechLevel.ScenarioWarning>
