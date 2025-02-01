@@ -38,6 +38,7 @@ internal static class Patch_PawnGenerator
 
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
+    [PatchExcludedFromConflictCheck]
     [HarmonyPatch(nameof(PawnGenerator.GeneratePawn), [typeof(PawnGenerationRequest)])]
     private static void GeneratePawn_Prefix(ref PawnGenerationRequest request)
     {
@@ -47,6 +48,7 @@ internal static class Patch_PawnGenerator
 
     [HarmonyPrefix]
     [HarmonyPriority(Priority.Low)]
+    [PatchExcludedFromConflictCheck]
     [HarmonyPatch(nameof(PawnGenerator.RedressPawn))]
     private static void RedressPawn_Prefix(ref PawnGenerationRequest request)
     {

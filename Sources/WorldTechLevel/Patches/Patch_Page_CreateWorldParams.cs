@@ -36,7 +36,7 @@ internal static class Patch_Page_CreateWorldParams
         var factionTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
         if (factionTechLevel is < TechLevel.Industrial)
         {
-            WorldTechLevel.Current = factionTechLevel.Value;
+            WorldTechLevel.Current = TechLevelUtility.Max(factionTechLevel.Value, TechLevel.Neolithic);
             ApplyChanges(___factions, ref ___pollution);
         }
     }
