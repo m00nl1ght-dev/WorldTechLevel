@@ -11,8 +11,9 @@ public static class EffectiveTechLevels
 
     internal static void Initialize()
     {
-        TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDef);
+        TechLevelDatabase<ResearchProjectDef>.Initialize(ResearchProjectDefFirstPass);
         TechLevelDatabase<ResearchProjectDef>.ApplyOverrides();
+        TechLevelDatabase<ResearchProjectDef>.Apply(ResearchProjectDefSecondPass);
 
         TechLevelDatabase<ThingDef>.Initialize(ThingDefFirstPass);
         TechLevelDatabase<ThingDef>.ApplyOverrides();
@@ -72,9 +73,16 @@ public static class EffectiveTechLevels
         #endif
     }
 
-    private static TechLevel ResearchProjectDef(ResearchProjectDef def)
+    private static TechLevel ResearchProjectDefFirstPass(ResearchProjectDef def)
     {
-        var level = TechLevel.Undefined;
+        if (def.requiresMechanitor && def.techLevel < TechLevel.Ultra)
+            return TechLevel.Ultra;
+
+        return def.techLevel;
+    }
+
+    private static TechLevel ResearchProjectDefSecondPass(ResearchProjectDef def, TechLevel techLevel)
+    {
         var queue = new Queue<ResearchProjectDef>();
 
         queue.Enqueue(def);
@@ -93,16 +101,13 @@ public static class EffectiveTechLevels
                 foreach (var pre in other.hiddenPrerequisites)
                     queue.Enqueue(pre);
 
-            if (other.techLevel > level)
-                level = other.techLevel;
+            if (other.EffectiveTechLevel() > techLevel)
+                techLevel = other.techLevel;
 
             iterations++;
         }
 
-        if (def.requiresMechanitor && level < TechLevel.Ultra)
-            level = TechLevel.Ultra;
-
-        return level;
+        return techLevel;
     }
 
     private static TechLevel ThingDefFirstPass(ThingDef def)

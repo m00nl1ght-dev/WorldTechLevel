@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_ResearchProjectDefs</defName>
+        <defType>ResearchProjectDef</defType>
+        <entries>
+            <li>
+                <defName>AdvancedFabrication</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Gunlink</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>WastepackAtomizer</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Archogenetics</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>
