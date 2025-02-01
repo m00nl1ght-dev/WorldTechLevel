@@ -64,4 +64,11 @@ public static class TechLevelUtility
             ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
             : techLevel.ToStringHuman().CapitalizeFirst();
     }
+
+    public static string RevSelectionLabel(this TechLevel techLevel)
+    {
+        return techLevel == TechLevel.Undefined
+            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
+            : techLevel.ToStringHuman().CapitalizeFirst();
+    }
 }

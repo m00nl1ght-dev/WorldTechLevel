@@ -112,9 +112,42 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.Dropdown(layout.Abs(200f), _currentContentPack, _contentPacks, SelectMcp,
             d => d != null ? d.Name : Label("DefListing.AnyContentSource"));
 
-        if (LunarGUI.Button(layout.Abs(30f), "R"))
+        if (LunarGUI.Button(layout.Abs(30f), "~"))
         {
-            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(Label("DefListing.ConfirmResetAllInList"), ResetAllInList));
+            var options = new List<FloatMenuOption>();
+
+            foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+            {
+                if (value != TechLevel.Animal)
+                {
+                    options.Add(new FloatMenuOption("WorldTechLevel.Settings.DefListing.SetAllInList".Translate(value.RevSelectionLabel()), () =>
+                        Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(Label("DefListing.ConfirmSetAllInList"), SetAllInList))));
+
+                    void SetAllInList()
+                    {
+                        foreach (var def in _currentDefs)
+                        {
+                            _currentListing.SetLevelFor(def, value);
+                            Overrides.Value[$"{def.GetType().Name}:{def.defName}"] = value;
+                        }
+                    }
+                }
+            }
+
+            options.Add(new FloatMenuOption(Label("DefListing.ResetAllInList"), () =>
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(Label("DefListing.ConfirmResetAllInList"), ResetAllInList))));
+
+            void ResetAllInList()
+            {
+                foreach (var def in _currentDefs)
+                    Overrides.Value.Remove($"{def.GetType().Name}:{def.defName}");
+
+                EffectiveTechLevels.Initialize();
+                RefreshResearchViewWidth();
+                _changedLevels = false;
+            }
+
+            Find.WindowStack.Add(new FloatMenu(options));
         }
 
         layout.PushChanged();
@@ -283,16 +316,6 @@ public class WorldTechLevelSettings : LunarModSettings
         _listingViewRect.height = 450f;
     }
 
-    private void ResetAllInList()
-    {
-        foreach (var def in _currentDefs)
-            Overrides.Value.Remove($"{def.GetType().Name}:{def.defName}");
-
-        EffectiveTechLevels.Initialize();
-        RefreshResearchViewWidth();
-        _changedLevels = false;
-    }
-
     public void ApplyChangesIfDirty()
     {
         if (_changedLevels)
@@ -312,7 +335,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
     public static void RefreshResearchViewWidth()
     {
-        if (MainButtonDefOf.Research.TabWindow is MainTabWindow_Research researchTab)
+        if (Current.Game != null && MainButtonDefOf.Research.TabWindow is MainTabWindow_Research researchTab)
             researchTab.rightViewWidth = researchTab.ViewSize(researchTab.CurTab).x;
     }
 

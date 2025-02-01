@@ -74,6 +74,9 @@
   <WorldTechLevel.Settings.DefListing.FactionDef>factions</WorldTechLevel.Settings.DefListing.FactionDef>
 
   <WorldTechLevel.Settings.DefListing.AnyContentSource>(any content source)</WorldTechLevel.Settings.DefListing.AnyContentSource>
+  <WorldTechLevel.Settings.DefListing.SetAllInList>Set all listed defs to {0}</WorldTechLevel.Settings.DefListing.SetAllInList>
+  <WorldTechLevel.Settings.DefListing.ResetAllInList>Reset all listed defs to default</WorldTechLevel.Settings.DefListing.ResetAllInList>
+  <WorldTechLevel.Settings.DefListing.ConfirmSetAllInList>Do you really want to override the tech level for all the currently listed defs?</WorldTechLevel.Settings.DefListing.ConfirmSetAllInList>
   <WorldTechLevel.Settings.DefListing.ConfirmResetAllInList>Do you really want to reset all the currently listed defs to default?</WorldTechLevel.Settings.DefListing.ConfirmResetAllInList>
 
   <WorldTechLevel.Settings.TechLevelOption.Undefined>Allow at any tech level</WorldTechLevel.Settings.TechLevelOption.Undefined>
