@@ -42,6 +42,9 @@ internal static class Patch_PawnBioAndNameGenerator
 
     private static IEnumerable<BackstoryDef> FilteredBackstories(IEnumerable<BackstoryDef> original, Pawn pawn, BackstorySlot slot)
     {
+        if (pawn.story.childhood == null && slot == BackstorySlot.Adulthood)
+            return original;
+
         var filtered = original.FilterByEffectiveTechLevel(pawn.GenFilterTechLevel());
         if (filtered.Any(bs => bs.slot == slot)) return filtered;
 

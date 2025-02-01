@@ -336,7 +336,10 @@ public class WorldTechLevelSettings : LunarModSettings
     public static void RefreshResearchViewWidth()
     {
         if (Current.Game != null && MainButtonDefOf.Research.TabWindow is MainTabWindow_Research researchTab)
+        {
+            researchTab.cachedVisibleResearchProjects = null;
             researchTab.rightViewWidth = researchTab.ViewSize(researchTab.CurTab).x;
+        }
     }
 
     public interface IDefListing
