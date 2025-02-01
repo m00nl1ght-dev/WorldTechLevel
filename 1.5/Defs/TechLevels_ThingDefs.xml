@@ -136,6 +136,59 @@
                 <techLevel>Industrial</techLevel>
                 <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
             </li>
+            <li>
+                <defName>Xenogerm</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>HumanOvum</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>HumanEmbryo</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>DeathrestCapacitySerum</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Wastepack</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>SubcoreRegular</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SubcoreHigh</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SignalChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PowerfocusChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>NanostructuringChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>MechanoidTransponder</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ChunkMechanoidSlag</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Shard</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
 
             <!-- VFEE -->
 
