@@ -92,4 +92,8 @@
 
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nScenario: {1}\nWorld: {2}\n\nAre you sure?</WorldTechLevel.ScenarioWarning>
 
+  <WorldTechLevel.AddFactions.Message>New factions are available at this tech level. Select factions to add:</WorldTechLevel.AddFactions.Message>
+  <WorldTechLevel.AddFactions.Success>Successfully added {0} new factions.</WorldTechLevel.AddFactions.Success>
+  <WorldTechLevel.AddFactions.Error>Failed to add faction: {0}</WorldTechLevel.AddFactions.Error>
+
 </LanguageData>

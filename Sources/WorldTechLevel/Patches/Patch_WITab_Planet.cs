@@ -26,6 +26,8 @@ internal static class Patch_WITab_Planet
     [HarmonyPatch(nameof(WITab_Planet.FillTab))]
     internal static void FillTab_Postfix(WITab_Planet __instance)
     {
+        if (Current.ProgramState != ProgramState.Playing) return;
+
         var rect = new Rect(10f, __instance.size.y - 40f, 200f, 30f);
 
         if (Widgets.ButtonText(rect, "WorldTechLevel.ChangeTechLevel".Translate().CapitalizeFirst()))
@@ -40,9 +42,13 @@ internal static class Patch_WITab_Planet
 
                     void SetLevel()
                     {
+                        var prevLevel = WorldTechLevel.Current;
+
                         WorldTechLevel.Current = value;
                         Current.Game.TechLevel().WorldTechLevel = value;
+
                         WorldTechLevelSettings.RefreshResearchViewWidth();
+                        Window_AddFactions.OpenIfAnyAvailable(prevLevel);
                     }
                 }
             }
