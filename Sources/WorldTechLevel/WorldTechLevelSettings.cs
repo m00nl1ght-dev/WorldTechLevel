@@ -289,6 +289,7 @@ public class WorldTechLevelSettings : LunarModSettings
             Overrides.Value.Remove($"{def.GetType().Name}:{def.defName}");
 
         EffectiveTechLevels.Initialize();
+        RefreshResearchViewWidth();
         _changedLevels = false;
     }
 
@@ -297,14 +298,22 @@ public class WorldTechLevelSettings : LunarModSettings
         if (_changedLevels)
         {
             EffectiveTechLevels.Initialize();
+            RefreshResearchViewWidth();
             _changedLevels = false;
         }
 
         if (_changedFilters)
         {
             WorldTechLevel.FiltersPatchGroup.ReApply();
+            RefreshResearchViewWidth();
             _changedFilters = false;
         }
+    }
+
+    public static void RefreshResearchViewWidth()
+    {
+        if (MainButtonDefOf.Research.TabWindow is MainTabWindow_Research researchTab)
+            researchTab.rightViewWidth = researchTab.ViewSize(researchTab.CurTab).x;
     }
 
     public interface IDefListing

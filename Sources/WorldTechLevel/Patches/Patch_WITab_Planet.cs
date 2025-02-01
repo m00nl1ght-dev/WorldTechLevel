@@ -42,6 +42,7 @@ internal static class Patch_WITab_Planet
                     {
                         WorldTechLevel.Current = value;
                         Current.Game.TechLevel().WorldTechLevel = value;
+                        WorldTechLevelSettings.RefreshResearchViewWidth();
                     }
                 }
             }
