@@ -4,6 +4,7 @@
         <defName>WTL_XenotypeDefs</defName>
         <defType>XenotypeDef</defType>
         <entries>
+
             <li>
                 <defName>Hussar</defName>
                 <techLevel>Industrial</techLevel>
@@ -20,6 +21,22 @@
                 <defName>Genie</defName>
                 <techLevel>Spacer</techLevel>
             </li>
+
+            <!-- VE -->
+
+            <li>
+                <defName>VREA_AndroidBasic</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>VREA_AndroidAwakened</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>VRE_Archon</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
