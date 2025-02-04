@@ -25,6 +25,11 @@ public class ModCompat_RealisticPlanets : ModCompat
             _originPos += 40f;
         }
 
+        if (AccessTools.TypeByName("GeologicalLandforms.WorldTileInfo") != null)
+        {
+            _originPos -= 40f;
+        }
+
         return true;
     }
 
