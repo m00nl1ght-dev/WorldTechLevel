@@ -67,6 +67,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<FactionDef>.Initialize(d => d.techLevel);
         TechLevelDatabase<FactionDef>.ApplyOverrides();
 
+        TechLevelDatabase<RaidStrategyDef>.Initialize();
+        TechLevelDatabase<RaidStrategyDef>.ApplyOverrides();
+
         TechLevelDatabase<RuleDef>.Initialize();
         TechLevelDatabase<RuleDef>.ApplyOverrides();
 

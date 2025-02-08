@@ -75,6 +75,7 @@
   <WorldTechLevel.Settings.DefListing.BackstoryDef>backstories</WorldTechLevel.Settings.DefListing.BackstoryDef>
   <WorldTechLevel.Settings.DefListing.XenotypeDef>xenotypes</WorldTechLevel.Settings.DefListing.XenotypeDef>
   <WorldTechLevel.Settings.DefListing.FactionDef>factions</WorldTechLevel.Settings.DefListing.FactionDef>
+  <WorldTechLevel.Settings.DefListing.RaidStrategyDef>raid strategies</WorldTechLevel.Settings.DefListing.RaidStrategyDef>
 
   <WorldTechLevel.Settings.DefListing.AnyContentSource>(any content source)</WorldTechLevel.Settings.DefListing.AnyContentSource>
   <WorldTechLevel.Settings.DefListing.SetAllInList>Set all listed defs to {0}</WorldTechLevel.Settings.DefListing.SetAllInList>
