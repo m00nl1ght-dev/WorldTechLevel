@@ -68,6 +68,7 @@
   <WorldTechLevel.Settings.DefListing.SitePartDef>quest site parts</WorldTechLevel.Settings.DefListing.SitePartDef>
   <WorldTechLevel.Settings.DefListing.ComplexThreatDef>quest threats</WorldTechLevel.Settings.DefListing.ComplexThreatDef>
   <WorldTechLevel.Settings.DefListing.GenStepDef>map generation</WorldTechLevel.Settings.DefListing.GenStepDef>
+  <WorldTechLevel.Settings.DefListing.RuleDef>structure generation</WorldTechLevel.Settings.DefListing.RuleDef>
   <WorldTechLevel.Settings.DefListing.WorldGenStepDef>world generation</WorldTechLevel.Settings.DefListing.WorldGenStepDef>
   <WorldTechLevel.Settings.DefListing.TraitDef>traits</WorldTechLevel.Settings.DefListing.TraitDef>
   <WorldTechLevel.Settings.DefListing.PawnKindDef>creatures</WorldTechLevel.Settings.DefListing.PawnKindDef>

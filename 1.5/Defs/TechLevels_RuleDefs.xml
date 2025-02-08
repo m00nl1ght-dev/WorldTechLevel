@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_RuleDefs</defName>
+        <defType>RuleDef</defType>
+        <entries>
+            <li>
+                <defName>SleepingMechanoids</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>AncientComplex_Interior_SleepingMechanoids</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+        </entries>
+        <alternatives>
+            <li>
+                <targets>
+                    <li>AncientComplex_Interior_SleepingMechanoids</li>
+                </targets>
+                <options>
+                    <li><weight>1.0</weight><defName>AncientComplex_Interior_SleepingInsects</defName></li>
+                    <li><weight>1.0</weight><defName>AncientComplex_Interior_SleepingAncientSoldiers</defName></li>
+                </options>
+            </li>
+        </alternatives>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

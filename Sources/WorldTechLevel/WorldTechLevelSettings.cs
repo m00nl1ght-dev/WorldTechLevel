@@ -46,6 +46,7 @@ public class WorldTechLevelSettings : LunarModSettings
     private ModContentPack _currentContentPack;
     private List<Def> _currentDefs = [];
     private string _searchString = "";
+    private bool _anyDefLabels;
 
     private readonly LayoutRect _listingLayout;
     private Vector2 _listingScrollPosition;
@@ -177,8 +178,16 @@ public class WorldTechLevelSettings : LunarModSettings
             GUI.DrawTexture(_listingLayout, TexUI.HighlightTex);
             GUI.color = Color.white;
 
-            LunarGUI.Label(_listingLayout.Abs(300f).MoveBy(7f, 4f), def.defName);
-            LunarGUI.Label(_listingLayout.Abs(300f).MoveBy(7f, 4f), def.label);
+            if (_anyDefLabels)
+            {
+                LunarGUI.Label(_listingLayout.Abs(300f).MoveBy(7f, 4f), def.defName);
+                LunarGUI.Label(_listingLayout.Abs(300f).MoveBy(7f, 4f), def.label);
+            }
+            else
+            {
+                LunarGUI.Label(_listingLayout.Abs(610f).MoveBy(7f, 4f), def.defName);
+            }
+
             LunarGUI.Label(_listingLayout.Abs(300f).MoveBy(7f, 4f), techLevel == TechLevel.Undefined
                 ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
                 : techLevel.ToStringHuman().CapitalizeFirst());
@@ -252,6 +261,7 @@ public class WorldTechLevelSettings : LunarModSettings
         _listings.Add(new DefListing<QuestScriptDef>());
         _listings.Add(new DefListing<SitePartDef>());
         _listings.Add(new DefListing<GenStepDef>());
+        _listings.Add(new DefListing<RuleDef>());
         _listings.Add(new DefListing<WorldGenStepDef>());
         _listings.Add(new DefListing<TraitDef>());
         _listings.Add(new DefListing<PawnKindDef>());
@@ -303,6 +313,7 @@ public class WorldTechLevelSettings : LunarModSettings
             .Where(d => d.defName.ToLower().Contains(_searchString) || (d.label != null && d.label.ToLower().Contains(_searchString)));
 
         _currentDefs = enumerable.OrderBy(d => d.defName).ToList();
+        _anyDefLabels = _currentDefs.Any(d => d.label is { Length: > 0 });
         _listingScrollPosition = Vector2.zero;
         _listingViewRect.height = 450f;
     }

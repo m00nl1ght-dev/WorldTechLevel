@@ -67,6 +67,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<FactionDef>.Initialize(d => d.techLevel);
         TechLevelDatabase<FactionDef>.ApplyOverrides();
 
+        TechLevelDatabase<RuleDef>.Initialize();
+        TechLevelDatabase<RuleDef>.ApplyOverrides();
+
         #if DEBUG
         WarnPawnKindFactionUsages();
         WarnResearchTechLevels();
