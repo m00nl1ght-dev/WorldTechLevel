@@ -4,6 +4,7 @@
         <defName>WTL_QuestScriptDefs</defName>
         <defType>QuestScriptDef</defType>
         <entries>
+
             <li>
                 <defName>Util_MechCluster</defName>
                 <techLevel>Ultra</techLevel>
@@ -42,6 +43,18 @@
                 <techLevel>Industrial</techLevel>
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
             </li>
+
+            <!-- Alpha Series -->
+
+            <li>
+                <defName>AG_OpportunitySite_AbandonedBiotechLab</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Abooks_OpportunitySite_RuinedLibrary</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
