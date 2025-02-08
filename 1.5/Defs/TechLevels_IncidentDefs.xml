@@ -4,6 +4,7 @@
         <defName>WTL_IncidentDefs</defName>
         <defType>IncidentDef</defType>
         <entries>
+
             <li>
                 <defName>MechCluster</defName>
                 <techLevel>Ultra</techLevel>
@@ -97,6 +98,38 @@
                 <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
                 <offworld>true</offworld>
             </li>
+
+            <!-- VEE -->
+
+            <li>
+                <defName>VEE_SpaceBattle</defName>
+                <techLevel>Spacer</techLevel>
+                <offworld>true</offworld>
+            </li>
+            <li>
+                <defName>VEE_ShuttleCrash</defName>
+                <techLevel>Spacer</techLevel>
+                <offworld>true</offworld>
+            </li>
+            <li>
+                <defName>VEE_AnimalPodCrash</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+                <offworld>true</offworld>
+            </li>
+            <li>
+                <defName>VEE_Cargopodsweapons</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+                <offworld>true</offworld>
+            </li>
+            <li>
+                <defName>VEE_Cargopodsapparel</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+                <offworld>true</offworld>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
