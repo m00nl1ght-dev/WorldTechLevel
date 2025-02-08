@@ -77,6 +77,10 @@
   <WorldTechLevel.Settings.DefListing.FactionDef>factions</WorldTechLevel.Settings.DefListing.FactionDef>
   <WorldTechLevel.Settings.DefListing.RaidStrategyDef>raid strategies</WorldTechLevel.Settings.DefListing.RaidStrategyDef>
 
+  <WorldTechLevel.Settings.DefListing.ShowAll>Show with and without user override</WorldTechLevel.Settings.DefListing.ShowAll>
+  <WorldTechLevel.Settings.DefListing.ShowOnlyNonDefault>Show only defs with user override</WorldTechLevel.Settings.DefListing.ShowOnlyNonDefault>
+  <WorldTechLevel.Settings.DefListing.SortByName>Sort by name</WorldTechLevel.Settings.DefListing.SortByName>
+  <WorldTechLevel.Settings.DefListing.SortByTechLevel>Sort by tech level</WorldTechLevel.Settings.DefListing.SortByTechLevel>
   <WorldTechLevel.Settings.DefListing.AnyContentSource>(any content source)</WorldTechLevel.Settings.DefListing.AnyContentSource>
   <WorldTechLevel.Settings.DefListing.SetAllInList>Set all listed defs to {0}</WorldTechLevel.Settings.DefListing.SetAllInList>
   <WorldTechLevel.Settings.DefListing.ResetAllInList>Reset all listed defs to default</WorldTechLevel.Settings.DefListing.ResetAllInList>
@@ -90,6 +94,7 @@
   <WorldTechLevel.Settings.TechLevelOption.Spacer>Allow at tech level Spacer or above</WorldTechLevel.Settings.TechLevelOption.Spacer>
   <WorldTechLevel.Settings.TechLevelOption.Ultra>Allow at tech level Ultra or above</WorldTechLevel.Settings.TechLevelOption.Ultra>
   <WorldTechLevel.Settings.TechLevelOption.Archotech>Allow at tech level Archotech</WorldTechLevel.Settings.TechLevelOption.Archotech>
+  <WorldTechLevel.Settings.TechLevelOption.Reset>Reset to default</WorldTechLevel.Settings.TechLevelOption.Reset>
 
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
 

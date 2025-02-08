@@ -46,6 +46,8 @@ public class WorldTechLevelSettings : LunarModSettings
     private ModContentPack _currentContentPack;
     private List<Def> _currentDefs = [];
     private string _searchString = "";
+    private bool _showOnlyNonDefault;
+    private bool _sortByTechLevel;
     private bool _anyDefLabels;
 
     private readonly LayoutRect _listingLayout;
@@ -129,7 +131,7 @@ public class WorldTechLevelSettings : LunarModSettings
                         foreach (var def in _currentDefs)
                         {
                             _currentListing.SetLevelFor(def, value);
-                            Overrides.Value[$"{def.GetType().Name}:{def.defName}"] = value;
+                            Overrides.Value[KeyFor(def)] = value;
                         }
                     }
                 }
@@ -138,14 +140,26 @@ public class WorldTechLevelSettings : LunarModSettings
             options.Add(new FloatMenuOption(Label("DefListing.ResetAllInList"), () =>
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(Label("DefListing.ConfirmResetAllInList"), ResetAllInList))));
 
+            options.Add(new FloatMenuOption(Label(_showOnlyNonDefault ? "DefListing.ShowAll" : "DefListing.ShowOnlyNonDefault"), () =>
+            {
+                _showOnlyNonDefault = !_showOnlyNonDefault;
+                UpdateListing();
+            }));
+
+            options.Add(new FloatMenuOption(Label(_sortByTechLevel ? "DefListing.SortByName" : "DefListing.SortByTechLevel"), () =>
+            {
+                _sortByTechLevel = !_sortByTechLevel;
+                if (_sortByTechLevel && _changedLevels) ApplyLevels();
+                UpdateListing();
+            }));
+
             void ResetAllInList()
             {
                 foreach (var def in _currentDefs)
-                    Overrides.Value.Remove($"{def.GetType().Name}:{def.defName}");
+                    Overrides.Value.Remove(KeyFor(def));
 
-                EffectiveTechLevels.Initialize();
-                RefreshResearchViewWidth();
-                _changedLevels = false;
+                ApplyLevels();
+                UpdateListing();
             }
 
             Find.WindowStack.Add(new FloatMenu(options));
@@ -211,9 +225,17 @@ public class WorldTechLevelSettings : LunarModSettings
                             void SetOverride()
                             {
                                 _currentListing.SetLevelFor(def, value);
-                                Overrides.Value[$"{def.GetType().Name}:{def.defName}"] = value;
+                                Overrides.Value[KeyFor(def)] = value;
                             }
                         }
+                    }
+
+                    options.Add(new FloatMenuOption(Label("TechLevelOption.Reset"), ResetOverride));
+
+                    void ResetOverride()
+                    {
+                        Overrides.Value.Remove(KeyFor(def));
+                        ApplyLevels();
                     }
 
                     Find.WindowStack.Add(new FloatMenu(options));
@@ -312,7 +334,15 @@ public class WorldTechLevelSettings : LunarModSettings
         if (_searchString.Length > 0) enumerable = enumerable
             .Where(d => d.defName.ToLower().Contains(_searchString) || (d.label != null && d.label.ToLower().Contains(_searchString)));
 
-        _currentDefs = enumerable.OrderBy(d => d.defName).ToList();
+        if (_showOnlyNonDefault) enumerable = enumerable
+            .Where(d => Overrides.Value.ContainsKey(KeyFor(d)));
+
+        if (_sortByTechLevel)
+            enumerable = enumerable.OrderByDescending(d => _currentListing.GetLevelFor(d)).ThenBy(d => d.defName);
+        else
+            enumerable = enumerable.OrderBy(d => d.defName);
+
+        _currentDefs = enumerable.ToList();
         _anyDefLabels = _currentDefs.Any(d => d.label is { Length: > 0 });
         _listingScrollPosition = Vector2.zero;
         _listingViewRect.height = 450f;
@@ -322,17 +352,27 @@ public class WorldTechLevelSettings : LunarModSettings
     {
         if (_changedLevels)
         {
-            EffectiveTechLevels.Initialize();
-            RefreshResearchViewWidth();
-            _changedLevels = false;
+            ApplyLevels();
         }
 
         if (_changedFilters)
         {
-            WorldTechLevel.FiltersPatchGroup.ReApply();
-            RefreshResearchViewWidth();
-            _changedFilters = false;
+            ApplyFilters();
         }
+    }
+
+    private void ApplyLevels()
+    {
+        EffectiveTechLevels.Initialize();
+        RefreshResearchViewWidth();
+        _changedLevels = false;
+    }
+
+    private void ApplyFilters()
+    {
+        WorldTechLevel.FiltersPatchGroup.ReApply();
+        RefreshResearchViewWidth();
+        _changedFilters = false;
     }
 
     public static void RefreshResearchViewWidth()
@@ -342,6 +382,11 @@ public class WorldTechLevelSettings : LunarModSettings
             researchTab.cachedVisibleResearchProjects = null;
             researchTab.rightViewWidth = researchTab.ViewSize(researchTab.CurTab).x;
         }
+    }
+
+    private static string KeyFor(Def def)
+    {
+        return $"{def.GetType().Name}:{def.defName}";
     }
 
     public interface IDefListing
