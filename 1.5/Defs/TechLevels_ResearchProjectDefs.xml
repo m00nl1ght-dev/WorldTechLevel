@@ -4,6 +4,7 @@
         <defName>WTL_ResearchProjectDefs</defName>
         <defType>ResearchProjectDef</defType>
         <entries>
+
             <li>
                 <defName>AdvancedFabrication</defName>
                 <techLevel>Spacer</techLevel>
@@ -20,6 +21,15 @@
                 <defName>Archogenetics</defName>
                 <techLevel>Archotech</techLevel>
             </li>
+
+            <!-- Medieval Overhaul -->
+
+            <li>
+                <!-- implicitly included in TribalStart because it is prerequisite of RecurveBow -->
+                <defName>DankPyon_Lumber</defName>
+                <techLevel>Neolithic</techLevel>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
