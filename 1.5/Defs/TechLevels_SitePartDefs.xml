@@ -36,6 +36,22 @@
                 <defName>EMIDynamo</defName>
                 <techLevel>Spacer</techLevel>
             </li>
+            <li>
+                <defName>MechCluster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>MechClusterForceNoConditionCauser</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SleepingMechanoids</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Turrets</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
