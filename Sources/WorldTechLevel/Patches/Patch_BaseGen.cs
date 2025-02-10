@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 using LunarFramework.Patching;
@@ -14,6 +15,30 @@ internal static class Patch_BaseGen
 {
     [HarmonyPrepare]
     private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_GenSteps;
+
+    private static readonly Dictionary<FactionDef, TechLevel> _originalTechLevels = [];
+
+    [HarmonyPrefix]
+    [HarmonyPriority(Priority.Low)]
+    [HarmonyPatch(nameof(BaseGen.Generate))]
+    private static void Generate_Prefix()
+    {
+        foreach (var def in DefDatabase<FactionDef>.AllDefs.Where(f => !f.isPlayer))
+        {
+            _originalTechLevels[def] = def.techLevel;
+            def.techLevel = TechLevelUtility.Min(def.techLevel, WorldTechLevel.Current);
+        }
+    }
+
+    [HarmonyFinalizer]
+    [HarmonyPatch(nameof(BaseGen.Generate))]
+    private static void Generate_Finalizer()
+    {
+        foreach (var def in DefDatabase<FactionDef>.AllDefs.Where(f => !f.isPlayer))
+        {
+            def.techLevel = _originalTechLevels[def];
+        }
+    }
 
     [HarmonyTranspiler]
     [HarmonyPatch(nameof(BaseGen.Resolve))]
