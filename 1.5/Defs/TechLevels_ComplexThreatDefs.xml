@@ -8,6 +8,10 @@
                 <defName>SleepingMechanoids</defName>
                 <techLevel>Ultra</techLevel>
             </li>
+            <li>
+                <defName>MechDrop</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>

@@ -72,6 +72,7 @@ All filters are optional and can be toggled on/off in the mod settings. If all f
 - **Mineable resources**: Filters mineable ores generated on the map. For example, Compacted Components will not appear if the world's tech level is below Industrial. Also affects meteors.
 - **Ancient debris**: Filters ancient structures and debris on the map, such as derelict vehicles, mechanoid parts and other junk.
 - **Asphalt roads**: Prevents asphalt roads from being generated into the world if tech level is below Industrial.
+- **User interface**: Filters items displayed in stockpile settings and other places in the user interface.
 
 
 # Customization
@@ -108,7 +109,7 @@ The preview image contains graphics from [vecteezy.com](https://www.vecteezy.com
 # Links
 
 Steam Workshop:
-TBD
+https://steamcommunity.com/sharedfiles/filedetails/?id=3414187030
 
 
 # License

@@ -17,7 +17,6 @@ internal static class Patch_PawnAddictionHediffsGenerator
     [HarmonyPatch(nameof(PawnAddictionHediffsGenerator.PossibleWithTechLevel))]
     private static bool PossibleWithTechLevel_Prefix(ChemicalDef chemical, Faction faction, ref bool __result)
     {
-        if (faction != null && faction.def.techLevel <= WorldTechLevel.Current) return true;
         if (Current.ProgramState == ProgramState.Entry && faction is { IsPlayer: true }) return true;
 
         __result = PawnAddictionHediffsGenerator.allDrugs
