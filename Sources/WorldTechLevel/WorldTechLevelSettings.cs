@@ -231,12 +231,15 @@ public class WorldTechLevelSettings : LunarModSettings
                         }
                     }
 
-                    options.Add(new FloatMenuOption(Label("TechLevelOption.Reset"), ResetOverride));
-
-                    void ResetOverride()
+                    if (Overrides.Value.ContainsKey(KeyFor(def)))
                     {
-                        Overrides.Value.Remove(KeyFor(def));
-                        ApplyLevels();
+                        options.Add(new FloatMenuOption(Label("TechLevelOption.Reset"), ResetOverride));
+
+                        void ResetOverride()
+                        {
+                            Overrides.Value.Remove(KeyFor(def));
+                            ApplyLevels();
+                        }
                     }
 
                     Find.WindowStack.Add(new FloatMenu(options));
@@ -266,28 +269,33 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.Checkbox(layout, ref AlwaysDefaultToUnrestricted.Value, Label("AlwaysDefaultToUnrestricted"));
     }
 
+    private readonly string[] _excludedThingCategories = [
+        "Animals", "Corpses", "Chunks", "Plants"
+    ];
+
+    private readonly string[] _excludedWorldGenSteps = [
+        "Components", "Factions", "Terrain"
+    ];
+
+    private readonly string[] _excludedMapGenSteps = [
+        "Terrain", "Fog"
+    ];
+
     private void SetupListings()
     {
         _listings = [];
 
-        ThingCategoryDef[] excluded = [
-            ThingCategoryDefOf.Animals,
-            ThingCategoryDefOf.Corpses,
-            ThingCategoryDefOf.Chunks,
-            WorldTechLevel_DefOf.Plants
-        ];
-
-        foreach (var categoryDef in ThingCategoryDefOf.Root.childCategories.Except(excluded))
-            _listings.Add(new ThingDefCategoryListing(categoryDef));
+        foreach (var categoryDef in ThingCategoryDefOf.Root.childCategories)
+            if (!_excludedThingCategories.Contains(categoryDef.defName))
+                _listings.Add(new ThingDefCategoryListing(categoryDef));
 
         _listings.Add(new DefListing<TerrainDef>(d => d.BuildableByPlayer));
         _listings.Add(new DefListing<ResearchProjectDef>());
         _listings.Add(new DefListing<IncidentDef>());
         _listings.Add(new DefListing<QuestScriptDef>());
         _listings.Add(new DefListing<SitePartDef>());
-        _listings.Add(new DefListing<GenStepDef>());
-        _listings.Add(new DefListing<RuleDef>());
-        _listings.Add(new DefListing<WorldGenStepDef>());
+        _listings.Add(new DefListing<GenStepDef>(d => !_excludedMapGenSteps.Contains(d.defName)));
+        _listings.Add(new DefListing<WorldGenStepDef>(d => !_excludedWorldGenSteps.Contains(d.defName)));
         _listings.Add(new DefListing<TraitDef>());
         _listings.Add(new DefListing<PawnKindDef>());
         _listings.Add(new DefListing<BackstoryDef>());
@@ -299,7 +307,6 @@ public class WorldTechLevelSettings : LunarModSettings
             _listings.Add(new DefListing<MemeDef>());
             _listings.Add(new DefListing<PreceptDef>());
             _listings.Add(new DefListing<RitualAttachableOutcomeEffectDef>());
-            _listings.Add(new DefListing<ComplexThreatDef>());
         }
 
         if (ModsConfig.BiotechActive)

@@ -7,5 +7,4 @@ namespace WorldTechLevel;
 public static class WorldTechLevel_DefOf
 {
     public static ThingCategoryDef InertRelics;
-    public static ThingCategoryDef Plants;
 }

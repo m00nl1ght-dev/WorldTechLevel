@@ -69,7 +69,7 @@
   <WorldTechLevel.Settings.DefListing.IncidentDef>incidents</WorldTechLevel.Settings.DefListing.IncidentDef>
   <WorldTechLevel.Settings.DefListing.QuestScriptDef>quests</WorldTechLevel.Settings.DefListing.QuestScriptDef>
   <WorldTechLevel.Settings.DefListing.SitePartDef>quest site parts</WorldTechLevel.Settings.DefListing.SitePartDef>
-  <WorldTechLevel.Settings.DefListing.ComplexThreatDef>quest threats</WorldTechLevel.Settings.DefListing.ComplexThreatDef>
+  <WorldTechLevel.Settings.DefListing.ComplexThreatDef>complex threats</WorldTechLevel.Settings.DefListing.ComplexThreatDef>
   <WorldTechLevel.Settings.DefListing.GenStepDef>map generation</WorldTechLevel.Settings.DefListing.GenStepDef>
   <WorldTechLevel.Settings.DefListing.RuleDef>structure generation</WorldTechLevel.Settings.DefListing.RuleDef>
   <WorldTechLevel.Settings.DefListing.WorldGenStepDef>world generation</WorldTechLevel.Settings.DefListing.WorldGenStepDef>
