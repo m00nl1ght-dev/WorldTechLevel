@@ -70,6 +70,9 @@ public static class EffectiveTechLevels
         TechLevelDatabase<RaidStrategyDef>.Initialize();
         TechLevelDatabase<RaidStrategyDef>.ApplyOverrides();
 
+        TechLevelDatabase<PawnsArrivalModeDef>.Initialize(d => d.minTechLevel);
+        TechLevelDatabase<PawnsArrivalModeDef>.ApplyOverrides();
+
         TechLevelDatabase<RuleDef>.Initialize();
         TechLevelDatabase<RuleDef>.ApplyOverrides();
 

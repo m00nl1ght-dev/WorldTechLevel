@@ -5,8 +5,8 @@ using RimWorld;
 namespace WorldTechLevel.Patches;
 
 [PatchGroup("Filters")]
-[HarmonyPatch(typeof(RaidStrategyWorker))]
-internal static class Patch_RaidStrategyWorker
+[HarmonyPatch(typeof(PawnsArrivalModeWorker))]
+internal static class Patch_PawnsArrivalModeWorker
 {
     [HarmonyPrepare]
     private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Incidents;
@@ -14,7 +14,7 @@ internal static class Patch_RaidStrategyWorker
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(RaidStrategyWorker.CanUseWith))]
-    internal static void CanUseWith_Postfix(RaidStrategyWorker __instance, IncidentParms parms, ref bool __result)
+    internal static void CanUseWith_Postfix(PawnsArrivalModeWorker __instance, IncidentParms parms, ref bool __result)
     {
         if (__result && __instance.def.EffectiveTechLevel() > WorldTechLevel.Current)
         {
