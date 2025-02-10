@@ -12,7 +12,7 @@
 
   <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
   <WorldTechLevel.Settings.Tab.Overrides>Overrides</WorldTechLevel.Settings.Tab.Overrides>
-  <WorldTechLevel.Settings.Tab.Experimental>Experimental</WorldTechLevel.Settings.Tab.Experimental>
+  <WorldTechLevel.Settings.Tab.Misc>Misc</WorldTechLevel.Settings.Tab.Misc>
 
   <WorldTechLevel.Settings.Filter_Factions>Factions</WorldTechLevel.Settings.Filter_Factions>
   <WorldTechLevel.Settings.Filter_Research>Research</WorldTechLevel.Settings.Filter_Research>
@@ -100,6 +100,7 @@
   <WorldTechLevel.Settings.TechLevelOption.Reset>Reset to default</WorldTechLevel.Settings.TechLevelOption.Reset>
 
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
+  <WorldTechLevel.Settings.AlwaysDefaultToUnrestricted>Always default world tech level slider to Unrestricted regardless of scenario</WorldTechLevel.Settings.AlwaysDefaultToUnrestricted>
 
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nAre you sure?\n\nScenario: {1}\nWorld: {2}\n\nStarting research from scenario:\n\n{3}</WorldTechLevel.ScenarioWarning>
 

@@ -33,18 +33,21 @@ internal static class Patch_Page_CreateWorldParams
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
     internal static void ResetFactionCounts_Postfix(ref List<FactionDef> ___factions, ref float ___pollution)
     {
-        var scenPart = Find.Scenario?.parts.OfType<ScenPart_WorldTechLevel>().FirstOrDefault();
-        var scenarioTechLevel = ResearchUtility.InitialResearchLevelFor(Find.Scenario);
+        if (!WorldTechLevel.Settings.AlwaysDefaultToUnrestricted)
+        {
+            var scenPart = Find.Scenario?.parts.OfType<ScenPart_WorldTechLevel>().FirstOrDefault();
+            var scenarioTechLevel = ResearchUtility.InitialResearchLevelFor(Find.Scenario);
 
-        if (scenPart is { defaultWorldTechLevel: >= TechLevel.Neolithic })
-        {
-            WorldTechLevel.Current = scenPart.defaultWorldTechLevel;
-            ApplyChanges(___factions, ref ___pollution);
-        }
-        else if (scenarioTechLevel is not TechLevel.Undefined and < TechLevel.Industrial)
-        {
-            WorldTechLevel.Current = TechLevelUtility.Max(scenarioTechLevel, TechLevel.Neolithic);
-            ApplyChanges(___factions, ref ___pollution);
+            if (scenPart is { defaultWorldTechLevel: >= TechLevel.Neolithic })
+            {
+                WorldTechLevel.Current = scenPart.defaultWorldTechLevel;
+                ApplyChanges(___factions, ref ___pollution);
+            }
+            else if (scenarioTechLevel is not TechLevel.Undefined and < TechLevel.Industrial)
+            {
+                WorldTechLevel.Current = TechLevelUtility.Max(scenarioTechLevel, TechLevel.Neolithic);
+                ApplyChanges(___factions, ref ___pollution);
+            }
         }
     }
 

@@ -37,6 +37,7 @@ public class WorldTechLevelSettings : LunarModSettings
     public readonly Entry<Dictionary<string, TechLevel>> Overrides = MakeEntry(new Dictionary<string, TechLevel>());
 
     public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
+    public readonly Entry<bool> AlwaysDefaultToUnrestricted = MakeEntry(false);
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -61,7 +62,7 @@ public class WorldTechLevelSettings : LunarModSettings
     {
         MakeTab("Tab.Filters", DoFiltersSettingsTab);
         MakeTab("Tab.Overrides", DoOverridesSettingsTab);
-        MakeTab("Tab.Experimental", DoExperimentalSettingsTab);
+        MakeTab("Tab.Misc", DoMiscSettingsTab);
 
         _listingLayout = new LayoutRect(WorldTechLevel.LunarAPI);
     }
@@ -251,7 +252,7 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.EndScrollView();
     }
 
-    public void DoExperimentalSettingsTab(LayoutRect layout)
+    public void DoMiscSettingsTab(LayoutRect layout)
     {
         layout.PushChanged();
 
@@ -261,6 +262,8 @@ public class WorldTechLevelSettings : LunarModSettings
         {
             _changedLevels = true;
         }
+
+        LunarGUI.Checkbox(layout, ref AlwaysDefaultToUnrestricted.Value, Label("AlwaysDefaultToUnrestricted"));
     }
 
     private void SetupListings()
