@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -27,7 +28,7 @@ public static class ResearchUtility
     /// Determine the research tech level that the player faction from the given scenario
     /// should have access to at minimum, regardless of world tech level.
     /// </summary>
-    public static TechLevel InitialResearchLevelFor(Scenario scenario)
+    public static TechLevel InitialResearchLevelFor(Scenario scenario, List<ResearchProjectDef> outStartingResearch = null)
     {
         if (scenario == null)
         {
@@ -40,10 +41,19 @@ public static class ResearchUtility
 
         // check starting research from player faction
         if (scenario.playerFaction.factionDef.startingResearchTags is { } startingResearchTags)
+        {
             foreach (var startingResearchTag in startingResearchTags)
+            {
                 foreach (var project in DefDatabase<ResearchProjectDef>.AllDefs)
+                {
                     if (project.HasTag(startingResearchTag))
+                    {
                         techLevel = TechLevelUtility.Max(techLevel, project.EffectiveTechLevel());
+                        outStartingResearch?.AddDistinct(project);
+                    }
+                }
+            }
+        }
 
         // check scenario parts
         foreach (var part in scenario.parts)
@@ -52,6 +62,7 @@ public static class ResearchUtility
             {
                 // starting research from scenario may imply higher tech level
                 techLevel = TechLevelUtility.Max(techLevel, startingResearch.project.EffectiveTechLevel());
+                outStartingResearch?.AddDistinct(startingResearch.project);
             }
             else if (part is ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs configPage)
             {

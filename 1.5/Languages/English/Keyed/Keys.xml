@@ -7,6 +7,9 @@
   <WorldTechLevel.Unrestricted>unrestricted</WorldTechLevel.Unrestricted>
   <WorldTechLevel.ChangeTechLevel>change tech level</WorldTechLevel.ChangeTechLevel>
 
+  <WorldTechLevel.Faction.CurrentTechLevel>current tech level</WorldTechLevel.Faction.CurrentTechLevel>
+  <WorldTechLevel.Faction.OriginalTechLevel>original tech level</WorldTechLevel.Faction.OriginalTechLevel>
+
   <WorldTechLevel.Settings.Tab.Filters>Filters</WorldTechLevel.Settings.Tab.Filters>
   <WorldTechLevel.Settings.Tab.Overrides>Overrides</WorldTechLevel.Settings.Tab.Overrides>
   <WorldTechLevel.Settings.Tab.Experimental>Experimental</WorldTechLevel.Settings.Tab.Experimental>
@@ -98,7 +101,7 @@
 
   <WorldTechLevel.Settings.AlwaysAllowOffworld>Allow technology obtained from space to exceed the world's tech level</WorldTechLevel.Settings.AlwaysAllowOffworld>
 
-  <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nScenario: {1}\nWorld: {2}\n\nAre you sure?</WorldTechLevel.ScenarioWarning>
+  <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nAre you sure?\n\nScenario: {1}\nWorld: {2}\n\nStarting research from scenario:\n\n{3}</WorldTechLevel.ScenarioWarning>
 
   <WorldTechLevel.AddFactions.Message>New factions are available at this tech level. Select factions to add:</WorldTechLevel.AddFactions.Message>
   <WorldTechLevel.AddFactions.Success>Successfully added {0} new factions.</WorldTechLevel.AddFactions.Success>

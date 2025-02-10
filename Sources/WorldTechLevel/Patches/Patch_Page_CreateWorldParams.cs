@@ -33,10 +33,17 @@ internal static class Patch_Page_CreateWorldParams
     [HarmonyPatch(nameof(Page_CreateWorldParams.ResetFactionCounts))]
     internal static void ResetFactionCounts_Postfix(ref List<FactionDef> ___factions, ref float ___pollution)
     {
-        var factionTechLevel = Find.Scenario?.playerFaction?.factionDef?.techLevel;
-        if (factionTechLevel is < TechLevel.Industrial)
+        var scenPart = Find.Scenario?.parts.OfType<ScenPart_WorldTechLevel>().FirstOrDefault();
+        var scenarioTechLevel = ResearchUtility.InitialResearchLevelFor(Find.Scenario);
+
+        if (scenPart is { defaultWorldTechLevel: >= TechLevel.Neolithic })
         {
-            WorldTechLevel.Current = TechLevelUtility.Max(factionTechLevel.Value, TechLevel.Neolithic);
+            WorldTechLevel.Current = scenPart.defaultWorldTechLevel;
+            ApplyChanges(___factions, ref ___pollution);
+        }
+        else if (scenarioTechLevel is not TechLevel.Undefined and < TechLevel.Industrial)
+        {
+            WorldTechLevel.Current = TechLevelUtility.Max(scenarioTechLevel, TechLevel.Neolithic);
             ApplyChanges(___factions, ref ___pollution);
         }
     }
@@ -45,11 +52,17 @@ internal static class Patch_Page_CreateWorldParams
     [HarmonyPatch(nameof(Page_CreateWorldParams.CanDoNext))]
     internal static bool CanDoNext_Prefix(Page __instance, ref bool __result)
     {
-        var scenarioTechLevel = ResearchUtility.InitialResearchLevelFor(Find.Scenario);
+        var startingResearch = new List<ResearchProjectDef>();
+        var scenarioTechLevel = ResearchUtility.InitialResearchLevelFor(Find.Scenario, startingResearch);
+
         if (scenarioTechLevel > WorldTechLevel.Current && !_confirmedScenarioWarning)
         {
+            var researchStr = startingResearch
+                .OrderByDescending(p => p.techLevel)
+                .Join(p => $"{p.label.CapitalizeFirst()} ({p.EffectiveTechLevel().ToStringHuman()})", "\n");
+
             var msg = "WorldTechLevel.ScenarioWarning".Translate(
-                Find.Scenario.name, scenarioTechLevel.ToString(), WorldTechLevel.Current.ToString()
+                Find.Scenario.name, scenarioTechLevel.ToString(), WorldTechLevel.Current.ToString(), researchStr
             );
 
             Find.WindowStack.Add(new Dialog_MessageBox(msg, "Confirm".Translate(), Confirm, "Cancel".Translate()));
