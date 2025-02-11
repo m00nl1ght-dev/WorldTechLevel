@@ -1,4 +1,20 @@
 
+v1.1.1
+
+- Added default tech levels for events from 'Vanilla Events Expanded'
+- Added default tech levels for xenotypes from VRE Android and VRE Archon
+- Added filtering for raid strategies and arrival modes (drop pods, sieges)
+- Added scenario part that can be used to pre-configure world's tech level
+- Added mod option to ignore pre-configured tech level from scenario
+- Added some filtering and sorting options to the Overrides tab
+- Fixed filtering of quests manually triggered by mods (e.g. Alpha Genes)
+- Fixed issue with mechanoids as guards in relic quest sites
+- Fixed filtering of turrets and electrical devices in quest sites
+- Fixed detection of scenario tech levels when Medieval Overhaul is present
+- Fixed UI overlap of world tech level slider when many world gen mods present
+- Fixed Royal Ascent quest issue when no Industrial+ factions present
+- Fixed filtering of resources/loot at work sites
+
 v1.1.0
 
 - Factions can now be retroactively added when changing the world tech level in an ongoing game
