@@ -130,6 +130,13 @@
                 <offworld>true</offworld>
             </li>
 
+            <!-- VFED -->
+
+            <li>
+                <defName>VFED_GiveQuest_ChasedDeserter</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
