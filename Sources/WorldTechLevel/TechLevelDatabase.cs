@@ -120,8 +120,8 @@ internal static class TechLevelDatabase<T> where T : Def
         var overrides = DefDatabase<TechLevelConfigDef>.AllDefs
             .Where(d => d.defType == typeof(T) && d.entries != null)
             .SelectMany(d => d.entries)
-            .Where(d => d.unlessModPresent == null || !ModsConfig.IsActive(d.unlessModPresent))
-            .Where(d => d.ifModPresent == null || ModsConfig.IsActive(d.ifModPresent))
+            .Where(d => d.unlessModPresent == null || !IsModActive(d.unlessModPresent))
+            .Where(d => d.ifModPresent == null || IsModActive(d.ifModPresent))
             .Where(d => !d.offworld || !WorldTechLevel.Settings.AlwaysAllowOffworld)
             .OrderBy(e => e.priority);
 
@@ -174,6 +174,11 @@ internal static class TechLevelDatabase<T> where T : Def
             this.def = def;
             this.weight = weight;
         }
+    }
+
+    private static bool IsModActive(string packageId)
+    {
+        return ModsConfig.IsActive(packageId) || ModsConfig.IsActive(packageId + "_steam");
     }
 
     private static readonly List<string> DebugExcludedPrefixes = [

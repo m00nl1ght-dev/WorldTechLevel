@@ -18,6 +18,6 @@ internal static class Patch_ThingSetMakerUtility
     [HarmonyPatch(nameof(ThingSetMakerUtility.GetAllowedThingDefs))]
     internal static void GetAllowedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {
-        __result = __result.FilterByEffectiveTechLevel();
+        __result = __result.FilterWithAlternatives();
     }
 }

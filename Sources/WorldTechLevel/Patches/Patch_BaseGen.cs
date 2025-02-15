@@ -68,21 +68,7 @@ internal static class Patch_BaseGen
     {
         if (rulesRef != null && rulesRef.Any(d => d.EffectiveTechLevel() > WorldTechLevel.Current))
         {
-            List<RuleDef> outRules = [];
-
-            foreach (var original in rulesRef)
-            {
-                if (original.EffectiveTechLevel() <= WorldTechLevel.Current)
-                {
-                    outRules.Add(original);
-                }
-                else if (original.GetAlternative() is { } replacement)
-                {
-                    outRules.Add(replacement);
-                }
-            }
-
-            rulesRef = outRules;
+            rulesRef = rulesRef.FilterWithAlternatives().ToList();
         }
     }
 }

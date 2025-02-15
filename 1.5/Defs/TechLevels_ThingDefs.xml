@@ -189,6 +189,11 @@
                 <defName>Shard</defName>
                 <techLevel>Archotech</techLevel>
             </li>
+            <li>
+                <defName>Schematic</defName>
+                <techLevel>Industrial</techLevel>
+                <ifModPresent>dankpyon.medieval.overhaul</ifModPresent>
+            </li>
 
             <!-- VFEE -->
 
@@ -309,6 +314,15 @@
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>Apparel_PlateArmor</defName></li>
                     <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Schematic</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Schematic</defName></li>
                 </options>
             </li>
         </alternatives>
