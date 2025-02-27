@@ -1,4 +1,12 @@
 
+v1.1.2
+
+- Add filtering for Schematic book contents
+- Added support for 'Real Ruins' (ruin contents are now filtered)
+- Added compatibility patch for the 'Better Research Tabs' mod
+- Added compatibility patch for the 'Research Powl' mod
+- Added default tech level for VFED scheduled quest
+
 v1.1.1
 
 - Added default tech levels for events from 'Vanilla Events Expanded'

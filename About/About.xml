@@ -17,6 +17,7 @@
   </loadAfter>
   <incompatibleWith>
     <li>ogam.rimedieval</li>
+    <li>sickboywi.medieval.vanilla</li>
     <li>mlie.removeindustrialstuff</li>
     <li>mlie.removemedievalstuff</li>
     <li>mlie.removespacerstuff</li>
