@@ -45,7 +45,7 @@ public class WorldTechLevelSettings : LunarModSettings
     private IDefListing _currentListing;
     private List<ModContentPack> _contentPacks;
     private ModContentPack _currentContentPack;
-    private List<Def> _currentDefs = [];
+    private List<Def> _currentDefs;
     private string _searchString = "";
     private bool _showOnlyNonDefault;
     private bool _sortByTechLevel;
@@ -108,6 +108,7 @@ public class WorldTechLevelSettings : LunarModSettings
     public void DoOverridesSettingsTab(LayoutRect layout)
     {
         if (_listings == null) SetupListings();
+        if (_currentDefs == null) UpdateListing();
 
         layout.BeginAbs(28f, new LayoutParams { Horizontal = true, Spacing = 10f });
 
@@ -369,6 +370,8 @@ public class WorldTechLevelSettings : LunarModSettings
         {
             ApplyFilters();
         }
+
+        _currentDefs = null;
     }
 
     private void ApplyLevels()
@@ -425,6 +428,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         public IEnumerable<Def> BuildDefList()
         {
+            TechLevelDatabase<T>.EnsureInitialized();
             return _filter == null ? DefDatabase<T>.AllDefs : DefDatabase<T>.AllDefs.Where(d => _filter(d));
         }
 
@@ -459,6 +463,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         public IEnumerable<Def> BuildDefList()
         {
+            TechLevelDatabase<ThingDef>.EnsureInitialized();
             return Category.DescendantThingDefs.Where(d => ExcludedPrefixes.All(p => !d.defName.StartsWith(p)));
         }
 
