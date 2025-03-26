@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -7,6 +8,9 @@ namespace WorldTechLevel;
 
 public static class TechLevelUtility
 {
+    public static readonly IReadOnlyList<TechLevel> AllSelectableTechLevels = Enum.GetValues(typeof(TechLevel))
+        .Cast<TechLevel>().Where(tl => tl > TechLevel.Animal).ToList();
+
     public static TechLevel Max(TechLevel a, TechLevel b) => a > b ? a : b;
 
     public static TechLevel Min(TechLevel a, TechLevel b) => a < b ? a : b;

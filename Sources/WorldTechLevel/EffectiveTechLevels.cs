@@ -202,8 +202,15 @@ public static class EffectiveTechLevels
         if (!def.shuffleable)
             return TechLevel.Undefined;
 
-        if (def.spawnCategories?.Contains("Tribal") ?? false)
-            return TechLevel.Neolithic;
+        if (def.spawnCategories != null)
+        {
+            if (def.spawnCategories.Contains("Tribal"))
+                return TechLevel.Neolithic;
+
+            foreach (var value in TechLevelUtility.AllSelectableTechLevels)
+                if (def.spawnCategories.Contains(value.ToString()))
+                    return value;
+        }
 
         var title = def.untranslatedTitle?.ToLower() ?? "";
         var desc = def.untranslatedDesc?.ToLower() ?? "";

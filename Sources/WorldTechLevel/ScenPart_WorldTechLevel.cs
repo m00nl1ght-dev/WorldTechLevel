@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 
@@ -19,14 +18,9 @@ public class ScenPart_WorldTechLevel : ScenPart
     {
         if (Widgets.ButtonText(listing.GetScenPartRect(this, RowHeight), this.defaultWorldTechLevel.SelectionLabel()))
         {
-            var options = new List<FloatMenuOption>();
-
-            foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
-            {
-                var techLevelLocal = techLevel;
-                if (techLevelLocal <= TechLevel.Animal) continue;
-                options.Add(new FloatMenuOption(techLevelLocal.SelectionLabel(), () => this.defaultWorldTechLevel = techLevelLocal));
-            }
+            var options = TechLevelUtility.AllSelectableTechLevels
+                .Select(tl => new FloatMenuOption(tl.SelectionLabel(), () => this.defaultWorldTechLevel = tl))
+                .ToList();
 
             Find.WindowStack.Add(new FloatMenu(options));
         }

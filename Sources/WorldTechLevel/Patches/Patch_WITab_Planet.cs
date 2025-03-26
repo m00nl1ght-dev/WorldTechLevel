@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using HarmonyLib;
 using LunarFramework.Patching;
-using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
@@ -34,22 +31,19 @@ internal static class Patch_WITab_Planet
         {
             var options = new List<FloatMenuOption>();
 
-            foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+            foreach (var value in TechLevelUtility.AllSelectableTechLevels)
             {
-                if (value > TechLevel.Animal)
+                options.Add(new FloatMenuOption(value.SelectionLabel(), SetLevel));
+
+                void SetLevel()
                 {
-                    options.Add(new FloatMenuOption(value.SelectionLabel(), SetLevel));
+                    var prevLevel = WorldTechLevel.Current;
 
-                    void SetLevel()
-                    {
-                        var prevLevel = WorldTechLevel.Current;
+                    WorldTechLevel.Current = value;
+                    Current.Game.TechLevel().WorldTechLevel = value;
 
-                        WorldTechLevel.Current = value;
-                        Current.Game.TechLevel().WorldTechLevel = value;
-
-                        WorldTechLevelSettings.RefreshResearchViewWidth();
-                        Window_AddFactions.OpenIfAnyAvailable(prevLevel);
-                    }
+                    WorldTechLevelSettings.RefreshResearchViewWidth();
+                    Window_AddFactions.OpenIfAnyAvailable(prevLevel);
                 }
             }
 
