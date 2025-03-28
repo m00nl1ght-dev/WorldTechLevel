@@ -86,6 +86,7 @@ public static class ReplacementUtility
             if (!ApparelUtility.HasPartsToWear(owner, def)) return false;
             if (!owner.apparel.CanWearWithoutDroppingAnything(def)) return false;
             if (!thing.def.apparel.bodyPartGroups.Intersect(def.apparel.bodyPartGroups).Any()) return false;
+            if (!thing.def.apparel.layers.Intersect(def.apparel.layers).Any()) return false;
             return def.apparel.PawnCanWear(owner);
         }
 

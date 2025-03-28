@@ -299,23 +299,7 @@
             </li>
             <li>
                 <categories>
-                    <li>ApparelMisc</li>
-                    <li>ApparelNoble</li>
-                </categories>
-                <options>
-                    <!-- Medieval -->
-                    <li><weight>1.0</weight><defName>Apparel_BasicShirt</defName></li>
-                    <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
-                    <li><weight>1.0</weight><defName>Apparel_KidShirt</defName></li>
-                    <li><weight>1.0</weight><defName>Apparel_KidPants</defName></li>
-                    <!-- Neolithic -->
-                    <li><weight>1.0</weight><defName>Apparel_TribalA</defName></li>
-                    <li><weight>1.0</weight><defName>Apparel_KidTribal</defName></li>
-                </options>
-            </li>
-            <li>
-                <categories>
-                    <li>ApparelArmor</li>
+                    <li>Apparel</li>
                 </categories>
                 <options>
                     <!-- Industrial -->
@@ -324,7 +308,13 @@
                     <li><weight>1.0</weight><defName>Apparel_FlakPants</defName></li>
                     <!-- Medieval -->
                     <li><weight>1.0</weight><defName>Apparel_PlateArmor</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_BasicShirt</defName></li>
                     <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidShirt</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidPants</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>Apparel_TribalA</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidTribal</defName></li>
                 </options>
             </li>
             <li>
