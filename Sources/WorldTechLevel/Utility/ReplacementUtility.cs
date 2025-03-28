@@ -42,8 +42,10 @@ public static class ReplacementUtility
     public static Thing TryMakeReplacementFor(Thing thing, Pawn owner = null)
     {
         var newDef = thing.def;
+        var minLevel = TechLevel.Undefined;
 
-        var minLevel = TechLevelUtility.Min(WorldTechLevel.Current, TechLevel.Medieval);
+        if (thing.def.IsApparel && WorldTechLevel.Current > TechLevel.Neolithic)
+            minLevel = TechLevel.Medieval;
 
         if (thing.def.EffectiveTechLevel() > WorldTechLevel.Current)
             newDef = thing.def.GetAlternative(WorldTechLevel.Current, minLevel, owner == null ? null : ApparelValidator);
