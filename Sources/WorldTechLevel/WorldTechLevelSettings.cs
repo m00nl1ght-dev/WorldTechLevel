@@ -385,6 +385,7 @@ public class WorldTechLevelSettings : LunarModSettings
     private void ApplyFilters()
     {
         WorldTechLevel.FiltersPatchGroup.ReApply();
+        WorldTechLevel.CompatPatchGroup.ReApply();
         RefreshResearchViewWidth();
         _changedFilters = false;
         LogFilterInfo();
