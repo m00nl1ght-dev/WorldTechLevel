@@ -63,7 +63,8 @@ internal static class Patch_PawnGenerator
         if (kindDef == null || kindDef.EffectiveTechLevel() <= WorldTechLevel.Current) return null;
         if (request.Context == PawnGenerationContext.PlayerStarter) return null;
 
-        var alternative = kindDef.GetAlternative();
+        var minLevel = TechLevelUtility.Min(WorldTechLevel.Current, TechLevel.Medieval);
+        var alternative = kindDef.GetAlternative(WorldTechLevel.Current, minLevel);
 
         if (alternative != null) WorldTechLevel.Logger.Debug($"Generating pawn of kind {alternative.defName} in place of {kindDef.defName}");
         else WorldTechLevel.Logger.Debug($"No alternative found for {kindDef.EffectiveTechLevel()} tech level pawn kind {kindDef.defName}");

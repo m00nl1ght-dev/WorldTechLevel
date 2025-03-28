@@ -8,8 +8,6 @@ namespace WorldTechLevel;
 
 public static class ReplacementUtility
 {
-    public static T GetAlternative<T>(this T def) where T : Def => def.GetAlternative(WorldTechLevel.Current);
-
     public static T GetAlternative<T>(
         this T def, TechLevel targetLevel,
         TechLevel minLevel = TechLevel.Neolithic,
