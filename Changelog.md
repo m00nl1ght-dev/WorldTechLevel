@@ -1,7 +1,18 @@
 
+v1.1.3
+
+- Reworked weapon and apparel selection/filtering conditions
+- Empire faction will now be retained by default when the VFE Empire mod is present
+- Added filtering for research given by ideology memes (e.g. Bloodfeeding)
+- Added support for custom backstory tags 'Medieval', 'Industrial', etc.
+- Fixed UI errors in mod settings window caused by some mod-added defs
+- Added compatibility patch for the 'Research Pal' mod
+- Added Mechanoids faction to the 'Overrides' settings tab
+- Added default tech levels for some Alpha Animals resources
+
 v1.1.2
 
-- Add filtering for Schematic book contents
+- Added filtering for Schematic book contents
 - Added support for 'Real Ruins' (ruin contents are now filtered)
 - Added compatibility patch for the 'Better Research Tabs' mod
 - Added compatibility patch for the 'Research Powl' mod
