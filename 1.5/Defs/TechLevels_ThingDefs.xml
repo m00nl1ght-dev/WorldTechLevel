@@ -226,6 +226,17 @@
                 <ifModPresent>BotchJob.MedievalFantasyThemedRelicQuests</ifModPresent>
             </li>
 
+            <!-- AA -->
+
+            <li>
+                <defName>AA_Hexagel</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AA_HexagelCore</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
         </entries>
         <alternatives>
             <li>
