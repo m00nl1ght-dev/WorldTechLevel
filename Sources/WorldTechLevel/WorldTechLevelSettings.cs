@@ -300,7 +300,7 @@ public class WorldTechLevelSettings : LunarModSettings
         _listings.Add(new DefListing<TraitDef>());
         _listings.Add(new DefListing<PawnKindDef>());
         _listings.Add(new DefListing<BackstoryDef>());
-        _listings.Add(new DefListing<FactionDef>(d => !d.isPlayer && !d.hidden));
+        _listings.Add(new DefListing<FactionDef>(d => d.maxConfigurableAtWorldCreation > 0 && d.displayInFactionSelection));
 
         if (ModsConfig.IdeologyActive)
         {
