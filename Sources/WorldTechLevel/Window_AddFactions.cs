@@ -100,7 +100,11 @@ public class Window_AddFactions : Window
             {
                 try
                 {
-                    if (_selected[i]) FactionGenerator.CreateFactionAndAddToManager(_factions[i]);
+                    if (_selected[i])
+                    {
+                        FactionGenerator.CreateFactionAndAddToManager(_factions[i]);
+                        WorldTechLevel.Logger.Log($"Successfully added faction: {_factions[i].defName}");
+                    }
                 }
                 catch (Exception e)
                 {

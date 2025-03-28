@@ -13,6 +13,8 @@ public static class ResearchUtility
     public static void InitializeFor(Scenario scenario)
     {
         InitialResearchLevel = CurrentResearchLevel = InitialResearchLevelFor(scenario);
+        WorldTechLevel.Logger.Log($"Current world tech level is {WorldTechLevel.Current.SelectionLabel()}.");
+        WorldTechLevel.Logger.Log($"Player faction tech level from scenario is {InitialResearchLevel}.");
     }
 
     public static void RefreshCurrentResearchLevel()

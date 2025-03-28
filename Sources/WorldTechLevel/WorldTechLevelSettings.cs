@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HarmonyLib;
 using LunarFramework.GUI;
 using LunarFramework.Utility;
 using RimWorld;
@@ -386,6 +387,17 @@ public class WorldTechLevelSettings : LunarModSettings
         WorldTechLevel.FiltersPatchGroup.ReApply();
         RefreshResearchViewWidth();
         _changedFilters = false;
+        LogFilterInfo();
+    }
+
+    public void LogFilterInfo()
+    {
+        var str = Entries
+            .Where(e => e.Key.StartsWith("Filter_") && e.Value is Entry<bool> { Value: false })
+            .Select(e => e.Key.Substring(7))
+            .Join();
+
+        WorldTechLevel.Logger.Log(str.Length > 0 ? $"Filters initialized. Disabled filters: {str}" : "Filters initialized.");
     }
 
     public static void RefreshResearchViewWidth()
