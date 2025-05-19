@@ -35,7 +35,7 @@ internal static class Patch_WorldGenerator
     [HarmonyPatch(nameof(WorldGenerator.GenerateWorld))]
     internal static void GenerateWorld_Prefix()
     {
-        Current.Game.TechLevel().WorldTechLevel = WorldTechLevel.Current;
+        Current.Game.TechLevel().ChangeTo(WorldTechLevel.Current);
         ResearchUtility.InitializeFor(Find.Scenario);
     }
 

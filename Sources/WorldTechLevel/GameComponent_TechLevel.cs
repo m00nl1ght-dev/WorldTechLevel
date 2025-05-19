@@ -5,12 +5,19 @@ namespace WorldTechLevel;
 
 public class GameComponent_TechLevel : GameComponent
 {
-    public TechLevel WorldTechLevel = TechLevel.Archotech;
+    private TechLevel _level = TechLevel.Archotech;
 
     public GameComponent_TechLevel(Game game) { }
 
+    public TechLevel WorldTechLevel => _level;
+
+    public void ChangeTo(TechLevel newLevel)
+    {
+        _level = newLevel;
+    }
+
     public override void ExposeData()
     {
-        Scribe_Values.Look(ref WorldTechLevel, "WorldTechLevel", TechLevel.Archotech);
+        Scribe_Values.Look(ref _level, "WorldTechLevel", TechLevel.Archotech);
     }
 }

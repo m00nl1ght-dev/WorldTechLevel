@@ -40,7 +40,7 @@ internal static class Patch_WITab_Planet
                     var prevLevel = WorldTechLevel.Current;
 
                     WorldTechLevel.Current = value;
-                    Current.Game.TechLevel().WorldTechLevel = value;
+                    Current.Game.TechLevel().ChangeTo(value);
 
                     WorldTechLevel.Logger.Log(
                         $"World tech level changed from {prevLevel.SelectionLabel()} to {WorldTechLevel.Current.SelectionLabel()}."
