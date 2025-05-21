@@ -18,7 +18,7 @@ public class WorldTechLevel : Mod
     internal static PatchGroup FiltersPatchGroup;
     internal static PatchGroup CompatPatchGroup;
 
-    internal static TechLevel Current = TechLevel.Archotech;
+    public static TechLevel Current { get; set; } = TechLevel.Archotech;
 
     internal static WorldTechLevelSettings Settings;
 
