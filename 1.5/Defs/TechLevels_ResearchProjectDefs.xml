@@ -6,10 +6,6 @@
         <entries>
 
             <li>
-                <defName>AdvancedFabrication</defName>
-                <techLevel>Spacer</techLevel>
-            </li>
-            <li>
                 <defName>Gunlink</defName>
                 <techLevel>Spacer</techLevel>
             </li>
