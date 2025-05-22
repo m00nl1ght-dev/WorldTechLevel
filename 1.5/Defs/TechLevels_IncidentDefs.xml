@@ -137,6 +137,25 @@
                 <techLevel>Ultra</techLevel>
             </li>
 
+            <!-- Sparkling Worlds -->
+
+            <li>
+                <defName>WeaponsCachePodCrashSW</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>ShipCrashSW</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>PsychicEmitterActivationSW</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PsychicEmitterAnimalInsanitySW</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+
         </entries>
     </WorldTechLevel.TechLevelConfigDef>
 </Defs>
