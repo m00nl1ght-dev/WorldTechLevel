@@ -79,6 +79,16 @@ public static class ResearchUtility
         return techLevel;
     }
 
+    public static bool ShouldProjectBeVisible(ResearchProjectDef def)
+    {
+        return !WorldTechLevel.Settings.Filter_Research || def.EffectiveTechLevel() <= TechLevelUtility.PlayerResearchFilterLevel();
+    }
+
+    public static bool ShouldSectionBeVisible(TechLevel techLevel)
+    {
+        return !WorldTechLevel.Settings.Filter_Research || techLevel <= TechLevelUtility.PlayerResearchFilterLevel();
+    }
+
     private static bool IsMechanitorPawnKind(PawnKindDef kindDef)
     {
         return kindDef?.techHediffsRequired?.Contains(ThingDefOf.Mechlink) ?? false;
