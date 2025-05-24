@@ -26,7 +26,7 @@ internal static class Patch_BaseGen
         foreach (var def in DefDatabase<FactionDef>.AllDefs.Where(f => !f.isPlayer))
         {
             _originalTechLevels[def] = def.techLevel;
-            def.techLevel = TechLevelUtility.Min(def.techLevel, WorldTechLevel.Current);
+            def.techLevel = def.TechLevelClamped();
         }
     }
 
@@ -53,7 +53,7 @@ internal static class Patch_BaseGen
         var pattern2 = TranspilerPattern.Build("ProcessRules")
             .Match(OpCodes.Ldloca_S).StoreOperandIn(ldloc).Keep()
             .MatchCall(typeof(Dictionary<string, List<RuleDef>>), nameof(Dictionary<string, List<RuleDef>>.TryGetValue)).Keep()
-            .Insert(ldloc).Insert(CodeInstruction.Call(typeof(Patch_BaseGen), nameof(ProcessRules)));
+            .Insert(OpCodes.Ldarg_0).Insert(ldloc).Insert(CodeInstruction.Call(typeof(Patch_BaseGen), nameof(ProcessRules)));
 
         return TranspilerPattern.Apply(instructions, pattern1, pattern2);
     }
@@ -64,11 +64,13 @@ internal static class Patch_BaseGen
         return resolveParams;
     }
 
-    private static void ProcessRules(ref List<RuleDef> rulesRef)
+    private static void ProcessRules(SymbolStack.Element toResolve, ref List<RuleDef> rulesRef)
     {
-        if (rulesRef != null && rulesRef.Any(d => d.MinRequiredTechLevel() > WorldTechLevel.Current))
+        var techLevel = toResolve.resolveParams.faction.CurrentFilterLevel();
+
+        if (rulesRef != null && rulesRef.Any(d => d.MinRequiredTechLevel() > techLevel))
         {
-            rulesRef = rulesRef.FilterWithAlternatives().ToList();
+            rulesRef = rulesRef.FilterWithAlternatives(techLevel).ToList();
         }
     }
 }

@@ -15,10 +15,10 @@ internal static class Patch_FactionDef
     {
         if (__instance.techLevel != TechLevel.Undefined)
         {
-            if (__instance.techLevel > WorldTechLevel.Current)
+            if (__instance.techLevel > __instance.CurrentFilterLevel())
             {
                 __result += $"\n\n{"WorldTechLevel.Faction.CurrentTechLevel".Translate().CapitalizeFirst()}: ".AsTipTitle();
-                __result += WorldTechLevel.Current.ToStringHuman().CapitalizeFirst();
+                __result += __instance.CurrentFilterLevel().ToStringHuman().CapitalizeFirst();
                 __result += $"\n{"WorldTechLevel.Faction.OriginalTechLevel".Translate().CapitalizeFirst()}: ".AsTipTitle();
                 __result += __instance.techLevel.ToStringHuman().CapitalizeFirst();
             }

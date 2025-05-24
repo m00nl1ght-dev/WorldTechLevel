@@ -12,8 +12,6 @@ public class BuildingMaterialUtility
     {
         if (!thingDef.MadeFromStuff) return null;
 
-        techLevel = techLevel.ClampToWorld();
-
         if (thingDef.stuffCategories.Contains(StuffCategoryDefOf.Woody))
         {
             var extraWoodChance = techLevel switch
@@ -38,7 +36,7 @@ public class BuildingMaterialUtility
             if (!IsResourcePlentifulInMap(map, stuff))
                 return false;
 
-            if (stuff.MinRequiredTechLevel() > WorldTechLevel.Current)
+            if (stuff.MinRequiredTechLevel() > techLevel)
                 return false;
 
             if (stuff.BaseMarketValue / stuff.VolumePerUnit >= 5f)
@@ -52,7 +50,7 @@ public class BuildingMaterialUtility
 
     public static TerrainDef RandomAppropriateBasicFloorFor(Map map, Faction faction, bool allowCarpet)
     {
-        var techLevel = faction?.def.MinRequiredTechLevel().ClampToWorld() ?? WorldTechLevel.Current;
+        var techLevel = faction == null ? WorldTechLevel.Current : faction.def.TechLevelClamped();
         var isCarpet = allowCarpet && !techLevel.IsNeolithicOrWorse() && Rand.Chance(0.1f);
 
         if (faction is { ideos: not null } && BaseGenUtility.IdeoFloorTypes(faction, isCarpet).TryRandomElement(out var result))

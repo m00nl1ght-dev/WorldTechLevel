@@ -16,7 +16,7 @@ internal static class Patch_PawnsArrivalModeWorker
     [HarmonyPatch(nameof(RaidStrategyWorker.CanUseWith))]
     internal static void CanUseWith_Postfix(PawnsArrivalModeWorker __instance, IncidentParms parms, ref bool __result)
     {
-        if (__result && __instance.def.MinRequiredTechLevel() > WorldTechLevel.Current)
+        if (__result && __instance.def.MinRequiredTechLevel() > parms.faction.CurrentFilterLevel())
         {
             __result = false;
         }

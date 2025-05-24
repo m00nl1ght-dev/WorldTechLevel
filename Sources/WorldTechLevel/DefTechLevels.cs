@@ -66,6 +66,7 @@ public static class DefTechLevels
 
         TechLevelDatabase<FactionDef>.Initialize(d => d.techLevel);
         TechLevelDatabase<FactionDef>.ApplyOverrides();
+        TechLevelDatabase<FactionDef>.ApplyExclusions(WorldTechLevel.Settings.FactionsExcluded);
 
         TechLevelDatabase<RaidStrategyDef>.Initialize();
         TechLevelDatabase<RaidStrategyDef>.ApplyOverrides();

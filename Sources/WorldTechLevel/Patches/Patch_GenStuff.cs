@@ -18,7 +18,17 @@ internal static class Patch_GenStuff
     private static bool RandomStuffInexpensiveFor_Prefix(ThingDef thingDef, TechLevel maxTechLevel, Predicate<ThingDef> validator, ref ThingDef __result)
     {
         if (MapGenerator.mapBeingGenerated is not { } map || thingDef.building == null) return true;
-        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, maxTechLevel, validator);
+        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, maxTechLevel.ClampTo(WorldTechLevel.Current), validator);
+        return __result == null;
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch( nameof(GenStuff.RandomStuffInexpensiveFor), [typeof(ThingDef), typeof(Faction), typeof(Predicate<ThingDef>)])]
+    private static bool RandomStuffInexpensiveFor_Prefix(ThingDef thingDef, Faction faction, Predicate<ThingDef> validator, ref ThingDef __result)
+    {
+        if (MapGenerator.mapBeingGenerated is not { } map || thingDef.building == null) return true;
+        var techLevel = faction == null ? WorldTechLevel.Current : faction.def.TechLevelClamped();
+        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, techLevel, validator);
         return __result == null;
     }
 }

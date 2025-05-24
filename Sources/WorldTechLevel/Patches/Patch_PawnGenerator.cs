@@ -59,12 +59,13 @@ internal static class Patch_PawnGenerator
     private static PawnKindDef GetReplacementFor(PawnGenerationRequest request)
     {
         var kindDef = request.kindDefInner;
+        var filterLevel = request.Faction.CurrentFilterLevel();
 
-        if (kindDef == null || kindDef.MinRequiredTechLevel() <= WorldTechLevel.Current) return null;
+        if (kindDef == null || kindDef.MinRequiredTechLevel() <= filterLevel) return null;
         if (request.Context == PawnGenerationContext.PlayerStarter) return null;
 
-        var minLevel = TechLevelUtility.Min(WorldTechLevel.Current, TechLevel.Medieval);
-        var alternative = kindDef.GetAlternative(WorldTechLevel.Current, minLevel);
+        var minLevel = TechLevelUtility.Min(filterLevel, TechLevel.Medieval);
+        var alternative = kindDef.GetAlternative(filterLevel, minLevel);
 
         if (alternative != null) WorldTechLevel.Logger.Debug($"Generating pawn of kind {alternative.defName} in place of {kindDef.defName}");
         else WorldTechLevel.Logger.Debug($"No alternative found for {kindDef.MinRequiredTechLevel()} tech level pawn kind {kindDef.defName}");
@@ -79,10 +80,12 @@ internal static class Patch_PawnGenerator
     {
         if (pawn.IsStartingPawnGen()) return;
 
+        var filterLevel = pawn.Faction.CurrentFilterLevel();
+
         if (WorldTechLevel.Settings.Filter_Possessions && pawn.inventory != null)
         {
             var toFilter = pawn.inventory.innerContainer
-                .Where(t => t.MinRequiredTechLevel() > WorldTechLevel.Current).ToList();
+                .Where(t => t.MinRequiredTechLevel() > filterLevel).ToList();
 
             foreach (var thing in toFilter)
                 pawn.inventory.innerContainer.Remove(thing);
@@ -95,7 +98,7 @@ internal static class Patch_PawnGenerator
         if (WorldTechLevel.Settings.Filter_Apparel && pawn.apparel != null)
         {
             var toFilter = pawn.apparel.WornApparel
-                .Where(t => t.MinRequiredTechLevel() > WorldTechLevel.Current).ToList();
+                .Where(t => t.MinRequiredTechLevel() > filterLevel).ToList();
 
             foreach (var apparel in toFilter)
                 pawn.apparel.Remove(apparel);
@@ -108,7 +111,7 @@ internal static class Patch_PawnGenerator
         if (WorldTechLevel.Settings.Filter_Weapons && pawn.equipment != null)
         {
             var toFilter = pawn.equipment.AllEquipmentListForReading
-                .Where(t => t.MinRequiredTechLevel() > WorldTechLevel.Current).ToList();
+                .Where(t => t.MinRequiredTechLevel() > filterLevel).ToList();
 
             foreach (var equipment in toFilter)
                 pawn.equipment.Remove(equipment);
@@ -138,10 +141,10 @@ internal static class Patch_PawnGenerator
 
     [HarmonyPostfix]
     [HarmonyPatch(nameof(PawnGenerator.XenotypesAvailableFor))]
-    private static void XenotypesAvailableFor_Postfix(Dictionary<XenotypeDef, float> __result)
+    private static void XenotypesAvailableFor_Postfix(Dictionary<XenotypeDef, float> __result, FactionDef factionDef)
     {
-        if (WorldTechLevel.Current != TechLevel.Archotech)
-            __result.RemoveAll(kv => kv.Key.MinRequiredTechLevel() > WorldTechLevel.Current);
+        var filterLevel = factionDef.CurrentFilterLevel();
+        __result.RemoveAll(kv => kv.Key.MinRequiredTechLevel() > filterLevel);
     }
 
     [HarmonyPostfix]

@@ -91,9 +91,6 @@ public static class ReplacementUtility
         return newThing;
     }
 
-    public static IEnumerable<T> FilterWithAlternatives<T>(this IEnumerable<T> source) where T : Def =>
-        FilterWithAlternatives(source, WorldTechLevel.Current);
-
     public static IEnumerable<T> FilterWithAlternatives<T>(this IEnumerable<T> source, TechLevel techLevel) where T : Def
     {
         TechLevelDatabase<T>.EnsureInitialized();

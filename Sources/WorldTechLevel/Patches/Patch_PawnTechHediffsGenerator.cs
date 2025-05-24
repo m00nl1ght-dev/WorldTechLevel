@@ -17,6 +17,6 @@ internal static class Patch_PawnTechHediffsGenerator
     [HarmonyPatch(nameof(PawnTechHediffsGenerator.InstallPart))]
     private static bool InstallPart_Prefix(Pawn pawn, ThingDef partDef)
     {
-        return pawn.IsStartingPawnGen() || partDef.MinRequiredTechLevel() <= WorldTechLevel.Current;
+        return pawn.IsStartingPawnGen() || partDef.MinRequiredTechLevel() <= pawn.Faction.CurrentFilterLevel();
     }
 }

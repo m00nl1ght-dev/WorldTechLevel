@@ -20,7 +20,7 @@ internal static class Patch_PawnAddictionHediffsGenerator
         if (Current.ProgramState == ProgramState.Entry && faction is { IsPlayer: true }) return true;
 
         __result = PawnAddictionHediffsGenerator.allDrugs
-            .Any(x => x.GetCompProperties<CompProperties_Drug>().chemical == chemical && x.techLevel <= WorldTechLevel.Current);
+            .Any(x => x.GetCompProperties<CompProperties_Drug>().chemical == chemical && x.techLevel <= faction.CurrentFilterLevel());
 
         return false;
     }

@@ -137,10 +137,13 @@ internal static class Patch_Page_CreateWorldParams
 
         string currentLabel = levelBefore.SelectionLabel();
 
-        WorldTechLevel.Current = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
+        var levelAfter = (TechLevel) Mathf.RoundToInt(Widgets.HorizontalSlider(sliderRect, (float) levelBefore, 2f, 7f, true, currentLabel));
 
-        if (WorldTechLevel.Current != levelBefore)
+        if (levelAfter != levelBefore)
+        {
+            WorldTechLevel.Current = levelAfter;
             ApplyChanges(factions, ref pollution);
+        }
 
         return pos;
     }

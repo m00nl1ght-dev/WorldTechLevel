@@ -16,8 +16,8 @@ internal static class Patch_ThingSetMakerUtility
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
     [HarmonyPatch(nameof(ThingSetMakerUtility.GetAllowedThingDefs))]
-    internal static void GetAllowedThingDefs_Postfix(ref IEnumerable<ThingDef> __result)
+    internal static void GetAllowedThingDefs_Postfix(ref ThingSetMakerParams parms, ref IEnumerable<ThingDef> __result)
     {
-        __result = __result.FilterWithAlternatives();
+        __result = __result.FilterWithAlternatives(parms.makingFaction.CurrentFilterLevel());
     }
 }

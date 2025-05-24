@@ -40,6 +40,8 @@ public class WorldTechLevelSettings : LunarModSettings
     public readonly Entry<bool> AlwaysAllowOffworld = MakeEntry(false);
     public readonly Entry<bool> AlwaysDefaultToUnrestricted = MakeEntry(false);
 
+    public readonly Entry<List<string>> FactionsExcluded = MakeEntry(new List<string>());
+
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
     private List<IDefListing> _listings;
@@ -269,6 +271,34 @@ public class WorldTechLevelSettings : LunarModSettings
         }
 
         LunarGUI.Checkbox(layout, ref AlwaysDefaultToUnrestricted.Value, Label("AlwaysDefaultToUnrestricted"));
+
+        layout.BeginAbs(Text.LineHeight, new() { Reversed = true, Horizontal = true });
+
+        if (LunarGUI.Button(layout.Abs(100), "WorldTechLevel.Settings.FactionsExcluded.Select".Translate()))
+        {
+            LunarGUI.OpenGenericWindow(WorldTechLevel.LunarAPI, new(500, 400), (_, layout) =>
+            {
+                layout.PushChanged();
+
+                foreach (var def in DefDatabase<FactionDef>.AllDefsListForReading)
+                {
+                    if (!def.isPlayer)
+                    {
+                        LunarGUI.ToggleTableRow(layout, def.defName, false, def.LabelCap, FactionsExcluded.Value);
+                    }
+                }
+
+                if (layout.PopChanged())
+                {
+                    _changedLevels = true;
+                    _currentDefs = null;
+                }
+            });
+        }
+
+        LunarGUI.Label(layout.Abs(-1), "WorldTechLevel.Settings.FactionsExcluded".Translate(FactionsExcluded.Value.Count));
+
+        layout.End();
     }
 
     private readonly string[] _excludedThingCategories = [
@@ -301,7 +331,10 @@ public class WorldTechLevelSettings : LunarModSettings
         _listings.Add(new DefListing<TraitDef>());
         _listings.Add(new DefListing<PawnKindDef>());
         _listings.Add(new DefListing<BackstoryDef>());
-        _listings.Add(new DefListing<FactionDef>(d => d.maxConfigurableAtWorldCreation > 0 && d.displayInFactionSelection));
+        _listings.Add(new DefListing<FactionDef>(d =>
+            d.maxConfigurableAtWorldCreation > 0 && d.displayInFactionSelection &&
+            !FactionsExcluded.Value.Contains(d.defName))
+        );
 
         if (ModsConfig.IdeologyActive)
         {

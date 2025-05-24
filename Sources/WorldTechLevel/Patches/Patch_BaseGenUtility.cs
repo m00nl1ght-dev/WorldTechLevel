@@ -22,6 +22,18 @@ internal static class Patch_BaseGenUtility
     private static bool RandomCheapWallStuff_Prefix(TechLevel techLevel, bool notVeryFlammable, ref ThingDef __result)
     {
         if (MapGenerator.mapBeingGenerated is not { } map) return true;
+        techLevel = techLevel.ClampTo(WorldTechLevel.Current);
+        Predicate<ThingDef> validator = notVeryFlammable ? def => def.BaseFlammability < 0.5 : null;
+        __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, ThingDefOf.Wall, techLevel, validator);
+        return __result == null;
+    }
+
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(BaseGenUtility.RandomCheapWallStuff), [typeof(Faction), typeof(bool)])]
+    private static bool RandomCheapWallStuff_Prefix(Faction faction, bool notVeryFlammable, ref ThingDef __result)
+    {
+        if (MapGenerator.mapBeingGenerated is not { } map) return true;
+        var techLevel = faction == null ? WorldTechLevel.Current : faction.def.TechLevelClamped();
         Predicate<ThingDef> validator = notVeryFlammable ? def => def.BaseFlammability < 0.5 : null;
         __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, ThingDefOf.Wall, techLevel, validator);
         return __result == null;
@@ -32,7 +44,7 @@ internal static class Patch_BaseGenUtility
     private static bool CheapStuffFor_Prefix(ThingDef thingDef, Faction faction, ref ThingDef __result)
     {
         if (MapGenerator.mapBeingGenerated is not { } map) return true;
-        var techLevel = faction?.def.MinRequiredTechLevel() ?? TechLevel.Undefined;
+        var techLevel = faction == null ? WorldTechLevel.Current : faction.def.TechLevelClamped();
         __result = BuildingMaterialUtility.RandomAppropriateBuildingMaterialFor(map, thingDef, techLevel);
         return __result == null;
     }

@@ -15,14 +15,14 @@ public static class TechLevelUtility
 
     public static TechLevel Min(TechLevel a, TechLevel b) => a < b ? a : b;
 
-    public static TechLevel ClampToWorld(this TechLevel techLevel)
+    public static TechLevel ClampTo(this TechLevel techLevel, TechLevel limit)
     {
-        return techLevel == TechLevel.Undefined || techLevel > WorldTechLevel.Current ? WorldTechLevel.Current : techLevel;
+        return techLevel == TechLevel.Undefined || techLevel > limit ? limit : techLevel;
     }
 
     public static TechLevel GenFilterTechLevel(this Pawn pawn)
     {
-        return pawn.IsStartingPawnGen() ? Max(pawn.Faction.def.techLevel, WorldTechLevel.Current) : WorldTechLevel.Current;
+        return pawn.IsStartingPawnGen() ? Max(pawn.Faction.def.techLevel, WorldTechLevel.Current) : pawn.Faction.CurrentFilterLevel();
     }
 
     public static TechLevel PlayerResearchFilterLevel()
@@ -60,6 +60,18 @@ public static class TechLevelUtility
     public static IEnumerable<T> FilterByMinRequiredTechLevel<T>(this IEnumerable<T> defs) where T : Def
     {
         return defs.FilterByMinRequiredTechLevel(WorldTechLevel.Current);
+    }
+
+    public static TechLevel TechLevelClamped(this FactionDef faction) => faction.techLevel.ClampTo(faction.CurrentFilterLevel());
+
+    public static TechLevel CurrentFilterLevel(this Faction faction) => CurrentFilterLevel(faction?.def);
+
+    public static TechLevel CurrentFilterLevel(this FactionDef faction)
+    {
+        if (faction != null && WorldTechLevel.Settings.FactionsExcluded.Value.Contains(faction.defName))
+            return TechLevel.Archotech;
+
+        return WorldTechLevel.Current;
     }
 
     public static string SelectionLabel(this TechLevel techLevel)

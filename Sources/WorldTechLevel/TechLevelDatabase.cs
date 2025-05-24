@@ -164,6 +164,17 @@ internal static class TechLevelDatabase<T> where T : Def
         }
     }
 
+    internal static void ApplyExclusions(List<string> excludedDefNames)
+    {
+        foreach (var defName in excludedDefNames)
+        {
+            if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
+            {
+                Levels[def.index] = TechLevel.Undefined;
+            }
+        }
+    }
+
     public readonly record struct Alternative
     {
         public readonly T def;

@@ -23,18 +23,20 @@ internal static class Patch_StockGenerator
 
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
-    private static void GenerateThings_Prefix(StockGenerator __instance, ref State __state)
+    private static void GenerateThings_Prefix(StockGenerator __instance, Faction faction, ref State __state)
     {
         __state.maxTechLevelBuy = __instance.maxTechLevelBuy;
         __state.maxTechLevelGenerate = __instance.maxTechLevelGenerate;
 
+        var filterLevel = faction.CurrentFilterLevel();
+
         if (__instance.trader is { orbital: true } && WorldTechLevel.Settings.AlwaysAllowOffworld) return;
 
-        if (__instance.maxTechLevelBuy > WorldTechLevel.Current)
-            __instance.maxTechLevelBuy = WorldTechLevel.Current;
+        if (__instance.maxTechLevelBuy > filterLevel)
+            __instance.maxTechLevelBuy = filterLevel;
 
-        if (__instance.maxTechLevelGenerate > WorldTechLevel.Current)
-            __instance.maxTechLevelGenerate = WorldTechLevel.Current;
+        if (__instance.maxTechLevelGenerate > filterLevel)
+            __instance.maxTechLevelGenerate = filterLevel;
     }
 
     [HarmonyPostfix]
