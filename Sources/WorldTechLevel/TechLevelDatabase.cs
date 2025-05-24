@@ -62,11 +62,11 @@ internal static class TechLevelDatabase<T> where T : Def
                 {
                     foreach (var defName in altEntry.targets)
                     {
-                        if (defName.EndsWith("*"))
+                        if (defName.Contains("*") || defName.Contains("?"))
                         {
-                            var prefix = defName.Substring(0, defName.Length - 1);
+                            var matcher = defName.GlobMatcher();
 
-                            foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                            foreach (var def in DefDatabase<T>.AllDefs.Where(d => matcher.IsMatch(d.defName)))
                                 Process(def);
                         }
                         else if (DefDatabase<T>.defsByName.TryGetValue(defName, out var def))
@@ -129,7 +129,7 @@ internal static class TechLevelDatabase<T> where T : Def
         {
             void Process(T def)
             {
-                if (entry.contentPack == null || def.modContentPack?.PackageId == entry.contentPack)
+                if (entry.contentPack == null || def.modContentPack?.PackageId == entry.contentPack.ToLower())
                     if (entry.priority >= 0 || Levels[def.index] == TechLevel.Undefined)
                         Levels[def.index] = entry.techLevel;
             }
@@ -139,11 +139,11 @@ internal static class TechLevelDatabase<T> where T : Def
                 foreach (var def in DefDatabase<T>.AllDefs)
                     Process(def);
             }
-            else if (entry.defName.EndsWith("*"))
+            else if (entry.defName.Contains("*") || entry.defName.Contains("?"))
             {
-                var prefix = entry.defName.Substring(0, entry.defName.Length - 1);
+                var matcher = entry.defName.GlobMatcher();
 
-                foreach (var def in DefDatabase<T>.AllDefs.Where(d => d.defName.StartsWith(prefix)))
+                foreach (var def in DefDatabase<T>.AllDefs.Where(d => matcher.IsMatch(d.defName)))
                     Process(def);
             }
             else if (DefDatabase<T>.defsByName.TryGetValue(entry.defName, out var def))

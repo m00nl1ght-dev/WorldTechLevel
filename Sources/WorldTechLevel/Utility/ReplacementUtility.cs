@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using RimWorld;
 using Verse;
 
@@ -128,5 +129,11 @@ public static class ReplacementUtility
     public static bool IsStartingPawnGen(this Pawn pawn)
     {
         return Current.ProgramState == ProgramState.Entry && pawn.Faction is { IsPlayer: true };
+    }
+
+    public static Regex GlobMatcher(this string pattern)
+    {
+        var regex = Regex.Escape(pattern).Replace(@"\*", ".*").Replace(@"\?", ".");
+        return new Regex("^" + regex + "$", RegexOptions.IgnoreCase | RegexOptions.Singleline);
     }
 }
