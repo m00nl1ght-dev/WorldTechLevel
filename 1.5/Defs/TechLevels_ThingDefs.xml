@@ -202,6 +202,13 @@
                 <techLevel>Medieval</techLevel>
             </li>
 
+            <!-- VVE -->
+
+            <li>
+                <defName>VVE_*Wreck</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
             <!-- DD Elves -->
 
             <li>
