@@ -28,6 +28,6 @@ internal static class Patch_Page_ChooseIdeoPreset
 
     private static IEnumerable<IdeoPresetDef> FilteredPresets()
     {
-        return DefDatabase<IdeoPresetDef>.AllDefs.FilterByEffectiveTechLevel();
+        return DefDatabase<IdeoPresetDef>.AllDefs.FilterByMinRequiredTechLevel();
     }
 }

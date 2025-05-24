@@ -16,6 +16,6 @@ internal static class Patch_BookUtility
     [HarmonyPatch(nameof(BookUtility.GetBookDefs))]
     internal static void GetBookDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {
-        __result = __result.FilterByEffectiveTechLevel();
+        __result = __result.FilterByMinRequiredTechLevel();
     }
 }

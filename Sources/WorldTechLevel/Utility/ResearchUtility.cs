@@ -21,7 +21,7 @@ public static class ResearchUtility
     {
         CurrentResearchLevel = DefDatabase<ResearchProjectDef>.AllDefs
             .Where(r => r.IsFinished)
-            .Select(r => r.EffectiveTechLevel())
+            .Select(r => r.MinRequiredTechLevel())
             .Prepend(InitialResearchLevel)
             .Max();
     }
@@ -50,7 +50,7 @@ public static class ResearchUtility
                 {
                     if (project.HasTag(startingResearchTag))
                     {
-                        techLevel = TechLevelUtility.Max(techLevel, project.EffectiveTechLevel());
+                        techLevel = TechLevelUtility.Max(techLevel, project.MinRequiredTechLevel());
                         outStartingResearch?.AddDistinct(project);
                     }
                 }
@@ -63,7 +63,7 @@ public static class ResearchUtility
             if (part is ScenPart_StartingResearch { project: not null } startingResearch)
             {
                 // starting research from scenario may imply higher tech level
-                techLevel = TechLevelUtility.Max(techLevel, startingResearch.project.EffectiveTechLevel());
+                techLevel = TechLevelUtility.Max(techLevel, startingResearch.project.MinRequiredTechLevel());
                 outStartingResearch?.AddDistinct(startingResearch.project);
             }
             else if (part is ScenPart_ConfigPage_ConfigureStartingPawns_KindDefs configPage)
@@ -81,7 +81,7 @@ public static class ResearchUtility
 
     public static bool ShouldProjectBeVisible(ResearchProjectDef def)
     {
-        return !WorldTechLevel.Settings.Filter_Research || def.EffectiveTechLevel() <= TechLevelUtility.PlayerResearchFilterLevel();
+        return !WorldTechLevel.Settings.Filter_Research || def.MinRequiredTechLevel() <= TechLevelUtility.PlayerResearchFilterLevel();
     }
 
     public static bool ShouldSectionBeVisible(TechLevel techLevel)

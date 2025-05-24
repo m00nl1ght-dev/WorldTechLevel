@@ -15,7 +15,7 @@ internal static class Patch_BiomeDef
     [HarmonyPatch(nameof(BiomeDef.CommonalityOfDisease))]
     private static void CommonalityOfDisease_Postfix(IncidentDef diseaseInc, ref float __result)
     {
-        if (diseaseInc.EffectiveTechLevel() > WorldTechLevel.Current)
+        if (diseaseInc.MinRequiredTechLevel() > WorldTechLevel.Current)
         {
             __result = 0f;
         }

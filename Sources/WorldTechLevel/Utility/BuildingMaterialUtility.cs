@@ -38,7 +38,7 @@ public class BuildingMaterialUtility
             if (!IsResourcePlentifulInMap(map, stuff))
                 return false;
 
-            if (stuff.EffectiveTechLevel() > WorldTechLevel.Current)
+            if (stuff.MinRequiredTechLevel() > WorldTechLevel.Current)
                 return false;
 
             if (stuff.BaseMarketValue / stuff.VolumePerUnit >= 5f)
@@ -52,20 +52,20 @@ public class BuildingMaterialUtility
 
     public static TerrainDef RandomAppropriateBasicFloorFor(Map map, Faction faction, bool allowCarpet)
     {
-        var techLevel = faction?.def.EffectiveTechLevel().ClampToWorld() ?? WorldTechLevel.Current;
+        var techLevel = faction?.def.MinRequiredTechLevel().ClampToWorld() ?? WorldTechLevel.Current;
         var isCarpet = allowCarpet && !techLevel.IsNeolithicOrWorse() && Rand.Chance(0.1f);
 
         if (faction is { ideos: not null } && BaseGenUtility.IdeoFloorTypes(faction, isCarpet).TryRandomElement(out var result))
             return result;
 
         if (isCarpet)
-            return DefDatabase<TerrainDef>.AllDefs.FilterByEffectiveTechLevel(techLevel).Where(x => x.IsCarpet).RandomElement();
+            return DefDatabase<TerrainDef>.AllDefs.FilterByMinRequiredTechLevel(techLevel).Where(x => x.IsCarpet).RandomElement();
 
         if (Rand.Chance(0.5f) && !map.IsPocketMap)
         {
             var stoneFloor = BaseGenUtility.RegionalRockTerrainDef(map.Tile, false);
 
-            if (stoneFloor != TerrainDefOf.Concrete && stoneFloor.EffectiveTechLevel() <= techLevel)
+            if (stoneFloor != TerrainDefOf.Concrete && stoneFloor.MinRequiredTechLevel() <= techLevel)
                 return stoneFloor;
         }
 
@@ -77,7 +77,7 @@ public class BuildingMaterialUtility
 
     public static bool IsAppropriateFloorMaterial(Map map, TerrainDef floor)
     {
-        if (floor.EffectiveTechLevel() > WorldTechLevel.Current)
+        if (floor.MinRequiredTechLevel() > WorldTechLevel.Current)
             return false;
 
         if (floor.costList?.Any(c => c.thingDef.IsStuff && !IsResourcePlentifulInMap(map, c.thingDef)) ?? false)

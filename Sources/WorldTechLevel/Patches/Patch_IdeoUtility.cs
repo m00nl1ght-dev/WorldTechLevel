@@ -16,6 +16,6 @@ internal static class Patch_IdeoUtility
     [HarmonyPatch(nameof(IdeoUtility.IsMemeAllowedFor))]
     internal static void IsMemeAllowedFor_Postfix(MemeDef meme, ref bool __result)
     {
-        if (meme.EffectiveTechLevel() > WorldTechLevel.Current) __result = false;
+        if (meme.MinRequiredTechLevel() > WorldTechLevel.Current) __result = false;
     }
 }

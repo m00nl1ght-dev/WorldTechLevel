@@ -15,6 +15,6 @@ internal static class Patch_QuestUtility
     [HarmonyPatch(nameof(QuestUtility.SendLetterQuestAvailable))]
     internal static bool SendLetterQuestAvailable_Prefix(Quest quest)
     {
-        return quest?.root == null || quest.root.EffectiveTechLevel() <= WorldTechLevel.Current;
+        return quest?.root == null || quest.root.MinRequiredTechLevel() <= WorldTechLevel.Current;
     }
 }

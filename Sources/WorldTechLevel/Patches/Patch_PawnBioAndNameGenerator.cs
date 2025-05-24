@@ -45,11 +45,11 @@ internal static class Patch_PawnBioAndNameGenerator
         if (pawn.story.childhood == null && slot == BackstorySlot.Adulthood)
             return original;
 
-        var filtered = original.FilterByEffectiveTechLevel(pawn.GenFilterTechLevel());
+        var filtered = original.FilterByMinRequiredTechLevel(pawn.GenFilterTechLevel());
         if (filtered.Any(bs => bs.slot == slot)) return filtered;
 
         return DefDatabase<BackstoryDef>.AllDefs
-            .FilterByEffectiveTechLevel(pawn.GenFilterTechLevel())
+            .FilterByMinRequiredTechLevel(pawn.GenFilterTechLevel())
             .Where(bs => bs.shuffleable);
     }
 }

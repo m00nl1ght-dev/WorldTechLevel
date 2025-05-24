@@ -17,7 +17,7 @@ internal class ModCompat_ResearchPowl : ModCompat
     [HarmonyPatch("ResearchPowl.ResearchNode", "GetAvailable")]
     private static void GetAvailable_Postfix(ResearchProjectDef ___Research, ref bool __result)
     {
-        if (__result && ___Research.EffectiveTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
+        if (__result && ___Research.MinRequiredTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
         {
             __result = false;
         }

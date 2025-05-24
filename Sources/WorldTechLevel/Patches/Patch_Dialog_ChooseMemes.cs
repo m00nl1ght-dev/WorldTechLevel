@@ -16,6 +16,6 @@ internal static class Patch_Dialog_ChooseMemes
     [HarmonyPatch(nameof(Dialog_ChooseMemes.CanUseMeme))]
     internal static void CanUseMeme_Postfix(MemeDef meme, ref bool __result)
     {
-        if (meme.EffectiveTechLevel() > WorldTechLevel.Current) __result = false;
+        if (meme.MinRequiredTechLevel() > WorldTechLevel.Current) __result = false;
     }
 }

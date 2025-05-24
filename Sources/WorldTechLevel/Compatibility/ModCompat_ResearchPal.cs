@@ -17,7 +17,7 @@ internal class ModCompat_ResearchPal : ModCompat
     [HarmonyPatch("ResearchPal.CompatibilityHooks", "PassCustomUnlockRequirements")]
     private static void PassCustomUnlockRequirements_Postfix(ResearchProjectDef p, ref bool __result)
     {
-        if (__result && p.EffectiveTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
+        if (__result && p.MinRequiredTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
         {
             __result = false;
         }

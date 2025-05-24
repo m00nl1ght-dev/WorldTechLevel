@@ -30,7 +30,7 @@ internal static class Patch_QuestNode_RandomNode
         {
             if (node is QuestNode_SubScript subscript && subscript.def.TryGetValue(slate, out var def))
             {
-                if (def.EffectiveTechLevel() > WorldTechLevel.Current) continue;
+                if (def.MinRequiredTechLevel() > WorldTechLevel.Current) continue;
             }
 
             yield return node;

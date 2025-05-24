@@ -42,7 +42,7 @@ internal class ModCompat_BetterResearchTabs : ModCompat
             var filterLevel = TechLevelUtility.PlayerResearchFilterLevel();
 
             ___cachedVisibleResearchProjects.RemoveAll(
-                def => def.EffectiveTechLevel() > filterLevel && !def.IsFinished
+                def => def.MinRequiredTechLevel() > filterLevel && !def.IsFinished
             );
         }
     }

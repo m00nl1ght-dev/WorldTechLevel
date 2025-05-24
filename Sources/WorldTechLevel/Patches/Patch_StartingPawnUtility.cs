@@ -17,6 +17,6 @@ internal static class Patch_StartingPawnUtility
     internal static void GeneratePossessions_Postfix(Pawn pawn)
     {
         if (StartingPawnUtility.StartingPossessions.TryGetValue(pawn, out var list))
-            list.RemoveAll(t => t.ThingDef.EffectiveTechLevel() > pawn.GenFilterTechLevel());
+            list.RemoveAll(t => t.ThingDef.MinRequiredTechLevel() > pawn.GenFilterTechLevel());
     }
 }

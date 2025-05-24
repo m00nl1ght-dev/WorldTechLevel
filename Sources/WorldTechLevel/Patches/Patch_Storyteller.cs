@@ -26,7 +26,7 @@ internal static class Patch_Storyteller
 
     private static bool IncidentFilter(FiringIncident i)
     {
-        if (i.parms.questScriptDef?.EffectiveTechLevel() > WorldTechLevel.Current) return false;
-        return i.def.EffectiveTechLevel() <= WorldTechLevel.Current;
+        if (i.parms.questScriptDef?.MinRequiredTechLevel() > WorldTechLevel.Current) return false;
+        return i.def.MinRequiredTechLevel() <= WorldTechLevel.Current;
     }
 }

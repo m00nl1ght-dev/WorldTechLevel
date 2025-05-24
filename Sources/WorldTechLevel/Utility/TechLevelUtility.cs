@@ -30,7 +30,7 @@ public static class TechLevelUtility
         return Max(WorldTechLevel.Current, ResearchUtility.InitialResearchLevel);
     }
 
-    public static TechLevel EffectiveTechLevel<T>(this T def) where T : Def
+    public static TechLevel MinRequiredTechLevel<T>(this T def) where T : Def
     {
         TechLevelDatabase<T>.EnsureInitialized();
 
@@ -41,12 +41,12 @@ public static class TechLevelUtility
         return TechLevel.Undefined;
     }
 
-    public static TechLevel EffectiveTechLevel(this Thing thing)
+    public static TechLevel MinRequiredTechLevel(this Thing thing)
     {
-        return Max(thing.def.EffectiveTechLevel(), thing.Stuff.EffectiveTechLevel());
+        return Max(thing.def.MinRequiredTechLevel(), thing.Stuff.MinRequiredTechLevel());
     }
 
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
+    public static IEnumerable<T> FilterByMinRequiredTechLevel<T>(this IEnumerable<T> defs, TechLevel techLevel) where T : Def
     {
         if (techLevel == TechLevel.Archotech)
             return defs;
@@ -57,9 +57,9 @@ public static class TechLevelUtility
         return defs.Where(def => def.index >= data.Length || data[def.index] <= techLevel);
     }
 
-    public static IEnumerable<T> FilterByEffectiveTechLevel<T>(this IEnumerable<T> defs) where T : Def
+    public static IEnumerable<T> FilterByMinRequiredTechLevel<T>(this IEnumerable<T> defs) where T : Def
     {
-        return defs.FilterByEffectiveTechLevel(WorldTechLevel.Current);
+        return defs.FilterByMinRequiredTechLevel(WorldTechLevel.Current);
     }
 
     public static string SelectionLabel(this TechLevel techLevel)

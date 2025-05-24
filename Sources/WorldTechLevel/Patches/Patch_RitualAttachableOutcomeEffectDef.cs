@@ -17,6 +17,6 @@ internal static class Patch_RitualAttachableOutcomeEffectDef
     [HarmonyPatch(nameof(RitualAttachableOutcomeEffectDef.CanAttachToRitual))]
     internal static void CanAttachToRitual_Postfix(RitualAttachableOutcomeEffectDef __instance, ref AcceptanceReport __result)
     {
-        if (__instance.EffectiveTechLevel() > WorldTechLevel.Current) __result = false;
+        if (__instance.MinRequiredTechLevel() > WorldTechLevel.Current) __result = false;
     }
 }

@@ -27,6 +27,6 @@ internal static class Patch_WorldFactionsUIUtility
 
     internal static bool ShouldSkipMechanoidsWarning(bool present)
     {
-        return present || WorldTechLevel.Current < FactionDefOf.Mechanoid.EffectiveTechLevel();
+        return present || WorldTechLevel.Current < FactionDefOf.Mechanoid.MinRequiredTechLevel();
     }
 }

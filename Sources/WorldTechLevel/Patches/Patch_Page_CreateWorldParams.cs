@@ -62,7 +62,7 @@ internal static class Patch_Page_CreateWorldParams
         {
             var researchStr = startingResearch
                 .OrderByDescending(p => p.techLevel)
-                .Join(p => $"{p.label.CapitalizeFirst()} ({p.EffectiveTechLevel().ToStringHuman()})", "\n");
+                .Join(p => $"{p.label.CapitalizeFirst()} ({p.MinRequiredTechLevel().ToStringHuman()})", "\n");
 
             var msg = "WorldTechLevel.ScenarioWarning".Translate(
                 Find.Scenario.name, scenarioTechLevel.ToString(), WorldTechLevel.Current.ToString(), researchStr
@@ -150,7 +150,7 @@ internal static class Patch_Page_CreateWorldParams
         if (WorldTechLevel.Settings.Filter_Factions)
         {
             var toRemove = factions
-                .Where(f => f.EffectiveTechLevel() > WorldTechLevel.Current && f.displayInFactionSelection)
+                .Where(f => f.MinRequiredTechLevel() > WorldTechLevel.Current && f.displayInFactionSelection)
                 .ToList();
 
             foreach (var faction in toRemove)
@@ -161,7 +161,7 @@ internal static class Patch_Page_CreateWorldParams
         }
 
         var toAdd = _removedFactions
-            .Where(f => f.EffectiveTechLevel() <= WorldTechLevel.Current)
+            .Where(f => f.MinRequiredTechLevel() <= WorldTechLevel.Current)
             .ToList();
 
         foreach (var faction in toAdd)

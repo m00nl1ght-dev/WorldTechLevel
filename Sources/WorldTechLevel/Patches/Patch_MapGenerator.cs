@@ -18,6 +18,6 @@ internal static class Patch_MapGenerator
     [HarmonyPatch(nameof(MapGenerator.GenerateContentsIntoMap))]
     private static void GenerateContentsIntoMap_Prefix(ref IEnumerable<GenStepWithParams> genStepDefs)
     {
-        genStepDefs = genStepDefs.Where(f => f.def.EffectiveTechLevel() <= WorldTechLevel.Current);
+        genStepDefs = genStepDefs.Where(f => f.def.MinRequiredTechLevel() <= WorldTechLevel.Current);
     }
 }

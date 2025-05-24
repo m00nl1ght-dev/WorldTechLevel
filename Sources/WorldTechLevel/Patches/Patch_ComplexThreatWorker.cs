@@ -16,6 +16,6 @@ internal static class Patch_ComplexThreatWorker
     [HarmonyPatch(nameof(ComplexThreatWorker.CanResolve))]
     internal static void CanResolve_Postfix(ComplexThreatWorker __instance, ref bool __result)
     {
-        if (__instance.def.EffectiveTechLevel() > WorldTechLevel.Current) __result = false;
+        if (__instance.def.MinRequiredTechLevel() > WorldTechLevel.Current) __result = false;
     }
 }

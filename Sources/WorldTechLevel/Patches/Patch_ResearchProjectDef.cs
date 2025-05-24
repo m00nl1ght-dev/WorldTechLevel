@@ -15,6 +15,6 @@ internal static class Patch_ResearchProjectDef
     [HarmonyPatch(nameof(ResearchProjectDef.CanStartNow), MethodType.Getter)]
     internal static void CanStartNow_Postfix(ResearchProjectDef __instance, ref bool __result)
     {
-        __result = __result && __instance.EffectiveTechLevel() <= TechLevelUtility.PlayerResearchFilterLevel();
+        __result = __result && __instance.MinRequiredTechLevel() <= TechLevelUtility.PlayerResearchFilterLevel();
     }
 }

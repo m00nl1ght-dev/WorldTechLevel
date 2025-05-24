@@ -100,7 +100,7 @@ internal static class TechLevelDatabase<T> where T : Def
         if (DefDatabase<T>.defsList.Count != Levels.Length && Levels.Length > 0)
         {
             WorldTechLevel.Logger.Warn($"{typeof(T).Name} database was modified, re-initializing tech levels.");
-            EffectiveTechLevels.Initialize();
+            DefTechLevels.Initialize();
         }
     }
 

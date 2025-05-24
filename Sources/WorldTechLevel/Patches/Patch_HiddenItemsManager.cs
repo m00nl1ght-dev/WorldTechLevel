@@ -18,6 +18,6 @@ internal static class Patch_HiddenItemsManager
     internal static void Hidden_Postfix(ThingDef def, ref bool __result)
     {
         var filterLevel = TechLevelUtility.Max(WorldTechLevel.Current, ResearchUtility.CurrentResearchLevel);
-        __result = __result || def.EffectiveTechLevel() > filterLevel;
+        __result = __result || def.MinRequiredTechLevel() > filterLevel;
     }
 }

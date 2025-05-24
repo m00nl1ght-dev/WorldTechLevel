@@ -18,6 +18,6 @@ internal static class Patch_ResearchPrerequisitesUtility
     internal static void UnlockedDefsGroupedByPrerequisites_Postfix(ref List<Pair<ResearchPrerequisitesUtility.UnlockedHeader, List<Def>>> __result)
     {
         var filterLevel = TechLevelUtility.PlayerResearchFilterLevel();
-        __result.RemoveAll(p => p.first.unlockedBy.Any(r => r.EffectiveTechLevel() > filterLevel));
+        __result.RemoveAll(p => p.first.unlockedBy.Any(r => r.MinRequiredTechLevel() > filterLevel));
     }
 }

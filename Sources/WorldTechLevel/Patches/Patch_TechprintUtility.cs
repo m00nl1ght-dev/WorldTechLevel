@@ -18,6 +18,6 @@ internal static class Patch_TechprintUtility
     [HarmonyPatch(nameof(TechprintUtility.GetResearchProjectsNeedingTechprintsNow))]
     internal static void GetResearchProjectsNeedingTechprintsNow_Postfix(ref IEnumerable<ResearchProjectDef> __result)
     {
-        __result = __result.FilterByEffectiveTechLevel(TechLevelUtility.PlayerResearchFilterLevel());
+        __result = __result.FilterByMinRequiredTechLevel(TechLevelUtility.PlayerResearchFilterLevel());
     }
 }

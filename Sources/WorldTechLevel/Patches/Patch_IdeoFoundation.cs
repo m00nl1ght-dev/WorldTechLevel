@@ -17,6 +17,6 @@ internal static class Patch_IdeoFoundation
     [HarmonyPatch(nameof(IdeoFoundation.CanAdd))]
     internal static void CanAdd_Postfix(PreceptDef precept, ref AcceptanceReport __result)
     {
-        if (precept.EffectiveTechLevel() > WorldTechLevel.Current) __result = false;
+        if (precept.MinRequiredTechLevel() > WorldTechLevel.Current) __result = false;
     }
 }

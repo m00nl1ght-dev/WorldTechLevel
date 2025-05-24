@@ -24,6 +24,6 @@ internal static class Patch_PreceptWorker
     [HarmonyPostfix]
     internal static void GetThingDefs_Postfix(ref IEnumerable<PreceptThingChance> __result)
     {
-        __result = __result.Where(t => t.def.EffectiveTechLevel() <= WorldTechLevel.Current);
+        __result = __result.Where(t => t.def.MinRequiredTechLevel() <= WorldTechLevel.Current);
     }
 }

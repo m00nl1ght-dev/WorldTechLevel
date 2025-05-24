@@ -27,6 +27,6 @@ internal static class Patch_ResearchUtility
 
     private static List<ResearchProjectDef> FilteredResearch(List<ResearchProjectDef> input)
     {
-        return input.Where(def => def.EffectiveTechLevel() <= WorldTechLevel.Current).ToList();
+        return input.Where(def => def.MinRequiredTechLevel() <= WorldTechLevel.Current).ToList();
     }
 }

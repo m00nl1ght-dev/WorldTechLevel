@@ -29,7 +29,7 @@ internal static class Patch_GenStep_ScatterLumpsMineable
     private static IEnumerable<ThingDef> FilteredThings()
     {
         return DefDatabase<ThingDef>.AllDefs.Where(
-            def => def.building?.mineableThing == null || def.building.mineableThing.EffectiveTechLevel() <= WorldTechLevel.Current
+            def => def.building?.mineableThing == null || def.building.mineableThing.MinRequiredTechLevel() <= WorldTechLevel.Current
         );
     }
 }

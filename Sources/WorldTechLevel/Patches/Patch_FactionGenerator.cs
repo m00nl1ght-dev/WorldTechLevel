@@ -18,6 +18,6 @@ internal static class Patch_FactionGenerator
     [HarmonyPatch(nameof(FactionGenerator.ConfigurableFactions), MethodType.Getter)]
     internal static void GetConfigurableFactions(ref IEnumerable<FactionDef> __result)
     {
-        __result = __result.Where(f => f.EffectiveTechLevel() <= WorldTechLevel.Current);
+        __result = __result.Where(f => f.MinRequiredTechLevel() <= WorldTechLevel.Current);
     }
 }

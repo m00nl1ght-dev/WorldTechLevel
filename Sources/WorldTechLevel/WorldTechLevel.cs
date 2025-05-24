@@ -44,7 +44,7 @@ public class WorldTechLevel : Mod
         MainPatchGroup.CheckForConflicts(Logger);
         FiltersPatchGroup.CheckForConflicts(Logger);
 
-        EffectiveTechLevels.Initialize();
+        DefTechLevels.Initialize();
         Settings.LogFilterInfo();
     }
 

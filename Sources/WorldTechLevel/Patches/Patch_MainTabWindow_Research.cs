@@ -29,7 +29,7 @@ internal static class Patch_MainTabWindow_Research
             var filterLevel = TechLevelUtility.PlayerResearchFilterLevel();
 
             __instance.cachedVisibleResearchProjects.RemoveAll(
-                def => def.EffectiveTechLevel() > filterLevel && !def.IsFinished
+                def => def.MinRequiredTechLevel() > filterLevel && !def.IsFinished
             );
         }
     }

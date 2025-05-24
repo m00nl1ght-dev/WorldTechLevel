@@ -28,7 +28,7 @@ internal static class Patch_WorldGenerator
     [HarmonyPatch(nameof(WorldGenerator.GenStepsInOrder), MethodType.Getter)]
     private static void GetGenStepsInOrder_Postfix(ref IEnumerable<WorldGenStepDef> __result)
     {
-        __result = __result.FilterByEffectiveTechLevel();
+        __result = __result.FilterByMinRequiredTechLevel();
     }
 
     [HarmonyPrefix]

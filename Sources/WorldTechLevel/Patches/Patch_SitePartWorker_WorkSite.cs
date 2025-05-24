@@ -17,6 +17,6 @@ internal static class Patch_SitePartWorker_WorkSite
     [HarmonyPatch(nameof(SitePartWorker_WorkSite.LootThings))]
     internal static void LootThings_Postfix(ref IEnumerable<SitePartWorker_WorkSite.CampLootThingStruct> __result)
     {
-        __result = __result.Where(e => e.thing.EffectiveTechLevel() <= WorldTechLevel.Current);
+        __result = __result.Where(e => e.thing.MinRequiredTechLevel() <= WorldTechLevel.Current);
     }
 }

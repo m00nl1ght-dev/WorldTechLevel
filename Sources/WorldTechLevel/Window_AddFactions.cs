@@ -43,7 +43,7 @@ public class Window_AddFactions : Window
 
         var available = DefDatabase<FactionDef>.AllDefs
             .Where(d => d.displayInFactionSelection && !d.hidden && !d.isPlayer && d.maxConfigurableAtWorldCreation > 0)
-            .Where(d => d.EffectiveTechLevel() > prevTechLevel && d.EffectiveTechLevel() <= WorldTechLevel.Current)
+            .Where(d => d.MinRequiredTechLevel() > prevTechLevel && d.MinRequiredTechLevel() <= WorldTechLevel.Current)
             .Where(d => factionManager.AllFactions.All(f => f.def != d))
             .ToList();
 

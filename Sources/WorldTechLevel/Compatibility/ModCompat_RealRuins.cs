@@ -33,14 +33,14 @@ internal class ModCompat_RealRuins : ModCompat
     private static TerrainDef GetNamedTerrainDef(string defName, bool errorOnFail)
     {
         var terrainDef = DefDatabase<TerrainDef>.GetNamed(defName, errorOnFail);
-        if (terrainDef != null && terrainDef.EffectiveTechLevel() > WorldTechLevel.Current) return null;
+        if (terrainDef != null && terrainDef.MinRequiredTechLevel() > WorldTechLevel.Current) return null;
         return terrainDef;
     }
 
     private static ThingDef GetNamedThingDef(string defName, bool errorOnFail)
     {
         var thingDef = DefDatabase<ThingDef>.GetNamed(defName, errorOnFail);
-        if (thingDef != null && thingDef.EffectiveTechLevel() > WorldTechLevel.Current) return null;
+        if (thingDef != null && thingDef.MinRequiredTechLevel() > WorldTechLevel.Current) return null;
         return thingDef;
     }
 }

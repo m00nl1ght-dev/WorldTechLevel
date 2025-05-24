@@ -29,6 +29,6 @@ internal static class Patch_QuestNode_Root_WorkSite
 
     private static IEnumerable<FactionDef> FilteredDefs()
     {
-        return DefDatabase<FactionDef>.AllDefs.Where(f => f.EffectiveTechLevel() <= WorldTechLevel.Current);
+        return DefDatabase<FactionDef>.AllDefs.Where(f => f.MinRequiredTechLevel() <= WorldTechLevel.Current);
     }
 }

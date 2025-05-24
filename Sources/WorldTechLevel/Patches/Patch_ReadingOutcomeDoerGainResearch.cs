@@ -16,7 +16,7 @@ internal static class Patch_ReadingOutcomeDoerGainResearch
     [HarmonyPatch(nameof(ReadingOutcomeDoerGainResearch.IsValid))]
     internal static void IsValid_Postfix(ResearchProjectDef project, ref bool __result)
     {
-        if (__result && project.EffectiveTechLevel() > WorldTechLevel.Current)
+        if (__result && project.MinRequiredTechLevel() > WorldTechLevel.Current)
         {
             __result = false;
         }

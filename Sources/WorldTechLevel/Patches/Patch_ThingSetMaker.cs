@@ -52,10 +52,10 @@ internal static class Patch_ThingSetMaker
     [HarmonyPatch(typeof(ThingSetMaker_Meteorite), nameof(ThingSetMaker_Meteorite.FindRandomMineableDef))]
     internal static void Meteorite_FindRandomMineableDef_Postfix(ref ThingDef __result)
     {
-        if (__result.building?.mineableThing?.EffectiveTechLevel() > WorldTechLevel.Current)
+        if (__result.building?.mineableThing?.MinRequiredTechLevel() > WorldTechLevel.Current)
         {
             __result = ThingSetMaker_Meteorite.nonSmoothedMineables
-                .Where(t => t.building?.mineableThing?.EffectiveTechLevel() <= WorldTechLevel.Current)
+                .Where(t => t.building?.mineableThing?.MinRequiredTechLevel() <= WorldTechLevel.Current)
                 .RandomElement() ?? ThingSetMaker_Meteorite.nonSmoothedMineables[0];
         }
     }
@@ -64,35 +64,35 @@ internal static class Patch_ThingSetMaker
     [HarmonyPatch(typeof(ThingSetMaker_Pawn), nameof(ThingSetMaker.Generate))]
     internal static bool Pawn_Generate_Prefix(ThingSetMaker_Pawn __instance)
     {
-        return __instance.pawnKind.EffectiveTechLevel() <= WorldTechLevel.Current;
+        return __instance.pawnKind.MinRequiredTechLevel() <= WorldTechLevel.Current;
     }
 
     [HarmonyPrefix]
     [HarmonyPatch(typeof(ThingSetMaker_MapGen_AncientPodContents), nameof(ThingSetMaker_MapGen_AncientPodContents.MakeIntoContainer))]
     internal static bool AncientPodContents_MakeIntoContainer_Prefix(ThingDef def)
     {
-        return def.EffectiveTechLevel() <= WorldTechLevel.Current;
+        return def.MinRequiredTechLevel() <= WorldTechLevel.Current;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_RandomGeneralGoods), nameof(ThingSetMaker_RandomGeneralGoods.RandomMeals))]
     internal static void RandomGeneralGoods_RandomMeals_Postfix(ref Thing __result)
     {
-        if (__result.def.EffectiveTechLevel() > WorldTechLevel.Current) __result = null;
+        if (__result.def.MinRequiredTechLevel() > WorldTechLevel.Current) __result = null;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_RandomGeneralGoods), nameof(ThingSetMaker_RandomGeneralGoods.RandomMedicine))]
     internal static void RandomGeneralGoods_RandomMedicine_Postfix(ref Thing __result)
     {
-        if (__result.def.EffectiveTechLevel() > WorldTechLevel.Current) __result = null;
+        if (__result.def.MinRequiredTechLevel() > WorldTechLevel.Current) __result = null;
     }
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ThingSetMaker_ResourcePod), nameof(ThingSetMaker_ResourcePod.PossiblePodContentsDefs))]
     internal static void ResourcePod_PossiblePodContentsDefs_Postfix(ref IEnumerable<ThingDef> __result)
     {
-        __result = __result.FilterByEffectiveTechLevel();
+        __result = __result.FilterByMinRequiredTechLevel();
     }
 
     [HarmonyPostfix]
@@ -103,7 +103,7 @@ internal static class Patch_ThingSetMaker
 
         if (WorldTechLevel.Current != TechLevel.Archotech)
         {
-            outThings.RemoveAll(t => t.def.EffectiveTechLevel() > WorldTechLevel.Current);
+            outThings.RemoveAll(t => t.def.MinRequiredTechLevel() > WorldTechLevel.Current);
         }
     }
 }

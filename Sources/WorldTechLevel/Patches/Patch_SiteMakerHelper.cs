@@ -21,7 +21,7 @@ internal static class Patch_SiteMakerHelper
     {
         if (WorldTechLevel.Current != TechLevel.Archotech)
         {
-            __result = __result.Where(p => p.EffectiveTechLevel() <= WorldTechLevel.Current);
+            __result = __result.Where(p => p.MinRequiredTechLevel() <= WorldTechLevel.Current);
         }
     }
 }

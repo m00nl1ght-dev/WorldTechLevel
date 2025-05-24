@@ -66,7 +66,7 @@ internal static class Patch_BaseGen
 
     private static void ProcessRules(ref List<RuleDef> rulesRef)
     {
-        if (rulesRef != null && rulesRef.Any(d => d.EffectiveTechLevel() > WorldTechLevel.Current))
+        if (rulesRef != null && rulesRef.Any(d => d.MinRequiredTechLevel() > WorldTechLevel.Current))
         {
             rulesRef = rulesRef.FilterWithAlternatives().ToList();
         }

@@ -17,7 +17,7 @@ internal class ModCompat_DubsMintMenus : ModCompat
     [HarmonyPatch("DubsMintMenus.MainTabWindow_MintResearch", "parc")]
     private static bool Parc_Prefix(ResearchProjectDef p, ref bool __result)
     {
-        if (p.EffectiveTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
+        if (p.MinRequiredTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
         {
             __result = false;
             return false;

@@ -32,6 +32,6 @@ internal static class Patch_NaturalRandomQuestChooser
 
     private static IEnumerable<QuestScriptDef> FilteredQuests()
     {
-        return DefDatabase<QuestScriptDef>.AllDefs.FilterByEffectiveTechLevel();
+        return DefDatabase<QuestScriptDef>.AllDefs.FilterByMinRequiredTechLevel();
     }
 }

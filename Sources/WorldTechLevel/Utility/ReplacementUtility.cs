@@ -23,7 +23,7 @@ public static class ReplacementUtility
 
         bool Filter(TechLevelDatabase<T>.Alternative option)
         {
-            var level = option.def.EffectiveTechLevel();
+            var level = option.def.MinRequiredTechLevel();
             if (level != targetLevel && level != TechLevel.Undefined) return false;
             return validator == null || validator(option.def);
         }
@@ -45,7 +45,7 @@ public static class ReplacementUtility
         if (thing.def.IsApparel && WorldTechLevel.Current > TechLevel.Neolithic)
             minLevel = TechLevel.Medieval;
 
-        if (thing.def.EffectiveTechLevel() > WorldTechLevel.Current)
+        if (thing.def.MinRequiredTechLevel() > WorldTechLevel.Current)
             newDef = thing.def.GetAlternative(WorldTechLevel.Current, minLevel, owner == null ? null : ApparelValidator);
 
         if (newDef == null)
@@ -100,7 +100,7 @@ public static class ReplacementUtility
 
         foreach (var original in source)
         {
-            if (original.EffectiveTechLevel() <= techLevel)
+            if (original.MinRequiredTechLevel() <= techLevel)
             {
                 yield return original;
             }
@@ -117,7 +117,7 @@ public static class ReplacementUtility
 
         bool Validator(ThingDef stuff)
         {
-            if (stuff.EffectiveTechLevel() >= WorldTechLevel.Current) return false;
+            if (stuff.MinRequiredTechLevel() >= WorldTechLevel.Current) return false;
             if (owner == null || !def.IsApparel) return true;
             return PawnApparelGenerator.CanUseStuff(owner, new ThingStuffPair { thing = def, stuff = stuff });
         }

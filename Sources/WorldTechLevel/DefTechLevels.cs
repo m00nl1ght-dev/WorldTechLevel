@@ -5,7 +5,7 @@ using Verse;
 
 namespace WorldTechLevel;
 
-public static class EffectiveTechLevels
+public static class DefTechLevels
 {
     private static readonly List<TechLevel> _tmpList = [];
 
@@ -110,7 +110,7 @@ public static class EffectiveTechLevels
                 foreach (var pre in other.hiddenPrerequisites)
                     queue.Enqueue(pre);
 
-            if (other.EffectiveTechLevel() > techLevel)
+            if (other.MinRequiredTechLevel() > techLevel)
                 techLevel = other.techLevel;
 
             iterations++;
@@ -124,7 +124,7 @@ public static class EffectiveTechLevels
         if (def is { generated: true, thingCategories: not null })
         {
             if (def.GetCompProperties<CompProperties_Techprint>() is { } techprint)
-                return techprint.project.EffectiveTechLevel();
+                return techprint.project.MinRequiredTechLevel();
         }
 
         if (def is { techLevel: TechLevel.Archotech, thingCategories: not null })
@@ -141,16 +141,16 @@ public static class EffectiveTechLevels
 
         if (def.researchPrerequisites != null)
             foreach (var project in def.researchPrerequisites)
-                _tmpList.Add(project.EffectiveTechLevel());
+                _tmpList.Add(project.MinRequiredTechLevel());
 
         if (def.recipeMaker != null)
         {
             if (def.recipeMaker.researchPrerequisite != null)
-                _tmpList.Add(def.recipeMaker.researchPrerequisite.EffectiveTechLevel());
+                _tmpList.Add(def.recipeMaker.researchPrerequisite.MinRequiredTechLevel());
 
             if (def.recipeMaker.researchPrerequisites != null)
                 foreach (var project in def.recipeMaker.researchPrerequisites)
-                    _tmpList.Add(project.EffectiveTechLevel());
+                    _tmpList.Add(project.MinRequiredTechLevel());
         }
 
         return _tmpList.Max();
@@ -166,7 +166,7 @@ public static class EffectiveTechLevels
 
         if (def.costList != null)
             foreach (var entry in def.costList)
-                _tmpList.Add(entry.thingDef.EffectiveTechLevel());
+                _tmpList.Add(entry.thingDef.MinRequiredTechLevel());
 
         if (def.GetCompProperties<CompProperties_Power>() != null)
             _tmpList.Add(TechLevel.Industrial);
@@ -184,7 +184,7 @@ public static class EffectiveTechLevels
 
         if (def.costList != null)
             foreach (var entry in def.costList)
-                _tmpList.Add(entry.thingDef.EffectiveTechLevel());
+                _tmpList.Add(entry.thingDef.MinRequiredTechLevel());
 
         return _tmpList.Max();
     }
@@ -244,10 +244,10 @@ public static class EffectiveTechLevels
         {
             foreach (var kind in faction.pawnGroupMakers.SelectMany(g => g.options).Select(o => o.kind).Distinct())
             {
-                if (kind.EffectiveTechLevel() > faction.techLevel && kind.GetAlternative(faction.techLevel) == null)
+                if (kind.MinRequiredTechLevel() > faction.techLevel && kind.GetAlternative(faction.techLevel) == null)
                 {
                     WorldTechLevel.Logger.Warn(
-                        $"Pawn kind {kind.defName} ({kind.EffectiveTechLevel()}) " +
+                        $"Pawn kind {kind.defName} ({kind.MinRequiredTechLevel()}) " +
                         $"is used by faction {faction.defName} with lower tech level ({faction.techLevel})"
                     );
                 }

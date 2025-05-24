@@ -377,7 +377,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
     private void ApplyLevels()
     {
-        EffectiveTechLevels.Initialize();
+        DefTechLevels.Initialize();
         RefreshResearchViewWidth();
         _changedLevels = false;
     }
