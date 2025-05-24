@@ -1,4 +1,11 @@
 
+v1.1.4
+
+- Added option to select factions which will be excluded from all filtering
+- Advanced Components and Advanced Fabrication are now available at 'Industrial'
+- Added filtering for ancient car wrecks from 'Vanilla Vehicles Expanded'
+- Added default tech levels for incidents from the 'Sparkling Worlds' mod
+
 v1.1.3
 
 - Reworked weapon and apparel selection/filtering conditions
