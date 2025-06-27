@@ -1,4 +1,8 @@
 
+v1.1.5
+
+- Support for RimWorld 1.6
+
 v1.1.4
 
 - Added option to select factions which will be excluded from all filtering
