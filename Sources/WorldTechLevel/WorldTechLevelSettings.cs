@@ -349,6 +349,15 @@ public class WorldTechLevelSettings : LunarModSettings
             _listings.Add(new DefListing<XenotypeDef>(d => d != XenotypeDefOf.Baseliner));
         }
 
+        #if RW_1_6_OR_GREATER
+
+        if (ModsConfig.OdysseyActive)
+        {
+            _listings.Add(new DefListing<LandmarkDef>());
+        }
+
+        #endif
+
         SelectListing(_listings.First());
     }
 

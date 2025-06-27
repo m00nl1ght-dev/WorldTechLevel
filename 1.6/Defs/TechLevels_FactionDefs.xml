@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_FactionDefs</defName>
+        <defType>FactionDef</defType>
+        <entries>
+            <li>
+                <defName>Empire</defName>
+                <techLevel>Undefined</techLevel>
+                <ifModPresent>oskarpotocki.vfe.empire</ifModPresent>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_ThingDefs</defName>
+        <defType>ThingDef</defType>
+        <entries>
+
+            <!-- resources -->
+
+            <li>
+                <defName>Plasteel</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Uranium</defName>
+                <techLevel>Medieval</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Chemfuel</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Neutroamine</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Synthread</defName>
+                <techLevel>Spacer</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>Hyperweave</defName>
+                <techLevel>Spacer</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ComponentIndustrial</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ReinforcedBarrel</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>ComponentSpacer</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- apparel with misconfigured tech level in vanilla -->
+
+            <li>
+                <defName>Apparel_FlakPants</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_FlakJacket</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_PsychicFoilHelmet</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_GasMask</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Sash</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- culturally/historically not medieval -->
+
+            <li>
+                <defName>PokerTable</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>BilliardsTable</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_CowboyHat</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_BowlerHat</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_CollarShirt</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Duster</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_AuthorityCap</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Apparel_Slicecap</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+            <!-- food -->
+
+            <li>
+                <defName>MealSurvivalPack</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+            <li>
+                <defName>MealNutrientPaste</defName>
+                <techLevel>Industrial</techLevel>
+                <priority>-1</priority>
+            </li>
+
+            <!-- biotech -->
+
+            <li>
+                <defName>ArchiteCapsule</defName>
+                <techLevel>Archotech</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>Genepack</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>Xenogerm</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>DankPyon.MedievalGenepacks</unlessModPresent>
+            </li>
+            <li>
+                <defName>HumanOvum</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>HumanEmbryo</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>DeathrestCapacitySerum</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>Wastepack</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>SubcoreRegular</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SubcoreHigh</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>SignalChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>PowerfocusChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>NanostructuringChip</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>MechanoidTransponder</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ChunkMechanoidSlag</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Shard</defName>
+                <techLevel>Archotech</techLevel>
+            </li>
+            <li>
+                <defName>Schematic</defName>
+                <techLevel>Industrial</techLevel>
+                <ifModPresent>dankpyon.medieval.overhaul</ifModPresent>
+            </li>
+
+            <!-- VFEE -->
+
+            <li>
+                <defName>VFEE_Aperitif</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- VVE -->
+
+            <li>
+                <defName>VVE_*Wreck</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+            <!-- DD Elves -->
+
+            <li>
+                <defName>DevDesigner_WoodElves_AlarielleStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+            <li>
+                <defName>DevDesigner_WoodElves_ShamanStaff</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+            <!-- MFTRQ -->
+
+            <li>
+                <defName>Neurotrainer_*</defName>
+                <techLevel>Medieval</techLevel>
+                <ifModPresent>BotchJob.MedievalFantasyThemedRelicQuests</ifModPresent>
+            </li>
+            <li>
+                <defName>Psytrainer_*</defName>
+                <techLevel>Medieval</techLevel>
+                <ifModPresent>BotchJob.MedievalFantasyThemedRelicQuests</ifModPresent>
+            </li>
+
+            <!-- AA -->
+
+            <li>
+                <defName>AA_Hexagel</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+            <li>
+                <defName>AA_HexagelCore</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+
+        </entries>
+        <alternatives>
+            <li>
+                <categories>
+                    <li>FoodMeals</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>MealSurvivalPack</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_MealRations</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MealSimple</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>Medicine</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>MedicineIndustrial</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MedicineHerbal</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>WeaponsMelee</li>
+                    <li>WeaponsMeleeBladelink</li>
+                </categories>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>MeleeWeapon_LongSword</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Gladius</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Mace</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>MeleeWeapon_Knife</defName></li>
+                    <li><weight>1.0</weight><defName>MeleeWeapon_Spear</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Ikwa</defName></li>
+                    <li><weight>0.5</weight><defName>MeleeWeapon_Club</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>WeaponsRanged</li>
+                    <li>Grenades</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Gun_Revolver</defName></li>
+                    <li><weight>1.0</weight><defName>Gun_AssaultRifle</defName></li>
+                    <li><weight>0.5</weight><defName>Gun_BoltActionRifle</defName></li>
+                    <li><weight>0.5</weight><defName>Gun_PumpShotgun</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>Bow_Short</defName></li>
+                    <li><weight>0.5</weight><defName>Bow_Recurve</defName></li>
+                    <li><weight>0.5</weight><defName>Bow_Great</defName></li>
+                </options>
+            </li>
+            <li>
+                <categories>
+                    <li>Apparel</li>
+                </categories>
+                <options>
+                    <!-- Industrial -->
+                    <li><weight>1.0</weight><defName>Apparel_FlakVest</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_FlakJacket</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_FlakPants</defName></li>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>Apparel_PlateArmor</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_BasicShirt</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_Pants</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidShirt</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidPants</defName></li>
+                    <!-- Neolithic -->
+                    <li><weight>1.0</weight><defName>Apparel_TribalA</defName></li>
+                    <li><weight>1.0</weight><defName>Apparel_KidTribal</defName></li>
+                </options>
+            </li>
+            <li>
+                <targets>
+                    <li>Schematic</li>
+                </targets>
+                <options>
+                    <!-- Medieval -->
+                    <li><weight>1.0</weight><defName>DankPyon_Schematic</defName></li>
+                </options>
+            </li>
+        </alternatives>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

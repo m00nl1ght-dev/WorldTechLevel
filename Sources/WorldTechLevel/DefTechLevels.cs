@@ -77,6 +77,13 @@ public static class DefTechLevels
         TechLevelDatabase<RuleDef>.Initialize();
         TechLevelDatabase<RuleDef>.ApplyOverrides();
 
+        #if RW_1_6_OR_GREATER
+
+        TechLevelDatabase<LandmarkDef>.Initialize();
+        TechLevelDatabase<LandmarkDef>.ApplyOverrides();
+
+        #endif
+
         #if DEBUG
         WarnPawnKindFactionUsages();
         WarnResearchTechLevels();
@@ -192,10 +199,16 @@ public static class DefTechLevels
 
     private static TechLevel PawnKindDef(PawnKindDef def)
     {
-        if (def.defaultFactionType is not { isPlayer: false })
+        #if RW_1_6_OR_GREATER
+        var defaultFaction = def.defaultFactionDef;
+        #else
+        var defaultFaction = def.defaultFactionType;
+        #endif
+
+        if (defaultFaction is not { isPlayer: false })
             return TechLevel.Undefined;
 
-        return def.defaultFactionType.techLevel;
+        return defaultFaction.techLevel;
     }
 
     private static TechLevel BackstoryDef(BackstoryDef def)

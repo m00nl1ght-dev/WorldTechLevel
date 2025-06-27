@@ -52,6 +52,7 @@ internal static class Patch_Page_CreateWorldParams
     }
 
     [HarmonyPrefix]
+    [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(Page_CreateWorldParams.CanDoNext))]
     internal static bool CanDoNext_Prefix(Page __instance, ref bool __result)
     {

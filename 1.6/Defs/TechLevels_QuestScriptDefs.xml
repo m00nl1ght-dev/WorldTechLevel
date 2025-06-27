@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_QuestScriptDefs</defName>
+        <defType>QuestScriptDef</defType>
+        <entries>
+
+            <li>
+                <defName>Util_MechCluster</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ThreatReward_MechPods_MiscReward</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ThreatReward_GameCondition_ItemPod</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>ThreatReward_GameCondition_Joiner</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>Util_GameConditionNegativeRandom</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>PollutionDump</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>SanguophageShip</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>RelicHunt</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+            <li>
+                <defName>OpportunitySite_AncientComplex</defName>
+                <techLevel>Industrial</techLevel>
+                <unlessModPresent>BotchJob.MedievalFantasyThemedRelicQuests</unlessModPresent>
+            </li>
+
+            <!-- Alpha Series -->
+
+            <li>
+                <defName>AG_OpportunitySite_AbandonedBiotechLab</defName>
+                <techLevel>Ultra</techLevel>
+            </li>
+            <li>
+                <defName>Abooks_OpportunitySite_RuinedLibrary</defName>
+                <techLevel>Medieval</techLevel>
+            </li>
+
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

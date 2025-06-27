@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+    <WorldTechLevel.TechLevelConfigDef>
+        <defName>WTL_RaidStrategyDefs</defName>
+        <defType>RaidStrategyDef</defType>
+        <entries>
+            <li>
+                <defName>Siege</defName>
+                <techLevel>Industrial</techLevel>
+            </li>
+        </entries>
+    </WorldTechLevel.TechLevelConfigDef>
+</Defs>

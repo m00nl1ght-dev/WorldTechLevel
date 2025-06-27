@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using LunarFramework.Patching;
@@ -21,7 +22,7 @@ internal static class Patch_QuestNode_GenerateThreats
     private static IEnumerable<CodeInstruction> RunInt_Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         var pattern = TranspilerPattern.Build("RunInt")
-            .MatchCall(typeof(GenCollection), nameof(GenCollection.RandomElement), null, [typeof(Faction)])
+            .Match(ci => ci.opcode == OpCodes.Call && ci.operand is MethodInfo { Name: "RandomElement" })
             .Replace(OpCodes.Call, AccessTools.Method(typeof(Patch_QuestNode_GenerateThreats), nameof(RandomFactionWithFallback)));
 
         return TranspilerPattern.Apply(instructions, pattern);
