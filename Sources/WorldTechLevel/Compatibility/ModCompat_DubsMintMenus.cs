@@ -14,7 +14,11 @@ internal class ModCompat_DubsMintMenus : ModCompat
     private static bool IsFilterEnabled() => WorldTechLevel.Settings.Filter_Research;
 
     [HarmonyPrefix]
+    #if RW_1_6_OR_GREATER
+    [HarmonyPatch("DubsMintMenus.MainTabWindow_MintResearch", "IsProjectAvailable")]
+    #else
     [HarmonyPatch("DubsMintMenus.MainTabWindow_MintResearch", "parc")]
+    #endif
     private static bool Parc_Prefix(ResearchProjectDef p, ref bool __result)
     {
         if (p.MinRequiredTechLevel() > TechLevelUtility.PlayerResearchFilterLevel())
