@@ -137,6 +137,21 @@
                 <techLevel>Ultra</techLevel>
             </li>
 
+            <!-- VFE Insectoids 2 -->
+
+            <li>
+                <defName>VFEI_InfestedChunkCrash</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>VFEI_InfestedPartCrash</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+            <li>
+                <defName>VFEI_InfestedModuleCrash</defName>
+                <techLevel>Spacer</techLevel>
+            </li>
+
             <!-- Sparkling Worlds -->
 
             <li>
