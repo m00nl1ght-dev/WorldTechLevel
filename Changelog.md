@@ -1,4 +1,11 @@
 
+v1.1.6
+
+- Added filtering for Odyssey DLC landmarks and map features
+- Added default tech levels for incidents from VFE Insectoids 2
+- Added mod setting for dev quick test world tech level
+- Fixed compatibility patch for Dubs Mint Menus
+
 v1.1.5
 
 - Support for RimWorld 1.6
