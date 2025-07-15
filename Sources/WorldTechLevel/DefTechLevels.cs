@@ -79,8 +79,8 @@ public static class DefTechLevels
 
         #if RW_1_6_OR_GREATER
 
-        TechLevelDatabase<LandmarkDef>.Initialize();
-        TechLevelDatabase<LandmarkDef>.ApplyOverrides();
+        TechLevelDatabase<TileMutatorDef>.Initialize();
+        TechLevelDatabase<TileMutatorDef>.ApplyOverrides();
 
         #endif
 

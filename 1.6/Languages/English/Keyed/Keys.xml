@@ -79,7 +79,7 @@
   <WorldTechLevel.Settings.DefListing.XenotypeDef>xenotypes</WorldTechLevel.Settings.DefListing.XenotypeDef>
   <WorldTechLevel.Settings.DefListing.FactionDef>factions</WorldTechLevel.Settings.DefListing.FactionDef>
   <WorldTechLevel.Settings.DefListing.RaidStrategyDef>raid strategies</WorldTechLevel.Settings.DefListing.RaidStrategyDef>
-  <WorldTechLevel.Settings.DefListing.LandmarkDef>landmarks</WorldTechLevel.Settings.DefListing.LandmarkDef>
+  <WorldTechLevel.Settings.DefListing.TileMutatorDef>map features</WorldTechLevel.Settings.DefListing.TileMutatorDef>
 
   <WorldTechLevel.Settings.DefListing.ShowAll>Show with and without user override</WorldTechLevel.Settings.DefListing.ShowAll>
   <WorldTechLevel.Settings.DefListing.ShowOnlyNonDefault>Show only defs with user override</WorldTechLevel.Settings.DefListing.ShowOnlyNonDefault>

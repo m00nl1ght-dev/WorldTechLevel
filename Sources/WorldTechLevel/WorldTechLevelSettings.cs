@@ -353,7 +353,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
         if (ModsConfig.OdysseyActive)
         {
-            _listings.Add(new DefListing<LandmarkDef>());
+            _listings.Add(new DefListing<TileMutatorDef>());
         }
 
         #endif
