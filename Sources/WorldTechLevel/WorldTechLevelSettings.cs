@@ -42,6 +42,8 @@ public class WorldTechLevelSettings : LunarModSettings
 
     public readonly Entry<List<string>> FactionsExcluded = MakeEntry(new List<string>());
 
+    public readonly Entry<TechLevel> DevQuickTestWorldTechLevel = MakeEntry(TechLevel.Archotech);
+
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
     private List<IDefListing> _listings;
@@ -297,6 +299,29 @@ public class WorldTechLevelSettings : LunarModSettings
         }
 
         LunarGUI.Label(layout.Abs(-1), "WorldTechLevel.Settings.FactionsExcluded".Translate(FactionsExcluded.Value.Count));
+
+        layout.End();
+
+        layout.BeginAbs(Text.LineHeight, new() { Reversed = true, Horizontal = true });
+
+        if (LunarGUI.Button(layout.Abs(100), DevQuickTestWorldTechLevel.Value.SelectionLabel()))
+        {
+            var options = new List<FloatMenuOption>();
+
+            foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+            {
+                if (value != TechLevel.Animal)
+                {
+                    options.Add(new FloatMenuOption(value.SelectionLabel(),
+                        () => DevQuickTestWorldTechLevel.Value = value)
+                    );
+                }
+            }
+
+            Find.WindowStack.Add(new FloatMenu(options));
+        }
+
+        LunarGUI.Label(layout.Abs(-1), "WorldTechLevel.Settings.DevQuickTestWorldTechLevel".Translate());
 
         layout.End();
     }

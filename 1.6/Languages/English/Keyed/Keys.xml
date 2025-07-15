@@ -106,6 +106,8 @@
   <WorldTechLevel.Settings.FactionsExcluded>Factions excluded from all filters ({0} selected)</WorldTechLevel.Settings.FactionsExcluded>
   <WorldTechLevel.Settings.FactionsExcluded.Select>Select</WorldTechLevel.Settings.FactionsExcluded.Select>
 
+  <WorldTechLevel.Settings.DevQuickTestWorldTechLevel>World tech level for dev quick test</WorldTechLevel.Settings.DevQuickTestWorldTechLevel>
+
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nAre you sure?\n\nScenario: {1}\nWorld: {2}\n\nStarting research from scenario:\n\n{3}</WorldTechLevel.ScenarioWarning>
 
   <WorldTechLevel.AddFactions.Message>New factions are available at this tech level. Select factions to add:</WorldTechLevel.AddFactions.Message>
