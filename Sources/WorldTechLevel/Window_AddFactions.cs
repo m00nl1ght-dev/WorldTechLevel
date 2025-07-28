@@ -42,7 +42,7 @@ public class Window_AddFactions : Window
         var factionManager = Find.FactionManager;
 
         var available = DefDatabase<FactionDef>.AllDefs
-            .Where(d => d.displayInFactionSelection && !d.hidden && !d.isPlayer && d.maxConfigurableAtWorldCreation > 0)
+            .Where(d => d.displayInFactionSelection && !d.isPlayer && d.maxConfigurableAtWorldCreation > 0)
             .Where(d => d.MinRequiredTechLevel() > prevTechLevel && d.MinRequiredTechLevel() <= WorldTechLevel.Current)
             .Where(d => factionManager.AllFactions.All(f => f.def != d))
             .ToList();
@@ -119,13 +119,16 @@ public class Window_AddFactions : Window
 
             foreach (var faction in added)
             {
-                for (int i = 0; i < Rand.RangeInclusive(3, 7); i++)
+                if (!faction.def.hidden)
                 {
-                    var settlement = (Settlement) WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
-                    settlement.SetFaction(faction);
-                    settlement.Tile = TileFinder.RandomSettlementTileFor(faction);
-                    settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
-                    Find.WorldObjects.Add(settlement);
+                    for (int i = 0; i < Rand.RangeInclusive(3, 7); i++)
+                    {
+                        var settlement = (Settlement) WorldObjectMaker.MakeWorldObject(WorldObjectDefOf.Settlement);
+                        settlement.SetFaction(faction);
+                        settlement.Tile = TileFinder.RandomSettlementTileFor(faction);
+                        settlement.Name = SettlementNameGenerator.GenerateSettlementName(settlement);
+                        Find.WorldObjects.Add(settlement);
+                    }
                 }
             }
 
