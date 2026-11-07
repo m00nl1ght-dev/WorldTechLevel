@@ -32,8 +32,9 @@ internal static class Patch_ThingSetMaker
     [HarmonyPrefix]
     [HarmonyPriority(Priority.High)]
     [HarmonyPatch(nameof(ThingSetMaker.Generate), [typeof(ThingSetMakerParams)])]
-    internal static void Generate_Prefix(ref ThingSetMakerParams parms)
+    internal static void Generate_Prefix(ref ThingSetMakerParams parms, out TechLevel __state)
     {
+        __state = _filterLevel;
         _filterLevel = parms.makingFaction.CurrentFilterLevel();
 
         if (_filterLevel != TechLevel.Archotech)
@@ -47,9 +48,9 @@ internal static class Patch_ThingSetMaker
 
     [HarmonyFinalizer]
     [HarmonyPatch(nameof(ThingSetMaker.Generate), [typeof(ThingSetMakerParams)])]
-    internal static void Generate_Finalizer()
+    internal static void Generate_Finalizer(TechLevel __state)
     {
-        _filterLevel = TechLevel.Archotech;
+        _filterLevel = __state;
     }
 
     [HarmonyPostfix]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
@@ -18,6 +19,6 @@ internal static class Patch_ThingSetMakerUtility
     [HarmonyPatch(nameof(ThingSetMakerUtility.GetAllowedThingDefs))]
     internal static void GetAllowedThingDefs_Postfix(ref ThingSetMakerParams parms, ref IEnumerable<ThingDef> __result)
     {
-        __result = __result.FilterWithAlternatives(parms.makingFaction.CurrentFilterLevel());
+        __result = __result.FilterWithAlternatives(parms.makingFaction.CurrentFilterLevel()).ToList();
     }
 }

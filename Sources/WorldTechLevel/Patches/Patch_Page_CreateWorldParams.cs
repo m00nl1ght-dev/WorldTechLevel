@@ -149,7 +149,7 @@ internal static class Patch_Page_CreateWorldParams
         return pos;
     }
 
-    private static void ApplyChanges(List<FactionDef> factions, ref float pollution)
+    internal static void ApplyChanges(List<FactionDef> factions, ref float pollution)
     {
         if (WorldTechLevel.Settings.Filter_Factions)
         {

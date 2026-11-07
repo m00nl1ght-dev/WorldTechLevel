@@ -115,7 +115,7 @@ public static class ReplacementUtility
 
         bool Validator(ThingDef stuff)
         {
-            if (stuff.MinRequiredTechLevel() >= WorldTechLevel.Current) return false;
+            if (stuff.MinRequiredTechLevel() > WorldTechLevel.Current) return false;
             if (owner == null || !def.IsApparel) return true;
             return PawnApparelGenerator.CanUseStuff(owner, new ThingStuffPair { thing = def, stuff = stuff });
         }
