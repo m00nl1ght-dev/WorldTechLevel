@@ -7,6 +7,7 @@ using LunarFramework.Utility;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using WorldTechLevel.Compatibility;
 
 namespace WorldTechLevel;
 
@@ -43,6 +44,9 @@ public class WorldTechLevelSettings : LunarModSettings
     public readonly Entry<List<string>> FactionsExcluded = MakeEntry(new List<string>());
 
     public readonly Entry<TechLevel> DevQuickTestWorldTechLevel = MakeEntry(TechLevel.Archotech);
+
+    public readonly Entry<TechLevel> Multiplayer_WorldTechLevel = MakeEntry(TechLevel.Undefined);
+    public readonly Entry<bool> Multiplayer_LockInGame = MakeEntry(false);
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -324,6 +328,40 @@ public class WorldTechLevelSettings : LunarModSettings
         LunarGUI.Label(layout.Abs(-1), "WorldTechLevel.Settings.DevQuickTestWorldTechLevel".Translate());
 
         layout.End();
+
+        if (ModCompat_RimWorldTogether.Active)
+        {
+            layout.BeginAbs(Text.LineHeight, new() { Reversed = true, Horizontal = true });
+
+            if (LunarGUI.Button(layout.Abs(100), MultiplayerLevelLabel(Multiplayer_WorldTechLevel.Value)))
+            {
+                var options = new List<FloatMenuOption>();
+
+                foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
+                {
+                    if (value != TechLevel.Animal)
+                    {
+                        options.Add(new FloatMenuOption(MultiplayerLevelLabel(value),
+                            () => Multiplayer_WorldTechLevel.Value = value)
+                        );
+                    }
+                }
+
+                Find.WindowStack.Add(new FloatMenu(options));
+            }
+
+            LunarGUI.Label(layout.Abs(-1), Label("Multiplayer_WorldTechLevel"));
+
+            layout.End();
+
+            LunarGUI.Checkbox(layout, ref Multiplayer_LockInGame.Value, Label("Multiplayer_LockInGame"));
+        }
+    }
+
+    private string MultiplayerLevelLabel(TechLevel techLevel)
+    {
+        if (techLevel == TechLevel.Undefined) return Label("Multiplayer_WorldTechLevel.None");
+        return techLevel.SelectionLabel();
     }
 
     private readonly string[] _excludedThingCategories = [

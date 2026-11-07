@@ -3,6 +3,7 @@ using System.Reflection;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
+using Verse;
 
 namespace WorldTechLevel.Patches;
 
@@ -21,35 +22,35 @@ internal static class Patch_StockGenerator
         yield return AccessTools.Method(typeof(StockGenerator_Tag), nameof(StockGenerator.GenerateThings));
     }
 
-    [HarmonyPrefix]
-    [HarmonyPriority(Priority.High)]
-    private static void GenerateThings_Prefix(StockGenerator __instance, Faction faction, ref State __state)
-    {
-        __state.maxTechLevelBuy = __instance.maxTechLevelBuy;
-        __state.maxTechLevelGenerate = __instance.maxTechLevelGenerate;
-
-        var filterLevel = faction.CurrentFilterLevel();
-
-        if (__instance.trader is { orbital: true } && WorldTechLevel.Settings.AlwaysAllowOffworld) return;
-
-        if (__instance.maxTechLevelBuy > filterLevel)
-            __instance.maxTechLevelBuy = filterLevel;
-
-        if (__instance.maxTechLevelGenerate > filterLevel)
-            __instance.maxTechLevelGenerate = filterLevel;
-    }
-
     [HarmonyPostfix]
     [HarmonyPriority(Priority.Low)]
-    private static void GenerateThings_Postfix(StockGenerator __instance, ref State __state)
+    private static void GenerateThings_Postfix(StockGenerator __instance, Faction faction, ref IEnumerable<Thing> __result)
     {
-        __instance.maxTechLevelBuy = __state.maxTechLevelBuy;
-        __instance.maxTechLevelGenerate = __state.maxTechLevelGenerate;
+        if (__result == null) return;
+        if (__instance.trader is { orbital: true } && WorldTechLevel.Settings.AlwaysAllowOffworld) return;
+
+        __result = GenerateThingsClamped(__result, __instance, faction.CurrentFilterLevel());
     }
 
-    private struct State
+    private static IEnumerable<Thing> GenerateThingsClamped(IEnumerable<Thing> things, StockGenerator generator, TechLevel filterLevel)
     {
-        public TechLevel maxTechLevelGenerate;
-        public TechLevel maxTechLevelBuy;
+        var maxTechLevelBuy = generator.maxTechLevelBuy;
+        var maxTechLevelGenerate = generator.maxTechLevelGenerate;
+
+        if (maxTechLevelBuy > filterLevel)
+            generator.maxTechLevelBuy = filterLevel;
+
+        if (maxTechLevelGenerate > filterLevel)
+            generator.maxTechLevelGenerate = filterLevel;
+
+        try
+        {
+            foreach (var thing in things) yield return thing;
+        }
+        finally
+        {
+            generator.maxTechLevelBuy = maxTechLevelBuy;
+            generator.maxTechLevelGenerate = maxTechLevelGenerate;
+        }
     }
 }
