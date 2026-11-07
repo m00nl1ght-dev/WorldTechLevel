@@ -45,8 +45,12 @@ public class WorldTechLevelSettings : LunarModSettings
 
     public readonly Entry<TechLevel> DevQuickTestWorldTechLevel = MakeEntry(TechLevel.Archotech);
 
-    public readonly Entry<TechLevel> Multiplayer_WorldTechLevel = MakeEntry(TechLevel.Undefined);
-    public readonly Entry<bool> Multiplayer_LockInGame = MakeEntry(false);
+    #if RW_1_6_OR_GREATER
+
+    public readonly Entry<TechLevel> RimWorldTogether_WorldTechLevel = MakeEntry(TechLevel.Undefined);
+    public readonly Entry<bool> RimWorldTogether_LockInGame = MakeEntry(false);
+
+    #endif
 
     protected override string TranslationKeyPrefix => "WorldTechLevel.Settings";
 
@@ -314,7 +318,7 @@ public class WorldTechLevelSettings : LunarModSettings
 
             foreach (var value in Enum.GetValues(typeof(TechLevel)).Cast<TechLevel>())
             {
-                if (value != TechLevel.Animal)
+                if (value > TechLevel.Animal)
                 {
                     options.Add(new FloatMenuOption(value.SelectionLabel(),
                         () => DevQuickTestWorldTechLevel.Value = value)
@@ -329,11 +333,13 @@ public class WorldTechLevelSettings : LunarModSettings
 
         layout.End();
 
+        #if RW_1_6_OR_GREATER
+
         if (ModCompat_RimWorldTogether.Active)
         {
             layout.BeginAbs(Text.LineHeight, new() { Reversed = true, Horizontal = true });
 
-            if (LunarGUI.Button(layout.Abs(100), MultiplayerLevelLabel(Multiplayer_WorldTechLevel.Value)))
+            if (LunarGUI.Button(layout.Abs(100), RimWorldTogether_WorldTechLevel.Value.SelectionLabel()))
             {
                 var options = new List<FloatMenuOption>();
 
@@ -341,8 +347,8 @@ public class WorldTechLevelSettings : LunarModSettings
                 {
                     if (value != TechLevel.Animal)
                     {
-                        options.Add(new FloatMenuOption(MultiplayerLevelLabel(value),
-                            () => Multiplayer_WorldTechLevel.Value = value)
+                        options.Add(new FloatMenuOption(value.SelectionLabel(),
+                            () => RimWorldTogether_WorldTechLevel.Value = value)
                         );
                     }
                 }
@@ -350,18 +356,14 @@ public class WorldTechLevelSettings : LunarModSettings
                 Find.WindowStack.Add(new FloatMenu(options));
             }
 
-            LunarGUI.Label(layout.Abs(-1), Label("Multiplayer_WorldTechLevel"));
+            LunarGUI.Label(layout.Abs(-1), Label("RimWorldTogether_WorldTechLevel"));
 
             layout.End();
 
-            LunarGUI.Checkbox(layout, ref Multiplayer_LockInGame.Value, Label("Multiplayer_LockInGame"));
+            LunarGUI.Checkbox(layout, ref RimWorldTogether_LockInGame.Value, Label("RimWorldTogether_LockInGame"));
         }
-    }
 
-    private string MultiplayerLevelLabel(TechLevel techLevel)
-    {
-        if (techLevel == TechLevel.Undefined) return Label("Multiplayer_WorldTechLevel.None");
-        return techLevel.SelectionLabel();
+        #endif
     }
 
     private readonly string[] _excludedThingCategories = [

@@ -76,15 +76,20 @@ public static class TechLevelUtility
 
     public static string SelectionLabel(this TechLevel techLevel)
     {
-        return techLevel == TechLevel.Archotech
-            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
-            : techLevel.ToStringHuman().CapitalizeFirst();
+        return techLevel switch
+        {
+            TechLevel.Archotech => "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst(),
+            TechLevel.Undefined => "WorldTechLevel.NotSet".Translate().CapitalizeFirst(),
+            _ => techLevel.ToStringHuman().CapitalizeFirst()
+        };
     }
 
     public static string RevSelectionLabel(this TechLevel techLevel)
     {
-        return techLevel == TechLevel.Undefined
-            ? "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst()
-            : techLevel.ToStringHuman().CapitalizeFirst();
+        return techLevel switch
+        {
+            TechLevel.Undefined => "WorldTechLevel.Unrestricted".Translate().CapitalizeFirst(),
+            _ => techLevel.ToStringHuman().CapitalizeFirst()
+        };
     }
 }

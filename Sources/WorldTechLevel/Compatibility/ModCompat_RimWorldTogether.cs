@@ -1,3 +1,5 @@
+#if RW_1_6_OR_GREATER
+
 using System;
 using System.Linq;
 using System.Reflection;
@@ -45,7 +47,7 @@ internal class ModCompat_RimWorldTogether : ModCompat
     [HarmonyPatch(typeof(Page_CreateWorldParams), nameof(Page_CreateWorldParams.ResetFactionCounts))]
     private static void Page_CreateWorldParams_ResetFactionCounts_Postfix(Page_CreateWorldParams __instance)
     {
-        var level = WorldTechLevel.Settings.Multiplayer_WorldTechLevel.Value;
+        var level = WorldTechLevel.Settings.RimWorldTogether_WorldTechLevel.Value;
 
         if (level != TechLevel.Undefined && IsConnected)
         {
@@ -59,7 +61,7 @@ internal class ModCompat_RimWorldTogether : ModCompat
     [HarmonyPatch(typeof(WorldGenerator), nameof(WorldGenerator.GenerateWorld))]
     private static void WorldGenerator_GenerateWorld_Prefix()
     {
-        var level = WorldTechLevel.Settings.Multiplayer_WorldTechLevel.Value;
+        var level = WorldTechLevel.Settings.RimWorldTogether_WorldTechLevel.Value;
 
         if (level != TechLevel.Undefined && IsConnected)
         {
@@ -71,6 +73,8 @@ internal class ModCompat_RimWorldTogether : ModCompat
     [HarmonyPatch(typeof(Patch_WITab_Planet), nameof(Patch_WITab_Planet.FillTab_Postfix))]
     private static bool WITab_Planet_FillTab_Postfix_Prefix()
     {
-        return !WorldTechLevel.Settings.Multiplayer_LockInGame || Prefs.DevMode || !IsConnected;
+        return !WorldTechLevel.Settings.RimWorldTogether_LockInGame || Prefs.DevMode || !IsConnected;
     }
 }
+
+#endif

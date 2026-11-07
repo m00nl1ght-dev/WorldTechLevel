@@ -35,6 +35,7 @@ internal static class Patch_ThingSetMaker
     internal static void Generate_Prefix(ref ThingSetMakerParams parms, out TechLevel __state)
     {
         __state = _filterLevel;
+
         _filterLevel = parms.makingFaction.CurrentFilterLevel();
 
         if (_filterLevel != TechLevel.Archotech)

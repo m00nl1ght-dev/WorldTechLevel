@@ -5,6 +5,7 @@
   <WorldTechLevel.TechLevel>tech level</WorldTechLevel.TechLevel>
   <WorldTechLevel.WorldTechLevel>world tech level</WorldTechLevel.WorldTechLevel>
   <WorldTechLevel.Unrestricted>unrestricted</WorldTechLevel.Unrestricted>
+  <WorldTechLevel.NotSet>not set</WorldTechLevel.NotSet>
   <WorldTechLevel.ChangeTechLevel>change tech level</WorldTechLevel.ChangeTechLevel>
 
   <WorldTechLevel.Faction.CurrentTechLevel>current tech level</WorldTechLevel.Faction.CurrentTechLevel>
@@ -107,6 +108,9 @@
   <WorldTechLevel.Settings.FactionsExcluded.Select>Select</WorldTechLevel.Settings.FactionsExcluded.Select>
 
   <WorldTechLevel.Settings.DevQuickTestWorldTechLevel>World tech level for dev quick test</WorldTechLevel.Settings.DevQuickTestWorldTechLevel>
+
+  <WorldTechLevel.Settings.RimWorldTogether_WorldTechLevel>RimWorld Together: World tech level for every world created while connected to a server</WorldTechLevel.Settings.RimWorldTogether_WorldTechLevel>
+  <WorldTechLevel.Settings.RimWorldTogether_LockInGame>RimWorld Together: Hide the planet tab's tech level button while connected (dev mode can still change it)</WorldTechLevel.Settings.RimWorldTogether_LockInGame>
 
   <WorldTechLevel.ScenarioWarning>Warning: The player faction in your selected scenario "{0}" exceeds the selected world tech level. This means you are starting with equipment and knowledge that is more advanced than the rest of the world.\n\nAre you sure?\n\nScenario: {1}\nWorld: {2}\n\nStarting research from scenario:\n\n{3}</WorldTechLevel.ScenarioWarning>
 
