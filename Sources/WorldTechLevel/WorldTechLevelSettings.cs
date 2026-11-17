@@ -180,11 +180,11 @@ public class WorldTechLevelSettings : LunarModSettings
             Find.WindowStack.Add(new FloatMenu(options));
         }
 
-        layout.PushChanged();
+        var searchStringBefore = _searchString;
 
         LunarGUI.TextField(layout.Rel(-1), ref _searchString);
 
-        if (layout.PopChanged())
+        if (_searchString != searchStringBefore)
         {
             _searchString = _searchString.ToLower();
             UpdateListing();
