@@ -15,6 +15,14 @@ internal static class Patch_QuestManager
     [HarmonyPatch(nameof(QuestManager.Add))]
     internal static bool Add_Prefix(Quest quest)
     {
-        return quest?.root == null || quest.root.MinRequiredTechLevel() <= WorldTechLevel.Current;
+        if (quest?.root != null && quest.root.MinRequiredTechLevel() > WorldTechLevel.Current)
+        {
+            if (QuestRetrySafeguard.Check(quest.root, true))
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
