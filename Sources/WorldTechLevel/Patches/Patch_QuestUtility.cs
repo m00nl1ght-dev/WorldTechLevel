@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HarmonyLib;
 using LunarFramework.Patching;
 using RimWorld;
@@ -25,4 +26,16 @@ internal static class Patch_QuestUtility
 
         return true;
     }
+
+    #if RW_1_6_OR_GREATER
+
+    [HarmonyPostfix]
+    [HarmonyPriority(Priority.Low)]
+    [HarmonyPatch(nameof(QuestUtility.GetGiverQuests))]
+    internal static void GetGiverQuests_Postfix(ref IEnumerable<QuestScriptDef> __result)
+    {
+        __result = __result.FilterByMinRequiredTechLevel();
+    }
+
+    #endif
 }
