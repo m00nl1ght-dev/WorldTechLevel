@@ -1,4 +1,13 @@
 
+v1.2.0
+
+- Support for RimWorld 1.7
+- Fixed various filtering bugs (thanks to KNAPPE0 for submitting these fixes on GitHub)
+- Fixed lag and world pawn leaks caused by quests triggered via interval-based storyteller comps
+- Fixed compatibility patch for Vanilla Expanded Framework doing nothing in 1.6 and 1.7
+- Fixed hidden factions not being offered when changing tech level of an existing world
+- Fixed search bar not working in the Overrides tab of the mod settings in 1.7
+
 v1.1.6
 
 - Added filtering for Odyssey DLC landmarks and map features

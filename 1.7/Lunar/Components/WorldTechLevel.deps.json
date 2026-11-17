@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "WorldTechLevel/1.1.6": {
+      "WorldTechLevel/1.2.0": {
         "runtime": {
           "WorldTechLevel.dll": {}
         }
@@ -14,7 +14,7 @@
     }
   },
   "libraries": {
-    "WorldTechLevel/1.1.6": {
+    "WorldTechLevel/1.2.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
